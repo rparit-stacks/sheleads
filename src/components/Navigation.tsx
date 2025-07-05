@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,30 +26,46 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="bg-gradient-hero text-primary-foreground font-bold text-2xl px-3 py-1 rounded">
+            <motion.div 
+              className="bg-gradient-hero text-primary-foreground font-bold text-2xl px-3 py-1 rounded"
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.2 }}
+            >
               SHE
-            </div>
+            </motion.div>
             <span className="font-bold text-xl text-foreground">LeadsIndia</span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navigation.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  isActive(item.href)
-                    ? "text-primary font-semibold"
-                    : "text-muted-foreground"
-                }`}
-              >
-                {item.name}
-              </Link>
+              <motion.div key={item.name} className="relative">
+                <Link
+                  to={item.href}
+                  className={`text-sm font-medium transition-colors hover:text-primary relative ${
+                    isActive(item.href)
+                      ? "text-primary font-semibold"
+                      : "text-muted-foreground"
+                  }`}
+                >
+                  {item.name}
+                  <motion.div
+                    className="absolute -bottom-1 left-0 h-0.5 bg-primary"
+                    initial={{ width: 0 }}
+                    whileHover={{ width: "100%" }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </Link>
+              </motion.div>
             ))}
-            <Button variant="hero" size="sm">
-              Get Started
-            </Button>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              <Button variant="hero" size="sm">
+                Get Started
+              </Button>
+            </motion.div>
           </div>
 
           {/* Mobile menu button */}

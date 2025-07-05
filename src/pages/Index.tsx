@@ -2,11 +2,36 @@ import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import ProgramsShowcase from "@/components/ProgramsShowcase";
 import TestimonialCard from "@/components/TestimonialCard";
+import AnimatedCounter from "@/components/AnimatedCounter";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Download, Users, Award, TrendingUp } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const Index = () => {
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-10%" });
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.6 }
+    }
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1
+      }
+    }
+  };
   const testimonials = [
     {
       quote: "SHELeadsIndia transformed my small business into a six-figure enterprise in just 8 months. The AI marketing tools alone saved me 20 hours per week!",
@@ -57,9 +82,15 @@ const Index = () => {
       <ProgramsShowcase />
 
       {/* Social Proof Section */}
-      <section className="py-20 bg-background">
+      <motion.section 
+        className="py-20 bg-background"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-10%" }}
+        variants={fadeInUp}
+      >
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <motion.div className="text-center mb-16" variants={fadeInUp}>
             <h2 className="text-3xl md:text-5xl font-bold mb-6">
               Real Women,
               <span className="block text-primary">Real Results</span>
@@ -68,28 +99,55 @@ const Index = () => {
               Don't just take our word for it. See how women entrepreneurs 
               across Maharashtra are transforming their businesses.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <motion.div 
+            className="grid md:grid-cols-3 gap-8 mb-16"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-10%" }}
+          >
             {testimonials.map((testimonial, index) => (
-              <TestimonialCard key={index} {...testimonial} />
+              <motion.div
+                key={index}
+                variants={fadeInUp}
+                whileHover={{ 
+                  y: -8,
+                  boxShadow: "0 20px 40px -10px rgba(0, 0, 0, 0.15)"
+                }}
+                transition={{ duration: 0.3 }}
+              >
+                <TestimonialCard {...testimonial} />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* CTA Section */}
-          <div className="text-center">
-            <Button variant="hero" size="xl" className="group">
-              Read More Success Stories
-              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </Button>
-          </div>
+          <motion.div className="text-center" variants={fadeInUp}>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+            >
+              <Button variant="hero" size="xl" className="group">
+                Read More Success Stories
+                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </motion.div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Lead Magnets Section */}
-      <section className="py-20 bg-gradient-section">
+      <motion.section 
+        className="py-20 bg-gradient-section"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-10%" }}
+        variants={fadeInUp}
+      >
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <motion.div className="text-center mb-16" variants={fadeInUp}>
             <h2 className="text-3xl md:text-5xl font-bold mb-6">
               Start Your Journey
               <span className="block text-primary">With Free Resources</span>
@@ -98,30 +156,55 @@ const Index = () => {
               Get instant access to our most valuable business-building tools 
               and start seeing results today.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <motion.div 
+            className="grid md:grid-cols-3 gap-8 mb-16"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-10%" }}
+          >
             {leadMagnets.map((magnet, index) => {
               const IconComponent = magnet.icon;
               return (
-                <div key={index} className="text-center group hover:scale-105 transition-transform duration-300">
+                <motion.div 
+                  key={index} 
+                  className="text-center group"
+                  variants={fadeInUp}
+                  whileHover={{ 
+                    scale: 1.05,
+                    y: -8
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
                   <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary/20 transition-colors">
                     <IconComponent className="h-8 w-8 text-primary" />
                   </div>
                   <h3 className="text-xl font-semibold mb-4">{magnet.title}</h3>
                   <p className="text-muted-foreground mb-6">{magnet.description}</p>
-                  <Button variant="outline" className="group">
-                    <Download className="h-4 w-4 mr-2" />
-                    Download Free
-                    <ArrowRight className="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </div>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Button variant="outline" className="group">
+                      <Download className="h-4 w-4 mr-2" />
+                      Download Free
+                      <ArrowRight className="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" />
+                    </Button>
+                  </motion.div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
 
           {/* Final CTA */}
-          <div className="text-center bg-background rounded-2xl p-12 shadow-card">
+          <motion.div 
+            className="text-center bg-background rounded-2xl p-12 shadow-card" 
+            variants={fadeInUp}
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.3 }}
+          >
             <h3 className="text-2xl md:text-3xl font-bold mb-4">
               Ready to Transform Your Business?
             </h3>
@@ -130,17 +213,27 @@ const Index = () => {
               digital destiny. Your success story starts with a single step.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="hero" size="xl" className="group">
-                Start Your Journey Now
-                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Button>
-              <Button variant="outline" size="xl">
-                Book Free Consultation
-              </Button>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Button variant="hero" size="xl" className="group">
+                  Start Your Journey Now
+                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Button variant="outline" size="xl">
+                  Book Free Consultation
+                </Button>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       <Footer />
     </div>
