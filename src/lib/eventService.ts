@@ -30,6 +30,14 @@ export interface Registration {
   status: 'confirmed' | 'pending' | 'cancelled';
 }
 
+export interface RegistrationWithEvent extends Registration {
+  event?: {
+    title: string;
+    event_date: string;
+    location: string;
+  };
+}
+
 // Event CRUD operations
 export async function fetchEvents(): Promise<Event[]> {
   const { data, error } = await supabase
@@ -89,6 +97,30 @@ export async function fetchRegistrations(eventId?: string): Promise<Registration
   let query = supabase
     .from('registrations')
     .select('*')
+    .order('registered_at', { ascending: false });
+  
+  if (eventId) {
+    query = query.eq('event_id', eventId);
+  }
+  
+  const { data, error } = await query;
+  
+  if (error) throw error;
+  return data || [];
+}
+
+// New function to fetch registrations with event details
+export async function fetchRegistrationsWithEvents(eventId?: string): Promise<RegistrationWithEvent[]> {
+  let query = supabase
+    .from('registrations')
+    .select(`
+      *,
+      event:events!inner(
+        title,
+        event_date,
+        location
+      )
+    `)
     .order('registered_at', { ascending: false });
   
   if (eventId) {

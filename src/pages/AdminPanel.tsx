@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchBlogPosts, createBlogPost, updateBlogPost, deleteBlogPost, BlogPost } from "@/lib/blogService";
-import { fetchEvents, createEvent, updateEvent, deleteEvent, Event, fetchRegistrations, Registration } from "@/lib/eventService";
+import { fetchEvents, createEvent, updateEvent, deleteEvent, Event, fetchRegistrationsWithEvents, RegistrationWithEvent } from "@/lib/eventService";
 import { getCurrentUser, signOut, onAuthStateChange, User } from "@/lib/authService";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -59,7 +59,7 @@ export default function AdminPanel() {
   const [eventsLoading, setEventsLoading] = useState(true);
   const [eventForm, setEventForm] = useState<any>(emptyEventForm);
   const [editingEventId, setEditingEventId] = useState<string | null>(null);
-  const [registrations, setRegistrations] = useState<Registration[]>([]);
+  const [registrations, setRegistrations] = useState<RegistrationWithEvent[]>([]);
   
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
@@ -107,7 +107,7 @@ export default function AdminPanel() {
   };
 
   const loadRegistrations = (eventId?: string) => {
-    fetchRegistrations(eventId)
+    fetchRegistrationsWithEvents(eventId)
       .then((data) => {
         setRegistrations(data);
       })
@@ -481,7 +481,14 @@ export default function AdminPanel() {
                     <tbody>
                       {registrations.map((registration) => (
                         <tr key={registration.id}>
-                          <td className="p-2 border">{registration.event_id}</td>
+                          <td className="p-2 border">
+                            <div>
+                              <div className="font-medium">{registration.event?.title || 'Unknown Event'}</div>
+                              <div className="text-xs text-muted-foreground">
+                                {registration.event?.event_date && new Date(registration.event.event_date).toLocaleDateString()}
+                              </div>
+                            </div>
+                          </td>
                           <td className="p-2 border">{registration.name}</td>
                           <td className="p-2 border">{registration.email}</td>
                           <td className="p-2 border">{registration.phone}</td>
