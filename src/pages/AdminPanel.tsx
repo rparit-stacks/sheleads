@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AdminLogin from "@/components/AdminLogin";
 import { LogOut, Plus, Edit, Trash2, Users, Calendar, FileText, Settings } from "lucide-react";
+import ImageUpload from "@/components/ImageUpload";
 
 const emptyBlogForm = {
   title: "",
@@ -297,7 +298,14 @@ export default function AdminPanel() {
                   </select>
                   <input name="author" value={blogForm.author} onChange={handleBlogChange} placeholder="Author" className="border p-2 rounded" required />
                   <input name="read_time" value={blogForm.read_time} onChange={handleBlogChange} placeholder="Read Time (e.g. 5 min read)" className="border p-2 rounded" required />
-                  <input name="image_url" value={blogForm.image_url} onChange={handleBlogChange} placeholder="Image URL (optional)" className="border p-2 rounded" />
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Blog Image</label>
+                    <ImageUpload
+                      value={blogForm.image_url}
+                      onChange={(url) => setBlogForm((f: any) => ({ ...f, image_url: url }))}
+                      folder="blog"
+                    />
+                  </div>
                   <input name="tags" value={blogForm.tags.join(", ")} onChange={handleBlogTagsChange} placeholder="Tags (comma separated)" className="border p-2 rounded" />
                   <label className="flex items-center gap-2">
                     <input type="checkbox" name="featured" checked={blogForm.featured} onChange={handleBlogChange} />
@@ -374,7 +382,14 @@ export default function AdminPanel() {
                     <input name="event_time" type="time" value={eventForm.event_time} onChange={handleEventChange} className="border p-2 rounded" required />
                   </div>
                   <input name="location" value={eventForm.location} onChange={handleEventChange} placeholder="Location" className="border p-2 rounded" required />
-                  <input name="image_url" value={eventForm.image_url} onChange={handleEventChange} placeholder="Event Image URL" className="border p-2 rounded" />
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Event Image</label>
+                    <ImageUpload
+                      value={eventForm.image_url}
+                      onChange={(url) => setEventForm((f: any) => ({ ...f, image_url: url }))}
+                      folder="events"
+                    />
+                  </div>
                   <div className="grid grid-cols-3 gap-4">
                     <input name="max_attendees" type="number" value={eventForm.max_attendees} onChange={handleEventChange} placeholder="Max Attendees" className="border p-2 rounded" />
                     <input name="price" type="number" step="0.01" value={eventForm.price} onChange={handleEventChange} placeholder="Price" className="border p-2 rounded" />
