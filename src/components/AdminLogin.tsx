@@ -101,7 +101,7 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
             </Button>
           </form>
           
-          <div className="mt-4 space-y-2">
+          <div className="mt-4">
             <Button 
               variant="outline" 
               size="sm" 
@@ -110,21 +110,6 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
             >
               🔧 Run Diagnostics
             </Button>
-          </div>
-          
-          <div className="mt-6 p-4 bg-muted rounded-md">
-            <p className="text-sm text-muted-foreground mb-2">
-              <strong>Need to create the admin user?</strong>
-            </p>
-            <p className="text-xs text-muted-foreground">
-              1. Go to your Supabase Dashboard<br/>
-              2. Navigate to Authentication → Users<br/>
-              3. Click "Add User"<br/>
-              4. Email: work.ankit2@gmail.com<br/>
-              5. Password: Ankit923@#<br/>
-              6. Turn OFF "Email Confirm"<br/>
-              7. Click "Create User"
-            </p>
           </div>
         </CardContent>
       </Card>
