@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, MapPin, Users, DollarSign, Clock, ArrowLeft } from "lucide-react";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 
 export default function EventDetails() {
   const { eventId } = useParams<{ eventId: string }>();
@@ -59,6 +61,7 @@ export default function EventDetails() {
   if (loading) {
     return (
       <div className="min-h-screen bg-background">
+        <Navigation />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
@@ -72,6 +75,7 @@ export default function EventDetails() {
   if (error || !event) {
     return (
       <div className="min-h-screen bg-background">
+        <Navigation />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
             <h1 className="text-2xl font-bold text-foreground mb-4">Event Not Found</h1>
@@ -88,6 +92,7 @@ export default function EventDetails() {
 
   return (
     <div className="min-h-screen bg-background">
+      <Navigation />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Back Button */}
         <div className="mb-6">
@@ -233,6 +238,8 @@ export default function EventDetails() {
           </CardContent>
         </Card>
       </div>
+      
+      <Footer />
     </div>
   );
 } 

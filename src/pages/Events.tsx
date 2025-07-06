@@ -5,6 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, MapPin, Users, DollarSign, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 
 export default function Events() {
   const [events, setEvents] = useState<Event[]>([]);
@@ -69,6 +71,8 @@ export default function Events() {
 
   return (
     <div className="min-h-screen bg-background">
+      <Navigation />
+      
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-primary/10 to-primary/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -165,6 +169,8 @@ export default function Events() {
           </div>
         )}
       </div>
+      
+      <Footer />
     </div>
   );
 } 

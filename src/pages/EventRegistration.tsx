@@ -6,6 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, MapPin, Users, DollarSign, Clock, CheckCircle } from "lucide-react";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 
 export default function EventRegistration() {
   const { eventId } = useParams<{ eventId: string }>();
@@ -127,6 +129,7 @@ export default function EventRegistration() {
   if (loading) {
     return (
       <div className="min-h-screen bg-background">
+        <Navigation />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
@@ -140,6 +143,7 @@ export default function EventRegistration() {
   if (error || !event) {
     return (
       <div className="min-h-screen bg-background">
+        <Navigation />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
             <p className="text-red-500 mb-4">{error || "Event not found"}</p>
@@ -155,6 +159,7 @@ export default function EventRegistration() {
   if (success) {
     return (
       <div className="min-h-screen bg-background">
+        <Navigation />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
             <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-6" />
@@ -182,6 +187,7 @@ export default function EventRegistration() {
 
   return (
     <div className="min-h-screen bg-background">
+      <Navigation />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="mb-6">
           <Button onClick={() => navigate("/events")} variant="outline">
@@ -304,6 +310,8 @@ export default function EventRegistration() {
           </Card>
         </div>
       </div>
+      
+      <Footer />
     </div>
   );
 } 
