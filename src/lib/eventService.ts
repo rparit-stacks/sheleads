@@ -22,20 +22,21 @@ export interface Event {
 export interface Registration {
   id: string;
   event_id: string;
-  name: string;
-  email: string;
-  phone: string;
-  additional_info: any; // JSON object for custom fields
-  registered_at: string;
+  registration_data: {
+    name?: string;
+    email?: string;
+    phone?: string;
+    [key: string]: any;
+  };
+  created_at: string;
   status: 'confirmed' | 'pending' | 'cancelled';
 }
 
 export interface RegistrationWithEvent extends Registration {
-  event?: {
-    title: string;
-    event_date: string;
-    location: string;
-  };
+  event_title?: string;
+  event_date?: string;
+  event_time?: string;
+  event_location?: string;
 }
 
 // Event CRUD operations
@@ -97,7 +98,7 @@ export async function fetchRegistrations(eventId?: string): Promise<Registration
   let query = supabase
     .from('registrations')
     .select('*')
-    .order('registered_at', { ascending: false });
+    .order('created_at', { ascending: false });
   
   if (eventId) {
     query = query.eq('event_id', eventId);
@@ -115,13 +116,14 @@ export async function fetchRegistrationsWithEvents(eventId?: string): Promise<Re
     .from('registrations')
     .select(`
       *,
-      event:events!inner(
+      events!inner(
         title,
         event_date,
+        event_time,
         location
       )
     `)
-    .order('registered_at', { ascending: false });
+    .order('created_at', { ascending: false });
   
   if (eventId) {
     query = query.eq('event_id', eventId);
@@ -130,13 +132,23 @@ export async function fetchRegistrationsWithEvents(eventId?: string): Promise<Re
   const { data, error } = await query;
   
   if (error) throw error;
-  return data || [];
+  
+  // Transform the data to match our interface
+  const transformedData = data?.map(registration => ({
+    ...registration,
+    event_title: registration.events?.title,
+    event_date: registration.events?.event_date,
+    event_time: registration.events?.event_time,
+    event_location: registration.events?.location,
+  })) || [];
+  
+  return transformedData;
 }
 
-export async function createRegistration(registration: Omit<Registration, 'id' | 'registered_at'>): Promise<Registration> {
+export async function createRegistration(registration: Omit<Registration, 'id' | 'created_at'>): Promise<Registration> {
   const { data, error } = await supabase
     .from('registrations')
-    .insert([{ ...registration, registered_at: new Date().toISOString() }])
+    .insert([registration])
     .select()
     .single();
   

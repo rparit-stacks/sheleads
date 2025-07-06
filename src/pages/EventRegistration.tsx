@@ -72,15 +72,10 @@ export default function EventRegistration() {
     setError(null);
 
     try {
-      // Separate standard fields from additional fields
-      const { name, email, phone, ...additionalInfo } = formData;
-      
+      // Create registration with the new structure
       await createRegistration({
         event_id: eventId,
-        name: name || "",
-        email: email || "",
-        phone: phone || "",
-        additional_info: additionalInfo,
+        registration_data: formData,
         status: "confirmed",
       });
 
