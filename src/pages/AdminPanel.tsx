@@ -385,17 +385,52 @@ export default function AdminPanel() {
   const handleTrainingSubmit = async (e: any) => {
     e.preventDefault();
     setSaving(true);
+    
     try {
-      if (editingTrainingId) {
-        await updateTraining(editingTrainingId, trainingForm);
-      } else {
-        await createTraining(trainingForm);
+      console.log('Submitting training form:', trainingForm);
+      
+      // Validate required fields
+      if (!trainingForm.title || !trainingForm.instructor || !trainingForm.start_date) {
+        alert("Please fill in all required fields (Title, Instructor, Start Date)");
+        setSaving(false);
+        return;
       }
+      
+      // Validate date format
+      if (!trainingForm.start_date || trainingForm.start_date.trim() === '') {
+        alert("Please provide a valid start date");
+        setSaving(false);
+        return;
+      }
+      
+      // Ensure arrays are properly formatted and handle empty dates
+      const processedForm = {
+        ...trainingForm,
+        topics: Array.isArray(trainingForm.topics) ? trainingForm.topics : [],
+        requirements: Array.isArray(trainingForm.requirements) ? trainingForm.requirements : [],
+        registration_fields: Array.isArray(trainingForm.registration_fields) ? trainingForm.registration_fields : [],
+        materials_included: Array.isArray(trainingForm.materials_included) ? trainingForm.materials_included : [],
+        // Handle empty date fields - set to null instead of empty string
+        end_date: trainingForm.end_date && trainingForm.end_date.trim() !== '' ? trainingForm.end_date : null,
+        end_time: trainingForm.end_time && trainingForm.end_time.trim() !== '' ? trainingForm.end_time : null,
+        instructor_bio: trainingForm.instructor_bio && trainingForm.instructor_bio.trim() !== '' ? trainingForm.instructor_bio : null
+      };
+      
+      console.log('Processed training form:', processedForm);
+      
+      if (editingTrainingId) {
+        await updateTraining(editingTrainingId, processedForm);
+      } else {
+        await createTraining(processedForm);
+      }
+      
       setTrainingForm(emptyTrainingForm);
       setEditingTrainingId(null);
       loadTrainings();
-    } catch (err) {
-      alert("Error saving training");
+      alert("Training saved successfully!");
+    } catch (err: any) {
+      console.error("Error saving training:", err);
+      alert(`Error saving training: ${err.message || 'Unknown error'}`);
     }
     setSaving(false);
   };

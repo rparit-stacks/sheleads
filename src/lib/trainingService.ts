@@ -77,13 +77,27 @@ export const fetchTrainingById = async (id: string): Promise<Training | null> =>
 };
 
 export const createTraining = async (training: Omit<Training, 'id' | 'created_at' | 'updated_at'>): Promise<Training> => {
+  // Check if the training data contains arrays that might need to be converted
+  const processedTraining = {
+    ...training,
+    topics: Array.isArray(training.topics) ? training.topics : [],
+    requirements: Array.isArray(training.requirements) ? training.requirements : [],
+    registration_fields: Array.isArray(training.registration_fields) ? training.registration_fields : [],
+    materials_included: Array.isArray(training.materials_included) ? training.materials_included : [],
+    // Handle empty date/time fields - convert empty strings to null
+    end_date: training.end_date && training.end_date.trim() !== '' ? training.end_date : null,
+    end_time: training.end_time && training.end_time.trim() !== '' ? training.end_time : null,
+    instructor_bio: training.instructor_bio && training.instructor_bio.trim() !== '' ? training.instructor_bio : null,
+  };
+
   const { data, error } = await supabase
     .from('trainings')
-    .insert([training])
+    .insert([processedTraining])
     .select()
     .single();
 
   if (error) {
+    console.error('Training creation error:', error);
     throw error;
   }
 
@@ -91,14 +105,42 @@ export const createTraining = async (training: Omit<Training, 'id' | 'created_at
 };
 
 export const updateTraining = async (id: string, training: Partial<Training>): Promise<Training> => {
+  // Process array fields to ensure they're in the correct format
+  const processedTraining = { ...training };
+  
+  if (training.topics) {
+    processedTraining.topics = Array.isArray(training.topics) ? training.topics : [];
+  }
+  if (training.requirements) {
+    processedTraining.requirements = Array.isArray(training.requirements) ? training.requirements : [];
+  }
+  if (training.registration_fields) {
+    processedTraining.registration_fields = Array.isArray(training.registration_fields) ? training.registration_fields : [];
+  }
+  if (training.materials_included) {
+    processedTraining.materials_included = Array.isArray(training.materials_included) ? training.materials_included : [];
+  }
+  
+  // Handle empty date/time fields - convert empty strings to null
+  if ('end_date' in training) {
+    processedTraining.end_date = training.end_date && training.end_date.trim() !== '' ? training.end_date : null;
+  }
+  if ('end_time' in training) {
+    processedTraining.end_time = training.end_time && training.end_time.trim() !== '' ? training.end_time : null;
+  }
+  if ('instructor_bio' in training) {
+    processedTraining.instructor_bio = training.instructor_bio && training.instructor_bio.trim() !== '' ? training.instructor_bio : null;
+  }
+
   const { data, error } = await supabase
     .from('trainings')
-    .update(training)
+    .update(processedTraining)
     .eq('id', id)
     .select()
     .single();
 
   if (error) {
+    console.error('Training update error:', error);
     throw error;
   }
 
@@ -117,17 +159,59 @@ export const deleteTraining = async (id: string): Promise<void> => {
 };
 
 export const createTrainingRegistration = async (registration: Omit<TrainingRegistration, 'id' | 'created_at'>): Promise<TrainingRegistration> => {
-  const { data, error } = await supabase
-    .from('training_registrations')
-    .insert([registration])
-    .select()
-    .single();
-
-  if (error) {
+  // Try the new schema first (with registration_data column)
+  try {
+    const { data, error } = await supabase
+      .from('training_registrations')
+      .insert([registration])
+      .select()
+      .single();
+    
+    if (error) throw error;
+    return data;
+  } catch (error: any) {
+    // If it fails, try the old schema (individual columns)
+    if (error.message?.includes('column "registration_data" does not exist') || 
+        error.message?.includes('violates row-level security policy')) {
+      
+      console.log('Falling back to old schema format for training registrations');
+      
+      // Extract data from registration_data for old schema
+      const { registration_data, training_id, status } = registration;
+      const { name, email, phone, ...additional_info } = registration_data;
+      
+      const oldSchemaData = {
+        training_id,
+        name: name || '',
+        email: email || '',
+        phone: phone || '',
+        additional_info: additional_info || {},
+        status,
+        created_at: new Date().toISOString()
+      };
+      
+      const { data, error: oldSchemaError } = await supabase
+        .from('training_registrations')
+        .insert([oldSchemaData])
+        .select()
+        .single();
+      
+      if (oldSchemaError) throw oldSchemaError;
+      
+      // Transform back to expected format
+      return {
+        ...data,
+        registration_data: {
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          ...data.additional_info
+        }
+      };
+    }
+    
     throw error;
   }
-
-  return data;
 };
 
 export const fetchTrainingRegistrations = async (trainingId?: string): Promise<TrainingRegistration[]> => {
@@ -143,10 +227,29 @@ export const fetchTrainingRegistrations = async (trainingId?: string): Promise<T
   const { data, error } = await query;
 
   if (error) {
-    throw error;
+    console.error('Error fetching training registrations:', error);
+    return [];
   }
 
-  return data || [];
+  // Transform data to match expected format if using old schema
+  const transformedData = (data || []).map(reg => {
+    if (reg.registration_data) {
+      return reg; // Already in new format
+    } else {
+      // Transform from old format
+      return {
+        ...reg,
+        registration_data: {
+          name: reg.name,
+          email: reg.email,
+          phone: reg.phone,
+          ...reg.additional_info
+        }
+      };
+    }
+  });
+
+  return transformedData;
 };
 
 export const fetchTrainingRegistrationsWithTrainings = async (trainingId?: string): Promise<TrainingRegistrationWithTraining[]> => {

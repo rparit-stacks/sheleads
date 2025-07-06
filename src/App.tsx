@@ -15,6 +15,8 @@ import Events from "./pages/Events";
 import EventDetails from "./pages/EventDetails";
 import EventRegistration from "./pages/EventRegistration";
 import UpcomingTraining from "./pages/UpcomingTraining";
+import TrainingDetails from "./pages/TrainingDetails";
+import TrainingRegistration from "./pages/TrainingRegistration";
 import AdminPanel from "./pages/AdminPanel";
 import NotFound from "./pages/NotFound";
 
@@ -39,6 +41,8 @@ const App = () => (
           <Route path="/events/:eventId" element={<EventDetails />} />
           <Route path="/events/:eventId/register" element={<EventRegistration />} />
           <Route path="/upcoming-training" element={<UpcomingTraining />} />
+          <Route path="/training/:trainingId" element={<TrainingDetails />} />
+          <Route path="/training/:trainingId/register" element={<TrainingRegistration />} />
           <Route path="/admin" element={<AdminPanel />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
