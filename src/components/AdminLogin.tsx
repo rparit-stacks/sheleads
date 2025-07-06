@@ -3,6 +3,7 @@ import { signIn } from "@/lib/authService";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import SupabaseTest from "./SupabaseTest";
 
 interface AdminLoginProps {
   onLogin: () => void;
@@ -13,6 +14,7 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showDiagnostic, setShowDiagnostic] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,11 +25,34 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
       await signIn(email, password);
       onLogin();
     } catch (err: any) {
-      setError(err.message || "Login failed");
+      console.error("Login error:", err);
+      
+      if (err.message.includes("Invalid login credentials")) {
+        setError("Invalid email or password. Please check your credentials and try again.");
+      } else if (err.message.includes("Database error")) {
+        setError("Authentication service error. Click 'Run Diagnostics' below to troubleshoot.");
+      } else {
+        setError(err.message || "Login failed. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
   };
+
+  if (showDiagnostic) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background p-4">
+        <div className="w-full max-w-4xl">
+          <div className="mb-4">
+            <Button variant="outline" onClick={() => setShowDiagnostic(false)}>
+              ← Back to Login
+            </Button>
+          </div>
+          <SupabaseTest />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
@@ -75,6 +100,32 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
               {loading ? "Signing in..." : "Sign In"}
             </Button>
           </form>
+          
+          <div className="mt-4 space-y-2">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={() => setShowDiagnostic(true)}
+              className="w-full"
+            >
+              🔧 Run Diagnostics
+            </Button>
+          </div>
+          
+          <div className="mt-6 p-4 bg-muted rounded-md">
+            <p className="text-sm text-muted-foreground mb-2">
+              <strong>Need to create the admin user?</strong>
+            </p>
+            <p className="text-xs text-muted-foreground">
+              1. Go to your Supabase Dashboard<br/>
+              2. Navigate to Authentication → Users<br/>
+              3. Click "Add User"<br/>
+              4. Email: work.ankit2@gmail.com<br/>
+              5. Password: Ankit923@#<br/>
+              6. Turn OFF "Email Confirm"<br/>
+              7. Click "Create User"
+            </p>
+          </div>
         </CardContent>
       </Card>
     </div>
