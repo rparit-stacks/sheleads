@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { fetchBlogPosts, createBlogPost, updateBlogPost, deleteBlogPost, BlogPost } from "@/lib/blogService";
+import { getCurrentUser, signOut, onAuthStateChange, User } from "@/lib/authService";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import AdminLogin from "@/components/AdminLogin";
+import { LogOut } from "lucide-react";
 
 const emptyForm = {
   title: "",
@@ -23,29 +26,49 @@ const categories = [
 ];
 
 export default function AdminPanel() {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [postsLoading, setPostsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState<any>(emptyForm);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
 
+  useEffect(() => {
+    // Check initial auth state
+    getCurrentUser().then((user) => {
+      setUser(user);
+      setLoading(false);
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = onAuthStateChange((user) => {
+      setUser(user);
+      setLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
   const loadPosts = () => {
-    setLoading(true);
+    setPostsLoading(true);
     fetchBlogPosts()
       .then((data) => {
         setPosts(data);
-        setLoading(false);
+        setPostsLoading(false);
       })
       .catch(() => {
         setError("Failed to load posts");
-        setLoading(false);
+        setPostsLoading(false);
       });
   };
 
   useEffect(() => {
-    loadPosts();
-  }, []);
+    if (user) {
+      loadPosts();
+    }
+  }, [user]);
 
   const handleChange = (e: any) => {
     const { name, value, type, checked } = e.target;
@@ -93,10 +116,43 @@ export default function AdminPanel() {
     setEditingId(null);
   };
 
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      setUser(null);
+    } catch (err) {
+      console.error("Logout error:", err);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div>Loading...</div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <AdminLogin onLogin={() => {}} />;
+  }
+
   return (
     <div className="min-h-screen bg-background p-8">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">Blog Admin Panel</h1>
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold">Blog Admin Panel</h1>
+          <div className="flex items-center gap-4">
+            <span className="text-sm text-muted-foreground">
+              Welcome, {user.email}
+            </span>
+            <Button variant="outline" size="sm" onClick={handleLogout}>
+              <LogOut className="h-4 w-4 mr-2" />
+              Logout
+            </Button>
+          </div>
+        </div>
+
         <Card className="mb-8">
           <CardHeader>
             <CardTitle>{editingId ? "Edit Post" : "Add New Post"}</CardTitle>
@@ -126,9 +182,10 @@ export default function AdminPanel() {
             </form>
           </CardContent>
         </Card>
+
         <h2 className="text-2xl font-bold mb-4">All Posts</h2>
-        {loading ? (
-          <div>Loading...</div>
+        {postsLoading ? (
+          <div>Loading posts...</div>
         ) : error ? (
           <div className="text-red-500">{error}</div>
         ) : (
