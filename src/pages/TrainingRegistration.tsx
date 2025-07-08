@@ -141,7 +141,7 @@ export default function TrainingRegistration() {
         <Navigation />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
-            <p className="text-red-500 mb-4">{error || "Training not found"}</p>
+            <p className="mb-4" style={{ color: '#E60023' }}>{error || "Training not found"}</p>
             <Button onClick={() => navigate("/upcoming-training")} variant="outline">
               Back to Training
             </Button>
@@ -307,7 +307,7 @@ export default function TrainingRegistration() {
                       <label htmlFor={field} className="block text-sm font-medium mb-2">
                         {getFieldLabel(field)}
                         {["name", "email"].includes(field) && (
-                          <span className="text-red-500 ml-1">*</span>
+                          <span className="ml-1" style={{ color: '#E60023' }}>*</span>
                         )}
                       </label>
                       

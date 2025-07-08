@@ -478,12 +478,19 @@ export default function AdminPanel() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           className="text-center"
         >
+          <div className="mb-6">
+            <img 
+              src="/she-leads-logo.png" 
+              alt="SHE Leads India" 
+              className="h-16 w-auto object-contain mx-auto mb-4"
+            />
+          </div>
           <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-lg font-medium text-muted-foreground">Loading admin panel...</p>
         </motion.div>
@@ -496,7 +503,7 @@ export default function AdminPanel() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <div className="min-h-screen bg-gray-50">
       {/* Enhanced Header */}
       <motion.div 
         initial={{ y: -20, opacity: 0 }}
@@ -511,8 +518,12 @@ export default function AdminPanel() {
               transition={{ delay: 0.1 }}
             >
               <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-primary to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                  <Settings className="h-6 w-6 text-white" />
+                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg p-1">
+                  <img 
+                    src="/she-leads-logo.png" 
+                    alt="SHE Leads India" 
+                    className="w-full h-full object-contain"
+                  />
                 </div>
                 <div>
                   <h1 className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
@@ -566,42 +577,42 @@ export default function AdminPanel() {
             <TabsList className="grid w-full grid-cols-6 bg-white/60 backdrop-blur-sm p-1 rounded-xl shadow-lg border border-white/20">
               <TabsTrigger 
                 value="dashboard" 
-                className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-purple-600 data-[state=active]:text-white rounded-lg transition-all duration-300"
+                className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-white rounded-lg transition-all duration-300"
               >
                 <BarChart3 className="h-4 w-4" />
                 <span className="hidden sm:inline">Dashboard</span>
               </TabsTrigger>
               <TabsTrigger 
                 value="blogs" 
-                className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-purple-600 data-[state=active]:text-white rounded-lg transition-all duration-300"
+                className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-white rounded-lg transition-all duration-300"
               >
                 <FileText className="h-4 w-4" />
                 <span className="hidden sm:inline">Blogs</span>
               </TabsTrigger>
               <TabsTrigger 
                 value="events" 
-                className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-purple-600 data-[state=active]:text-white rounded-lg transition-all duration-300"
+                className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-white rounded-lg transition-all duration-300"
               >
                 <Calendar className="h-4 w-4" />
                 <span className="hidden sm:inline">Events</span>
               </TabsTrigger>
               <TabsTrigger 
                 value="trainings" 
-                className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-purple-600 data-[state=active]:text-white rounded-lg transition-all duration-300"
+                className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-white rounded-lg transition-all duration-300"
               >
                 <BookOpen className="h-4 w-4" />
                 <span className="hidden sm:inline">Training</span>
               </TabsTrigger>
               <TabsTrigger 
                 value="registrations" 
-                className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-purple-600 data-[state=active]:text-white rounded-lg transition-all duration-300"
+                className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-white rounded-lg transition-all duration-300"
               >
                 <Users className="h-4 w-4" />
                 <span className="hidden sm:inline">Users</span>
               </TabsTrigger>
               <TabsTrigger 
                 value="settings" 
-                className="flex items-center gap-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-purple-600 data-[state=active]:text-white rounded-lg transition-all duration-300"
+                className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-white rounded-lg transition-all duration-300"
               >
                 <Settings className="h-4 w-4" />
                 <span className="hidden sm:inline">Settings</span>
@@ -648,15 +659,15 @@ export default function AdminPanel() {
               </motion.div>
 
               <motion.div variants={fadeInUp}>
-                <Card className="bg-gradient-to-br from-purple-500 to-purple-600 text-white border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
+                <Card className="bg-primary text-white border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-purple-100 text-sm font-medium">Training Sessions</p>
+                        <p className="text-white/80 text-sm font-medium">Training Sessions</p>
                         <p className="text-3xl font-bold">{stats.publishedTrainings}</p>
-                        <p className="text-purple-100 text-xs">active programs</p>
+                        <p className="text-white/80 text-xs">active programs</p>
                       </div>
-                      <BookOpen className="h-8 w-8 text-purple-200" />
+                      <BookOpen className="h-8 w-8 text-white/80" />
                     </div>
                   </CardContent>
                 </Card>
@@ -713,7 +724,7 @@ export default function AdminPanel() {
                     </Button>
                     <Button
                       onClick={() => setActiveTab("trainings")}
-                      className="h-20 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300"
+                      className="h-20 bg-primary hover:bg-primary/90 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300"
                     >
                       <div className="text-center">
                         <Plus className="h-6 w-6 mx-auto mb-2" />
@@ -734,7 +745,7 @@ export default function AdminPanel() {
               className="space-y-6"
             >
               <Card className="bg-white/60 backdrop-blur-sm border border-white/20 shadow-xl">
-                <CardHeader className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-t-lg">
+                <CardHeader className="bg-primary/10 rounded-t-lg">
                   <CardTitle className="flex items-center gap-2 text-xl">
                     <Plus className="h-5 w-5 text-primary" />
                     {editingBlogId ? "Edit Blog Post" : "Create New Blog Post"}
@@ -855,7 +866,7 @@ export default function AdminPanel() {
                       <Button 
                         type="submit" 
                         disabled={saving}
-                        className="bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300"
+                        className="bg-primary hover:bg-primary/90 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300"
                       >
                         <Save className="h-4 w-4 mr-2" />
                         {saving ? "Saving..." : editingBlogId ? "Update Post" : "Create Post"}
@@ -1263,7 +1274,7 @@ export default function AdminPanel() {
               className="space-y-6"
             >
               <Card className="bg-white/60 backdrop-blur-sm border border-white/20 shadow-xl">
-                <CardHeader className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-t-lg">
+                <CardHeader className="bg-primary/10 rounded-t-lg">
                   <CardTitle className="flex items-center gap-2 text-xl">
                     <Plus className="h-5 w-5 text-primary" />
                     {editingTrainingId ? "Edit Training" : "Create New Training"}
@@ -1474,7 +1485,7 @@ export default function AdminPanel() {
                       <Button 
                         type="submit" 
                         disabled={saving}
-                        className="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300"
+                        className="bg-primary hover:bg-primary/90 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300"
                       >
                         <Save className="h-4 w-4 mr-2" />
                         {saving ? "Saving..." : editingTrainingId ? "Update Training" : "Create Training"}
@@ -1503,7 +1514,7 @@ export default function AdminPanel() {
                       <BookOpen className="h-5 w-5 text-primary" />
                       All Training Sessions ({trainings.length})
                     </span>
-                    <Badge variant="secondary" className="bg-purple-100 text-purple-800">
+                    <Badge variant="secondary" className="bg-primary/10 text-primary">
                       {trainings.filter(t => t.status === 'published').length} Published
                     </Badge>
                   </CardTitle>
@@ -1536,7 +1547,7 @@ export default function AdminPanel() {
                                 }`}>
                                   {training.status}
                                 </Badge>
-                                <Badge variant="outline" className="text-purple-600 border-purple-200">
+                                <Badge variant="outline" className="text-primary border-primary/30">
                                   {training.level}
                                 </Badge>
                                 {training.certificate_provided && (
@@ -1714,13 +1725,13 @@ export default function AdminPanel() {
 
               {/* Training Registrations */}
               <Card className="bg-white/60 backdrop-blur-sm border border-white/20 shadow-xl">
-                <CardHeader className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-t-lg">
+                <CardHeader className="bg-primary/10 rounded-t-lg">
                   <CardTitle className="flex items-center justify-between">
                     <span className="flex items-center gap-2">
                       <BookOpen className="h-5 w-5 text-primary" />
                       Training Registrations
                     </span>
-                    <Badge variant="secondary" className="bg-purple-100 text-purple-800">
+                    <Badge variant="secondary" className="bg-primary/10 text-primary">
                       {trainingRegistrations.length} Total
                     </Badge>
                   </CardTitle>
@@ -1811,7 +1822,7 @@ export default function AdminPanel() {
                                   const newStatus = registration.status === 'confirmed' ? 'pending' : 'confirmed';
                                   // You can implement status update functionality here
                                 }}
-                                className="hover:bg-purple-50 hover:text-purple-600 hover:border-purple-200 transition-all duration-200"
+                                className="hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-all duration-200"
                               >
                                 {registration.status === 'confirmed' ? 'Unconfirm' : 'Confirm'}
                               </Button>

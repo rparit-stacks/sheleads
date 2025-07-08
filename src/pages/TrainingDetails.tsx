@@ -69,7 +69,7 @@ export default function TrainingDetails() {
         <Navigation />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
-            <p className="text-red-500 mb-4">{error || "Training not found"}</p>
+            <p className="mb-4" style={{ color: '#E60023' }}>{error || "Training not found"}</p>
             <Button asChild variant="outline">
               <Link to="/upcoming-training">Back to Training</Link>
             </Button>
