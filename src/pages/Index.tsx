@@ -5,8 +5,8 @@ import TestimonialCard from "@/components/TestimonialCard";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Download, Users, Award, TrendingUp, Mic, ChevronLeft, ChevronRight } from "lucide-react";
-import { motion, useInView } from "framer-motion";
+import { ArrowRight, Download, Users, Award, TrendingUp, Mic } from "lucide-react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -84,21 +84,50 @@ const Index = () => {
       }
     }
   };
+
+  // Podcast slide animation variants
+  const slideVariants = {
+    enter: {
+      scale: 0.8,
+      opacity: 0,
+      y: 20,
+    },
+    center: {
+      scale: 1,
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 300,
+        damping: 30,
+        opacity: { duration: 0.2 }
+      }
+    },
+    exit: {
+      scale: 0.9,
+      opacity: 0,
+      y: -20,
+      transition: {
+        duration: 0.2
+      }
+    }
+  };
+
   const testimonials = [
     {
-      quote: "SHELeadsIndia transformed my small business into a six-figure enterprise in just 8 months. The AI marketing tools alone saved me 20 hours per week!",
+      quote: "SHELeadsIndia didn't just teach me digital marketing—they helped me rediscover my confidence as an Indian woman in business. Today, my home-grown brand reaches families across Maharashtra, staying true to our values while embracing innovation.",
       author: "Priya Sharma",
       title: "Founder, Eco-Friendly Home Products",
       city: "Pune"
     },
     {
-      quote: "The community support is incredible. I found my business partner through a SHE networking event, and we've since launched two successful ventures together.",
+      quote: "Here, I found more than business strategies—I found a sisterhood. The woman sitting beside me at our first meetup became my business partner, and together we're creating solutions that make our community proud.",
       author: "Anita Desai",
       title: "Co-founder, Tech Solutions",
       city: "Nagpur"
     },
     {
-      quote: "From zero digital presence to 50k Instagram followers in 6 months. The strategies taught here actually work in the real world.",
+      quote: "As a young mother from Nashik, I thought my entrepreneurial dreams would have to wait. SHELeadsIndia showed me how to build a thriving business from home, honoring both my family values and my ambitions.",
       author: "Meera Patel",
       title: "Fashion Brand Owner",
       city: "Nashik"
@@ -107,18 +136,18 @@ const Index = () => {
 
   const leadMagnets = [
     {
-      title: "5-Day Business Growth Planner",
-      description: "Daily action plans to accelerate your business growth with proven strategies.",
+      title: "5-Day Sacred Business Journey",
+      description: "Transform your business dreams into reality with daily intention-setting practices designed by inspiring Indian women entrepreneurs.",
       icon: TrendingUp
     },
     {
-      title: "Brand Confidence Quiz",
-      description: "Discover your brand personality and get personalized recommendations.",
+      title: "Discover Your Authentic Brand Heart",
+      description: "Uncover your unique brand essence and receive personalized guidance for expressing your truth with confidence.",
       icon: Award
     },
     {
-      title: "Pre-Launch Success Checklist",
-      description: "Everything you need to launch your business or product successfully.",
+      title: "Mindful Launch Success Ritual",
+      description: "Everything you need to birth your venture with grace, ensuring every sacred step is honored in your business journey.",
       icon: Users
     }
   ];
@@ -144,12 +173,12 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <motion.div className="text-center mb-16" variants={fadeInUp}>
             <h2 className="text-3xl md:text-5xl font-bold mb-6">
-              Real Women,
-              <span className="block text-primary">Real Results</span>
+              Stories of Courage,
+              <span className="block text-primary">Journeys of Triumph</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Don't just take our word for it. See how women entrepreneurs 
-              across Maharashtra are transforming their businesses.
+              Every success story here represents a brave woman who chose to believe in herself. 
+              These are the voices of determination, the proof that your dreams are not just possible—they're inevitable.
             </p>
           </motion.div>
 
@@ -206,12 +235,12 @@ const Index = () => {
               </div>
             </div>
             <h2 className="text-3xl md:text-5xl font-bold mb-6">
-              Podcast – 
-              <span className="block text-primary">Talks That Glow</span>
+              Heartfelt Conversations – 
+              <span className="block text-primary">Voices That Inspire</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-              Dive into inspiring conversations with successful women entrepreneurs. 
-              Real stories, real struggles, and real victories that will ignite your entrepreneurial spirit.
+              Listen to the authentic stories of Indian women entrepreneurs who turned their dreams into reality. 
+              Real journeys, genuine struggles, and beautiful victories that will touch your heart and fuel your courage.
             </p>
           </motion.div>
 
@@ -220,65 +249,70 @@ const Index = () => {
             className="relative max-w-lg mx-auto mb-12"
             variants={fadeInUp}
           >
-            {/* Compact Video Container */}
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-background">
-              <div className="aspect-video">
-                <iframe
-                  src={podcastEpisodes[currentSlide].embedUrl}
-                  title={podcastEpisodes[currentSlide].title}
-                  className="w-full h-full"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-              
-              {/* Video Info */}
-              <div className="p-4 bg-background">
-                <h3 className="text-lg font-bold mb-2 line-clamp-2">
-                  {podcastEpisodes[currentSlide].title}
-                </h3>
-                <p className="text-muted-foreground text-sm line-clamp-2">
-                  {podcastEpisodes[currentSlide].description}
-                </p>
-              </div>
-
-              {/* Navigation Arrows */}
-              <button
-                onClick={prevSlide}
-                className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all duration-200 hover:scale-110"
+            {/* Animated Video Container */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentSlide}
+                className="relative rounded-3xl overflow-hidden shadow-2xl bg-background"
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
               >
-                <ChevronLeft className="h-6 w-6" />
-              </button>
-              
-              <button
-                onClick={nextSlide}
-                className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all duration-200 hover:scale-110"
-              >
-                <ChevronRight className="h-6 w-6" />
-              </button>
+                <div className="aspect-video">
+                  <iframe
+                    src={podcastEpisodes[currentSlide].embedUrl}
+                    title={podcastEpisodes[currentSlide].title}
+                    className="w-full h-full"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+                
+                {/* Video Info */}
+                <motion.div 
+                  className="p-4 bg-background"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1, duration: 0.3 }}
+                >
+                  <h3 className="text-lg font-bold mb-2 line-clamp-2">
+                    {podcastEpisodes[currentSlide].title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm line-clamp-2">
+                    {podcastEpisodes[currentSlide].description}
+                  </p>
+                </motion.div>
 
-              {/* Episode Counter */}
-              <div className="absolute top-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
-                {currentSlide + 1} / {podcastEpisodes.length}
-              </div>
-            </div>
+                {/* Episode Counter */}
+                <motion.div 
+                  className="absolute top-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm"
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.2, duration: 0.3 }}
+                >
+                  {currentSlide + 1} / {podcastEpisodes.length}
+                </motion.div>
+              </motion.div>
+            </AnimatePresence>
 
             {/* Dots Navigation */}
-            <div className="flex justify-center mt-6 space-x-2">
+            <div className="flex justify-center mt-6 space-x-1">
               {podcastEpisodes.map((_, index) => (
-                <button
+                <motion.button
                   key={index}
                   onClick={() => goToSlide(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                  className={`w-2 h-2 rounded-full transition-all duration-200 ${
                     currentSlide === index 
-                      ? 'bg-primary scale-125' 
+                      ? 'bg-primary scale-110' 
                       : 'bg-gray-300 hover:bg-gray-400'
                   }`}
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
                 />
               ))}
             </div>
-
 
           </motion.div>
 
@@ -311,12 +345,12 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <motion.div className="text-center mb-16" variants={fadeInUp}>
             <h2 className="text-3xl md:text-5xl font-bold mb-6">
-              Start Your Journey
-              <span className="block text-primary">With Free Resources</span>
+              Sacred Tools to Begin
+              <span className="block text-primary">Your Beautiful Journey</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Get instant access to our most valuable business-building tools 
-              and start seeing results today.
+              Embrace these carefully crafted resources designed to honor your dreams 
+              and guide your first steps toward entrepreneurial success.
             </p>
           </motion.div>
 
@@ -368,11 +402,11 @@ const Index = () => {
             transition={{ duration: 0.3 }}
           >
             <h3 className="text-2xl md:text-3xl font-bold mb-4">
-              Ready to Transform Your Business?
+              Ready to Honor Your Entrepreneurial Dreams?
             </h3>
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Join hundreds of women entrepreneurs who've already taken control of their 
-              digital destiny. Your success story starts with a single step.
+              Join a growing sisterhood of Indian women entrepreneurs who've chosen courage over comfort 
+              and are building businesses that celebrate both success and values. Your transformation begins with one brave step.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.div
@@ -380,7 +414,7 @@ const Index = () => {
                 transition={{ duration: 0.2 }}
               >
                 <Button variant="hero" size="xl" className="group">
-                  Start Your Journey Now
+                  Begin Your Sacred Journey
                   <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                 </Button>
               </motion.div>
@@ -389,7 +423,7 @@ const Index = () => {
                 transition={{ duration: 0.2 }}
               >
                 <Button variant="outline" size="xl">
-                  Book Free Consultation
+                  Connect with Your Sister Guide
                 </Button>
               </motion.div>
             </div>

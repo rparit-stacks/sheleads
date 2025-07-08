@@ -133,7 +133,7 @@ const Footer = () => {
               </Button>
             </div>
             <p className="text-gray-300 text-xs leading-relaxed">
-              The passion behind SHELeads is immense...to work together as a team to empower and uplift women entrepreneurs.
+              The sacred mission of SHELeads is to nurture and celebrate the dreams of Indian women entrepreneurs, creating a sisterhood where tradition meets innovation and success honors our roots.
             </p>
           </div>
         </div>

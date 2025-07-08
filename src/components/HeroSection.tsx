@@ -84,22 +84,16 @@ const HeroSection = () => {
             animate="visible"
           >
             <div className="flex flex-wrap gap-x-4">
-              {headlineWords.map((word, index) => (
-                <motion.span key={index} variants={wordVariants}>
-                  {word}
-                </motion.span>
-              ))}
+              <motion.span variants={wordVariants}>Every</motion.span>
+              <motion.span variants={wordVariants}>Indian</motion.span>
             </div>
             <motion.div className="block" variants={wordVariants}>
-              <span className="text-primary mr-4">{highlightWords[0]}</span>
-              <span className="text-primary">{highlightWords[1]}</span>
+              <span className="text-primary mr-4">Woman</span>
+              <span className="text-primary">Deserves</span>
             </motion.div>
             <div className="flex flex-wrap gap-x-4">
-              {finalWords.map((word, index) => (
-                <motion.span key={index} variants={wordVariants}>
-                  {word}
-                </motion.span>
-              ))}
+              <motion.span variants={wordVariants}>Digital</motion.span>
+              <motion.span variants={wordVariants}>Success</motion.span>
             </div>
           </motion.h1>
 
@@ -110,8 +104,8 @@ const HeroSection = () => {
             initial="hidden"
             animate="visible"
           >
-            Join India's most empowering community of women entrepreneurs mastering 
-            digital marketing and AI to scale their businesses beyond boundaries.
+            From your dreams to digital reality - we walk alongside ambitious Indian women entrepreneurs 
+            as they master AI, build authentic brands, and create businesses that honor both tradition and innovation.
           </motion.p>
 
           {/* CTA Buttons */}
