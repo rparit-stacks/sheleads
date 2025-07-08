@@ -5,7 +5,7 @@ import TestimonialCard from "@/components/TestimonialCard";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Download, Users, Award, TrendingUp, Mic } from "lucide-react";
+import { ArrowRight, Download, Users, Award, TrendingUp, Mic, Play } from "lucide-react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -16,31 +16,36 @@ const Index = () => {
   
   // Podcast carousel state
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
   
   const podcastEpisodes = [
     {
       id: 1,
       title: "From Atta Chakki to Shark Tank | SHELeads India",
       description: "Sangeeta dives into the ups and downs of entrepreneurship, her experience pitching on a national platform, and the lessons she's learned along the way.",
-      embedUrl: "https://www.youtube.com/embed/CfQk2FaS68A"
+      embedUrl: "https://www.youtube.com/embed/CfQk2FaS68A",
+      thumbnail: "https://img.youtube.com/vi/CfQk2FaS68A/maxresdefault.jpg"
     },
     {
       id: 2,
       title: "Inspiring journey of a makeup artist | SHELeads India", 
       description: "This episode is a must-watch for anyone seeking inspiration, insights, or the motivation to carve their own path!",
-      embedUrl: "https://www.youtube.com/embed/Cjtxwlz4uUI"
+      embedUrl: "https://www.youtube.com/embed/Cjtxwlz4uUI",
+      thumbnail: "https://img.youtube.com/vi/Cjtxwlz4uUI/maxresdefault.jpg"
     },
     {
       id: 3,
       title: "The twenty year old solopreneur | SHELeads India",
       description: "Meet an inspiring young entrepreneur who's building her empire at just twenty years old. Discover her secrets to success.",
-      embedUrl: "https://www.youtube.com/embed/tZxTcIwGpTA"
+      embedUrl: "https://www.youtube.com/embed/tZxTcIwGpTA",
+      thumbnail: "https://img.youtube.com/vi/tZxTcIwGpTA/maxresdefault.jpg"
     },
     {
       id: 4,
       title: "Her Legacy: A Lawyer's Impact on RERA and Entrepreneurship | SHELeads India",
       description: "Meet Adv. Amruta Salunke: Lawyer, RERA Expert, and Women Entrepreneur. A remarkable journey in a male-dominated industry.",
-      embedUrl: "https://www.youtube.com/embed/bsgUGK9pQ6U"
+      embedUrl: "https://www.youtube.com/embed/bsgUGK9pQ6U",
+      thumbnail: "https://img.youtube.com/vi/bsgUGK9pQ6U/maxresdefault.jpg"
     }
   ];
 
@@ -48,6 +53,7 @@ const Index = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % podcastEpisodes.length);
+      setIsPlaying(false); // Reset play state when slide changes
     }, 3000); // 3 seconds per slide
     
     return () => clearInterval(timer);
@@ -55,14 +61,21 @@ const Index = () => {
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % podcastEpisodes.length);
+    setIsPlaying(false); // Reset play state
   };
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + podcastEpisodes.length) % podcastEpisodes.length);
+    setIsPlaying(false); // Reset play state
   };
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
+    setIsPlaying(false); // Reset play state
+  };
+
+  const handlePlayClick = () => {
+    setIsPlaying(true);
   };
 
   const fadeInUp = {
@@ -88,27 +101,24 @@ const Index = () => {
   // Podcast slide animation variants
   const slideVariants = {
     enter: {
-      scale: 0.8,
+      scale: 0.95,
       opacity: 0,
-      y: 20,
     },
     center: {
       scale: 1,
       opacity: 1,
-      y: 0,
       transition: {
         type: "spring",
-        stiffness: 300,
-        damping: 30,
-        opacity: { duration: 0.2 }
+        stiffness: 200,
+        damping: 25,
+        opacity: { duration: 0.4 }
       }
     },
     exit: {
-      scale: 0.9,
+      scale: 0.95,
       opacity: 0,
-      y: -20,
       transition: {
-        duration: 0.2
+        duration: 0.3
       }
     }
   };
@@ -259,15 +269,39 @@ const Index = () => {
                 animate="center"
                 exit="exit"
               >
-                <div className="aspect-video">
-                  <iframe
-                    src={podcastEpisodes[currentSlide].embedUrl}
-                    title={podcastEpisodes[currentSlide].title}
-                    className="w-full h-full"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
+                <div 
+                  className="aspect-video relative bg-cover bg-center bg-no-repeat rounded-t-3xl overflow-hidden cursor-pointer"
+                  style={{ 
+                    backgroundImage: `url(${podcastEpisodes[currentSlide].thumbnail})` 
+                  }}
+                  onClick={handlePlayClick}
+                >
+                  {/* Show iframe only when playing */}
+                  {isPlaying ? (
+                    <iframe
+                      src={`${podcastEpisodes[currentSlide].embedUrl}?autoplay=1`}
+                      title={podcastEpisodes[currentSlide].title}
+                      className="w-full h-full absolute inset-0"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  ) : (
+                    /* Play button overlay */
+                    <motion.div 
+                      className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition-colors"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <motion.div 
+                        className="w-20 h-20 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg"
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <Play className="h-8 w-8 text-primary ml-1" fill="currentColor" />
+                      </motion.div>
+                    </motion.div>
+                  )}
                 </div>
                 
                 {/* Video Info */}
@@ -290,7 +324,7 @@ const Index = () => {
                   className="absolute top-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm"
                   initial={{ opacity: 0, scale: 0.5 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.2, duration: 0.3 }}
+                  transition={{ delay: 0.15, duration: 0.3 }}
                 >
                   {currentSlide + 1} / {podcastEpisodes.length}
                 </motion.div>
