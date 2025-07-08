@@ -143,7 +143,13 @@ const Footer = () => {
         <div className="container mx-auto px-4">
           <div className="text-center text-xs text-gray-300">
             © Copyright Sheleads 2024 All rights reserved. Professional Website Developed & Digital Marketing by{" "}
-            <span style={{ color: '#E60023' }}>Dexcel Digital Hub Pvt Ltd.</span>
+            <a href="mailto:work.ankit2@gmail.com" style={{ color: '#E60023' }} className="hover:underline">
+              work.ankit2@gmail.com
+            </a>
+            {" & "}
+            <a href="mailto:cg077593@gmail.com" style={{ color: '#E60023' }} className="hover:underline">
+              cg077593@gmail.com
+            </a>
           </div>
         </div>
       </div>
