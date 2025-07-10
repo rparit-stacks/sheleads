@@ -389,7 +389,7 @@ const Index = () => {
           </motion.div>
 
           <motion.div 
-            className="grid md:grid-cols-3 gap-8 mb-16"
+            className="grid md:grid-cols-3 gap-8 mb-16 items-stretch"
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
@@ -400,29 +400,32 @@ const Index = () => {
               return (
                 <motion.div 
                   key={index} 
-                  className="text-center group"
+                  className="bg-background rounded-2xl p-8 shadow-card hover:shadow-elegant transition-all duration-300 flex flex-col h-full group"
                   variants={fadeInUp}
                   whileHover={{ 
-                    scale: 1.05,
-                    y: -8
+                    scale: 1.02,
+                    y: -4
                   }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 transition-colors" style={{ backgroundColor: 'rgba(230, 0, 35, 0.1)' }}>
-                    <IconComponent className="h-8 w-8 text-primary" />
+                  <div className="text-center flex-1 flex flex-col">
+                    <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 transition-colors" style={{ backgroundColor: 'rgba(230, 0, 35, 0.1)' }}>
+                      <IconComponent className="h-8 w-8 text-primary" />
+                    </div>
+                    <h3 className="text-xl font-semibold mb-4">{magnet.title}</h3>
+                    <p className="text-muted-foreground mb-8 flex-1">{magnet.description}</p>
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.2 }}
+                      className="mt-auto"
+                    >
+                      <Button variant="outline" className="group w-full">
+                        <Download className="h-4 w-4 mr-2" />
+                        Download Free
+                        <ArrowRight className="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" />
+                      </Button>
+                    </motion.div>
                   </div>
-                  <h3 className="text-xl font-semibold mb-4">{magnet.title}</h3>
-                  <p className="text-muted-foreground mb-6">{magnet.description}</p>
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Button variant="outline" className="group">
-                      <Download className="h-4 w-4 mr-2" />
-                      Download Free
-                      <ArrowRight className="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" />
-                    </Button>
-                  </motion.div>
                 </motion.div>
               );
             })}
