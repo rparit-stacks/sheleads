@@ -505,12 +505,17 @@ const Index = () => {
                   whileHover={{ scale: 1.05, y: -5 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="w-full h-48 bg-gradient-to-br from-orange-100 to-orange-200 rounded-xl mb-3 flex items-center justify-center">
-                    <div className="w-24 h-24 bg-white rounded-lg flex items-center justify-center shadow-md">
-                      <svg className="w-12 h-12 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                      </svg>
-                    </div>
+                  <div className="w-full h-48 rounded-xl mb-3 overflow-hidden bg-gray-50">
+                    <img 
+                      src="/media/market-place.JPG" 
+                      alt="Market Place" 
+                      className="w-full h-full object-cover object-center"
+                      style={{
+                        filter: 'brightness(0.75) contrast(1.15) saturate(1.1)',
+                        imageRendering: 'crisp-edges',
+                        transition: 'none'
+                      }}
+                    />
                   </div>
                   <h3 className="text-lg font-semibold text-gray-800 mb-1">Market Place</h3>
                   <p className="text-xs text-gray-600">Exclusive platform for women-led businesses</p>
