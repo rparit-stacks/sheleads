@@ -370,6 +370,157 @@ const Index = () => {
         </div>
       </motion.section>
 
+      {/* SHELeads Platform Section */}
+      <motion.section 
+        className="py-20 bg-background"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-10%" }}
+        variants={fadeInUp}
+      >
+        <div className="container mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <motion.div variants={fadeInUp}>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                SHELeads
+              </h2>
+              <p className="text-lg text-muted-foreground mb-8">
+                SHELeads has created a business solution specially designed for women entrepreneurs 
+                and professionals with an offering that aims to help them set up their businesses 
+                in the digital world.
+              </p>
+              
+              <h3 className="text-2xl font-semibold mb-6">What makes it different?</h3>
+              
+              <div className="space-y-4 mb-8">
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center mt-1">
+                    <span className="text-primary-foreground text-xs font-bold">✓</span>
+                  </div>
+                  <span className="text-foreground">Created Exclusively for Women to grow in business</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center mt-1">
+                    <span className="text-primary-foreground text-xs font-bold">✓</span>
+                  </div>
+                  <span className="text-foreground">Empowering Women To Take their Business to the next level and help them create great Success Stories</span>
+                </div>
+              </div>
+
+              <p className="text-muted-foreground mb-6">
+                This solution and platform is a Win-Win situation for all women entrepreneurs that gives 
+                women entrepreneurs an independent platform to manage and develop their online E-commerce 
+                business under the guidance and training of expert professionals while also giving them 
+                their own e-commerce web store to do business and direct interact with customers without 
+                any third party involvement.
+              </p>
+
+              <div className="mb-8">
+                <h4 className="text-xl font-semibold mb-4">The platform provides access to:</h4>
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                    <span>A Networking Platform with other entrepreneurs</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                    <span>A Digital Market Place exclusively for women entrepreneurs</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                    <span>Website Development at a Nominal Charge</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Right Content - Features Grid */}
+            <motion.div variants={fadeInUp}>
+              <div className="grid grid-cols-2 gap-6">
+                {/* Mentoring */}
+                <motion.div 
+                  className="bg-white rounded-2xl p-4 text-center hover:shadow-lg transition-all duration-300 border border-gray-100"
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="w-full h-48 rounded-xl mb-3 overflow-hidden bg-gray-50">
+                    <img 
+                      src="/media/Mentoring.JPG" 
+                      alt="Mentoring" 
+                      className="w-full h-full object-cover object-center"
+                      style={{
+                        filter: 'brightness(0.75) contrast(1.15) saturate(1.1)',
+                        imageRendering: 'crisp-edges',
+                        transition: 'none'
+                      }}
+                    />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-800 mb-1">Mentoring</h3>
+                  <p className="text-xs text-gray-600">Expert guidance to accelerate your business growth</p>
+                </motion.div>
+
+                {/* Networking */}
+                <motion.div 
+                  className="bg-white rounded-2xl p-4 text-center hover:shadow-lg transition-all duration-300 border border-gray-100"
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="w-full h-48 rounded-xl mb-3 overflow-hidden bg-gray-50">
+                    <img 
+                      src="/media/networking.JPG" 
+                      alt="Networking" 
+                      className="w-full h-full object-cover object-center"
+                      style={{
+                        filter: 'brightness(0.7) contrast(1.2) saturate(1.1)',
+                        imageRendering: 'crisp-edges',
+                        transition: 'none'
+                      }}
+                    />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-800 mb-1">Networking</h3>
+                  <p className="text-xs text-gray-600">Connect with like-minded women entrepreneurs</p>
+                </motion.div>
+
+                {/* Building Website */}
+                <motion.div 
+                  className="bg-white rounded-2xl p-4 text-center hover:shadow-lg transition-all duration-300 border border-gray-100"
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="w-full h-48 bg-gradient-to-br from-purple-100 to-purple-200 rounded-xl mb-3 flex items-center justify-center">
+                    <div className="w-24 h-24 bg-white rounded-lg flex items-center justify-center shadow-md">
+                      <svg className="w-12 h-12 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-800 mb-1">Building Website</h3>
+                  <p className="text-xs text-gray-600">Create your professional online presence</p>
+                </motion.div>
+
+                {/* Market Place */}
+                <motion.div 
+                  className="bg-white rounded-2xl p-4 text-center hover:shadow-lg transition-all duration-300 border border-gray-100"
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="w-full h-48 bg-gradient-to-br from-orange-100 to-orange-200 rounded-xl mb-3 flex items-center justify-center">
+                    <div className="w-24 h-24 bg-white rounded-lg flex items-center justify-center shadow-md">
+                      <svg className="w-12 h-12 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-800 mb-1">Market Place</h3>
+                  <p className="text-xs text-gray-600">Exclusive platform for women-led businesses</p>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </motion.section>
+
       {/* Lead Magnets Section */}
       <motion.section 
         className="py-20 bg-gray-50"
