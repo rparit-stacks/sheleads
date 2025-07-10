@@ -125,22 +125,22 @@ const Index = () => {
 
   const testimonials = [
     {
-      quote: "SHELeadsIndia didn't just teach me digital marketing—they helped me rediscover my confidence as an Indian woman in business. Today, my home-grown brand reaches families across Maharashtra, staying true to our values while embracing innovation.",
-      author: "Priya Sharma",
-      title: "Founder, Eco-Friendly Home Products",
+      quote: "From running a traditional atta chakki to pitching on Shark Tank India - SHELeadsIndia helped me transform my business and navigate entrepreneurship challenges. This incredible journey taught me that with passion and determination, dreams truly have no limits!",
+      author: "Sangeeta",
+      title: "From Atta Chakki to Shark Tank",
+      city: "Mumbai"
+    },
+    {
+      quote: "Building my makeup artistry brand in the competitive beauty industry was challenging until SHELeadsIndia showed me how to blend creativity with smart business strategies. Now I'm living my passion while inspiring the next generation of artists!",
+      author: "Payaal Jain",
+      title: "Professional Makeup Artist & Entrepreneur",
       city: "Pune"
     },
     {
-      quote: "Here, I found more than business strategies—I found a sisterhood. The woman sitting beside me at our first meetup became my business partner, and together we're creating solutions that make our community proud.",
-      author: "Anita Desai",
-      title: "Co-founder, Tech Solutions",
-      city: "Nagpur"
-    },
-    {
-      quote: "As a young mother from Nashik, I thought my entrepreneurial dreams would have to wait. SHELeadsIndia showed me how to build a thriving business from home, honoring both my family values and my ambitions.",
-      author: "Meera Patel",
-      title: "Fashion Brand Owner",
-      city: "Nashik"
+      quote: "Breaking into the male-dominated legal industry while building my YouTube presence felt impossible until SHELeadsIndia showed me the path forward. Now I successfully balance my RERA expertise with content creation, empowering women through legal education every single day!",
+      author: "Adv. Amruta Salunke",
+      title: "RERA Expert, Lawyer & YouTuber",
+      city: "Pune"
     }
   ];
 
