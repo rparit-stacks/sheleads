@@ -1,12 +1,23 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import AnimatedCounter from "@/components/AnimatedCounter";
-import heroImage from "@/assets/hero-women-entrepreneurs.jpg";
+// Using direct path to media folder image
 
 const HeroSection = () => {
   const sectionRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   const headlineWords = ["Transform", "Your"];
   const highlightWords = ["Business", "Dreams"];
   const finalWords = ["Into", "Digital", "Success"];
@@ -50,19 +61,25 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center">
+    <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background Image with Overlay */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 w-full h-full">
         <img
-          src={heroImage}
+          src="/media/IMG_0011.JPG"
           alt="Empowering Women Entrepreneurs"
           className="w-full h-full object-cover"
+          style={{
+            objectPosition: isMobile ? 'center 15%' : 'center center',
+            height: '100vh',
+            width: '100%',
+            maxWidth: '100vw'
+          }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-foreground/80 via-foreground/60 to-transparent" />
       </div>
 
       {/* Content */}
-      <div className="relative container mx-auto px-4 py-20">
+      <div className="relative container mx-auto px-4 py-12 sm:py-16 md:py-20">
         <div className="max-w-2xl text-background">
           {/* Location Badge */}
           <motion.div 
