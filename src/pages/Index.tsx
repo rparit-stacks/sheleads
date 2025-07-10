@@ -220,9 +220,11 @@ const Index = () => {
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.2 }}
             >
-              <Button variant="hero" size="xl" className="group">
-                Read More Success Stories
-                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+              <Button asChild variant="hero" size="xl" className="group">
+                <Link to="/success-stories">
+                  Read More Success Stories
+                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </Link>
               </Button>
             </motion.div>
           </motion.div>

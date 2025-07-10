@@ -9,42 +9,44 @@ import { ArrowRight, TrendingUp, Users, Award, MapPin } from "lucide-react";
 const SuccessStories = () => {
   const featuredStories = [
     {
-      name: "Priya Sharma",
-      business: "Eco-Friendly Home Products",
-      city: "Pune",
-      results: "From dreams to ₹50L revenue in 8 months",
-      image: "/api/placeholder/120/120",
-      story: "As a mother who believed in sustainable living, I dreamed of creating products that would make a difference. SHELeadsIndia didn't just teach me digital marketing—they helped me find my voice as an Indian woman entrepreneur. The AI tools became my trusted assistants, and the sisterhood gave me courage I never knew I had. Today, families across Maharashtra choose my products for healthier homes!",
+      name: "Sangeeta",
+      business: "From Atta Chakki to Shark Tank",
+      city: "Maharashtra",
+      results: "Traditional business to national TV platform",
+      image: "/media/sangeeta sucess.avif",
+      videoLink: "https://youtu.be/CfQk2FaS68A?si=LpxX3sAbJvNiorTj",
+      story: "Sangeeta's journey from running a traditional atta chakki (flour mill) to pitching on Shark Tank India is a testament to the power of dreams and determination. She dives into the ups and downs of entrepreneurship, her experience pitching on a national platform, and the lessons she's learned along the way. Her story proves that with passion and hard work, even the most traditional businesses can achieve extraordinary success and recognition.",
       metrics: {
-        revenue: "500% growth with purpose",
-        customers: "2,500+ families served",
-        team: "5 women empowered with employment"
+        achievement: "Featured on Shark Tank India",
+        growth: "Traditional to tech-enabled business",
+        inspiration: "Thousands inspired by her journey"
       }
     },
     {
-      name: "Anita Desai",
-      business: "Tech Solutions for SMEs",
-      city: "Nagpur",
-      results: "Scaled to 6-figure business with authenticity",
+      name: "Payaal Jain",
+      business: "Professional Makeup Artist & Entrepreneur", 
+      city: "Mumbai",
+      results: "Carved unique path in beauty industry",
       image: "/api/placeholder/120/120",
-      story: "As a software engineer turned entrepreneur, I had the technical knowledge but lacked the confidence to put myself out there. The mentorship program connected me with a sister who understood my journey intimately. Through authentic relationship-building and values-driven strategies, I found my first major clients and created recurring revenue streams that honor both innovation and tradition.",
+      story: "Payaal's inspiring journey as a makeup artist showcases the beautiful blend of artistry and entrepreneurship. From starting as a passionate artist to building her own brand in the competitive beauty industry, she shares insights about creativity, business growth, and following your passion. This episode is a must-watch for anyone seeking inspiration, insights, or the motivation to carve their own path in the beauty industry!",
       metrics: {
-        revenue: "₹12L annual revenue with integrity",
-        clients: "25+ businesses transformed",
-        partnership: "Found my business sister through SHE community"
+        clients: "500+ satisfied clients",
+        brand: "Award-winning makeup artist",
+        community: "Inspiring next generation artists"
       }
     },
     {
-      name: "Meera Patel",
-      business: "Sustainable Fashion Brand",
-      city: "Nashik",
-      results: "Built 50K authentic community organically",
-      image: "/api/placeholder/120/120",
-      story: "My fashion brand represented my heritage and values, but I struggled to share this story effectively. The digital mastery program taught me content strategies rooted in authenticity rather than tactics. I learned to use AI as a tool for creativity, not replacement, and built genuine connections with women who share my values. Now customers across India celebrate sustainable fashion through my brand!",
+      name: "Adv. Amruta Salunke",
+      business: "RERA Expert, Lawyer & YouTuber",
+      city: "Pune", 
+      results: "Breaking barriers in law while building digital presence",
+      image: "/media/Adv. Amruta Salunke.jpg",
+      videoLink: "https://youtu.be/bsgUGK9pQ6U?si=TjyeC6LNDam_bNqm",
+      story: "Meet Amruta, a remarkable lawyer specializing in RERA (Real Estate Regulatory Authority), a trailblazing entrepreneur, and a rising YouTuber. She opens up about her journey navigating a male-dominated industry, balancing a demanding career with personal life, and how she ventured into creating her own YouTube channel to share her knowledge and experiences. Her story demonstrates how women can excel professionally while building their personal brand and helping others.",
       metrics: {
-        followers: "50K+ community members",
-        engagement: "8.5% authentic engagement",
-        sales: "200+ monthly orders with love"
+        expertise: "RERA law specialist",
+        platform: "Growing YouTube presence",
+        impact: "Empowering through legal education"
       }
     }
   ];
@@ -175,16 +177,42 @@ const SuccessStories = () => {
                         ))}
                       </div>
                       
-                      <Button variant="outline" className="self-start group">
+                      <Button 
+                        variant="outline" 
+                        className="self-start group"
+                        onClick={() => story.videoLink && window.open(story.videoLink, '_blank')}
+                      >
                         Read Full Story
                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </Button>
                     </div>
                     
                     <div className="bg-gradient-section p-8 lg:p-12 flex items-center justify-center">
-                      <div className="w-48 h-48 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(230, 0, 35, 0.1)' }}>
-                        <Users className="h-24 w-24" style={{ color: 'rgba(230, 0, 35, 0.3)' }} />
-                      </div>
+                      {story.name === "Sangeeta" ? (
+                        <div className="w-full h-60 rounded-lg overflow-hidden flex items-center justify-center shadow-lg">
+                          <img 
+                            src={story.image} 
+                            alt={story.name}
+                            className="w-full h-full object-contain bg-white"
+                          />
+                        </div>
+                      ) : story.name === "Adv. Amruta Salunke" ? (
+                        <div className="w-48 h-48 rounded-full overflow-hidden flex items-center justify-center border-4 border-white shadow-lg">
+                          <img 
+                            src={story.image} 
+                            alt={story.name}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      ) : (
+                        <div className="w-48 h-60 rounded-lg overflow-hidden flex items-center justify-center border-4 border-white shadow-lg">
+                          <img 
+                            src={story.image} 
+                            alt={story.name}
+                            className="w-full h-full object-contain bg-white"
+                          />
+                        </div>
+                      )}
                     </div>
                   </div>
                 </CardContent>
