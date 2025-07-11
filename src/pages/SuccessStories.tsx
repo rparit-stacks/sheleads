@@ -9,42 +9,42 @@ import { ArrowRight, TrendingUp, Users, Award, MapPin } from "lucide-react";
 const SuccessStories = () => {
   const featuredStories = [
     {
-      name: "Priya Sharma",
-      business: "Eco-Friendly Home Products",
+      name: "Sangeeta",
+      business: "From Atta Chakki to Shark Tank",
+      city: "Mumbai",
+      results: "Traditional business to national TV platform",
+      image: "/media/sangeeta%20sucess.avif",
+      story: "From running a traditional atta chakki to pitching on Shark Tank India - SHELeadsIndia helped me transform my business and navigate entrepreneurship challenges. This incredible journey taught me that with passion and determination, dreams truly have no limits!",
+      metrics: {
+        achievement: "Shark Tank India Pitch",
+        transformation: "Traditional to Modern Business",
+        impact: "Inspiring Entrepreneur"
+      }
+    },
+    {
+      name: "Payaal Jain",
+      business: "Professional Makeup Artist & Entrepreneur",
       city: "Pune",
-      results: "From ₹0 to ₹50L revenue in 8 months",
-      image: "/api/placeholder/120/120",
-      story: "I was a stay-at-home mom with a dream to create eco-friendly products. SHELeadsIndia didn't just teach me digital marketing—they gave me the confidence to believe I could build a real business. The AI tools they introduced saved me 20 hours per week, and the community support was incredible. Today, my products are sold across Maharashtra!",
+      results: "Built thriving makeup artistry brand",
+      image: "/api/placeholder/300/300",
+      story: "Building my makeup artistry brand in the competitive beauty industry was challenging until SHELeadsIndia showed me how to blend creativity with smart business strategies. Now I'm living my passion while inspiring the next generation of artists!",
       metrics: {
-        revenue: "500% increase",
-        customers: "2,500+ happy customers",
-        team: "Hired 5 team members"
+        business: "Thriving Makeup Brand",
+        impact: "Inspiring Next Generation",
+        growth: "Creative + Business Success"
       }
     },
     {
-      name: "Anita Desai",
-      business: "Tech Solutions for SMEs",
-      city: "Nagpur",
-      results: "Scaled to 6-figure business in 6 months",
-      image: "/api/placeholder/120/120",
-      story: "As a software engineer turned entrepreneur, I had the technical skills but no idea how to market my services. The mentorship program connected me with someone who had walked the same path. The business strategies and networking opportunities helped me find my first major clients and build recurring revenue streams.",
+      name: "Adv. Amruta Salunke",
+      business: "RERA Expert, Lawyer & YouTuber",
+      city: "Pune",
+      results: "Successfully balanced law practice with content creation",
+      image: "/media/Adv. Amruta Salunke.jpg",
+      story: "Breaking into the male-dominated legal industry while building my YouTube presence felt impossible until SHELeadsIndia showed me the path forward. Now I successfully balance my RERA expertise with content creation, empowering women through legal education every single day!",
       metrics: {
-        revenue: "₹12L annual revenue",
-        clients: "25+ enterprise clients",
-        team: "Founded with co-founder from SHE community"
-      }
-    },
-    {
-      name: "Meera Patel",
-      business: "Sustainable Fashion Brand",
-      city: "Nashik",
-      results: "Built 50K Instagram following organically",
-      image: "/api/placeholder/120/120",
-      story: "My fashion brand was stuck at 500 followers for months. The digital marketing course taught me content strategies that actually work. I learned to use AI for content creation, built authentic engagement, and turned my Instagram into a sales machine. Now I have customers from across India placing orders daily!",
-      metrics: {
-        followers: "50K+ Instagram followers",
-        engagement: "8.5% engagement rate",
-        sales: "200+ orders per month"
+        expertise: "RERA Legal Expert",
+        platform: "YouTube Content Creator",
+        mission: "Empowering Women Daily"
       }
     }
   ];
@@ -182,8 +182,48 @@ const SuccessStories = () => {
                     </div>
                     
                     <div className="bg-gradient-section p-8 lg:p-12 flex items-center justify-center">
-                      <div className="w-48 h-48 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(230, 0, 35, 0.1)' }}>
-                        <Users className="h-24 w-24" style={{ color: 'rgba(230, 0, 35, 0.3)' }} />
+                      <div className="w-80 h-56 rounded-2xl overflow-hidden shadow-xl border-4 border-white bg-white relative">
+                        {story.image.includes('placeholder') ? (
+                          <div className="w-full h-full bg-gradient-to-br from-primary/10 to-primary/20 flex items-center justify-center">
+                            <Users className="h-24 w-24 text-primary/50" />
+                          </div>
+                        ) : (
+                          <img 
+                            src={story.image} 
+                            alt={story.name}
+                            className="w-full h-full"
+                            style={{
+                              objectFit: 'contain',
+                              objectPosition: 'center center',
+                              width: '100%',
+                              height: '100%',
+                              display: 'block'
+                            }}
+                            onError={(e) => {
+                              // Fallback to a styled div if image fails to load
+                              const target = e.target as HTMLImageElement;
+                              console.log('Image failed to load:', story.image);
+                              const parent = target.parentElement;
+                              if (parent) {
+                                parent.innerHTML = `
+                                  <div class="w-full h-full bg-gradient-to-br from-purple-100 to-blue-100 flex items-center justify-center">
+                                    <div class="text-center">
+                                      <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-2 shadow-md">
+                                        <svg class="w-10 h-10 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                                          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                        </svg>
+                                      </div>
+                                      <div class="text-xs font-medium text-gray-600">${story.name}</div>
+                                    </div>
+                                  </div>
+                                `;
+                              }
+                            }}
+                            onLoad={() => {
+                              console.log('Image loaded successfully:', story.image);
+                            }}
+                          />
+                        )}
                       </div>
                     </div>
                   </div>
