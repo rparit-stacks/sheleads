@@ -17,11 +17,20 @@ const EventsGallery = () => {
     "/media/_PAS4965.JPG",
     "/media/_PAS4929.JPG",
     "/media/_PAS4914.JPG",
+    "/media/DSC02058.JPG",
+    "/media/DSC02132.JPG",
+    "/media/DSC02153.JPG",
+    "/media/DSC02211.JPG",
+    "/media/DSC02233.JPG",
+    "/media/DSC02242.JPG",
+    "/media/IMG_0011.JPG",
+    "/media/IMG_0013.JPG",
+    "/media/IMG_0137.JPG",
+    "/media/IMG_0195.JPG",
     "/media/market-place.JPG",
     "/media/digital wisdom.JPG",
     "/media/networking.JPG",
-    "/media/Mentoring.JPG",
-    "/media/IMG_0011.JPG"
+    "/media/Mentoring.JPG"
   ];
 
   const upcomingEvents = [

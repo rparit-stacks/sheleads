@@ -790,7 +790,7 @@ const Index = () => {
               whileHover={{ scale: 1.05, y: -2 }}
             >
               <img
-                src="/media/_PAS5285.JPG"
+                src="/media/DSC02058.JPG"
                 alt="Event photo 1"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
               />
@@ -803,7 +803,7 @@ const Index = () => {
               whileHover={{ scale: 1.05, y: -2 }}
             >
               <img
-                src="/media/_PAS5276.JPG"
+                src="/media/DSC02132.JPG"
                 alt="Event photo 2"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
               />
@@ -816,7 +816,7 @@ const Index = () => {
               whileHover={{ scale: 1.05, y: -2 }}
             >
               <img
-                src="/media/_PAS5044.JPG"
+                src="/media/IMG_0013.JPG"
                 alt="Event photo 3"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
               />
@@ -829,7 +829,7 @@ const Index = () => {
               whileHover={{ scale: 1.05, y: -2 }}
             >
               <img
-                src="/media/market-place.JPG"
+                src="/media/DSC02233.JPG"
                 alt="Event photo 4"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
               />
