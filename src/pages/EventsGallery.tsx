@@ -94,17 +94,32 @@ const EventsGallery = () => {
       <Navigation />
       
       {/* Hero Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
+      <section 
+        className="py-16 md:py-20 lg:py-24 text-white relative bg-cover bg-center bg-no-repeat min-h-[60vh] w-full overflow-hidden"
+        style={{ 
+          backgroundImage: 'url(/media/DSC02153.JPG)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center',
+          backgroundAttachment: 'scroll'
+        }}
+      >
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <Link to="/" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 mb-6 text-sm font-medium">
+            <Link to="/" className="inline-flex items-center gap-2 text-white hover:text-white/80 mb-6 text-sm font-medium drop-shadow-lg">
               <ArrowLeft className="h-4 w-4" />
               Back to Home
             </Link>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-light mb-6 text-gray-900">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-light mb-6 text-white drop-shadow-xl" style={{
+              textShadow: '3px 3px 10px rgba(0, 0, 0, 0.9), 2px 2px 6px rgba(0, 0, 0, 0.7), 1px 1px 3px rgba(0, 0, 0, 0.5)'
+            }}>
               Events Gallery
             </h1>
-            <p className="text-lg text-gray-600 mb-8">
+            <p className="text-lg text-white/90 mb-8 drop-shadow-lg" style={{
+              textShadow: '2px 2px 8px rgba(0, 0, 0, 0.8), 1px 1px 4px rgba(0, 0, 0, 0.6), 0px 0px 2px rgba(0, 0, 0, 0.4)'
+            }}>
               Discover our community events, workshops, and networking opportunities. 
               Join us in building the future of women entrepreneurship.
             </p>

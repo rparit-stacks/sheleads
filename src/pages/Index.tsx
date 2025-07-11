@@ -265,6 +265,9 @@ const Index = () => {
       {/* Programs Section */}
       <ProgramsShowcase />
 
+      {/* Thin black line divider */}
+      <div className="w-full h-px bg-black opacity-20"></div>
+
       {/* Social Proof Section */}
       <motion.section 
         className="py-20 bg-background"
@@ -323,6 +326,9 @@ const Index = () => {
           </motion.div>
         </div>
       </motion.section>
+
+      {/* Thin black line divider */}
+      <div className="w-full h-px bg-black opacity-20"></div>
 
       {/* Podcast Section */}
       <motion.section 
@@ -625,6 +631,9 @@ const Index = () => {
           </div>
         </div>
       </motion.section>
+
+      {/* Thin black line divider */}
+      <div className="w-full h-px bg-black opacity-20"></div>
 
       {/* Media Coverage & Recognition */}
       <motion.section 
