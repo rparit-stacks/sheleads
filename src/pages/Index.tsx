@@ -463,6 +463,9 @@ const Index = () => {
         </div>
       </motion.section>
 
+      {/* Thin black line divider */}
+      <div className="w-full h-px bg-black opacity-20"></div>
+
       {/* SHELeads Platform Section */}
       <motion.section 
         className="py-20 bg-background"
