@@ -109,20 +109,37 @@ const Programs = () => {
     <div className="min-h-screen">
       <Navigation />
       
-      {/* Hero Section - Made Smaller */}
-      <section className="py-12 lg:py-16 text-white" style={{ background: 'linear-gradient(135deg, rgb(230, 0, 35), rgb(204, 0, 31))' }}>
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-3xl lg:text-5xl font-bold mb-6 leading-tight">
+      {/* Hero Section with Background Image */}
+      <section 
+        className="py-16 md:py-20 lg:py-24 text-white relative bg-cover bg-center bg-no-repeat min-h-[60vh] w-full overflow-hidden"
+        style={{ 
+          backgroundImage: 'url(/media/market-place.JPG)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center',
+          backgroundAttachment: 'scroll'
+        }}
+      >
+        {/* Light overlay for better text readability */}
+        <div className="absolute inset-0 bg-black bg-opacity-20"></div>
+        
+        <div className="w-full px-4 relative z-10 flex items-center min-h-[50vh]">
+          <div className="max-w-4xl mx-auto text-center w-full">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium mb-6 leading-tight drop-shadow-xl" style={{
+              textShadow: '3px 3px 10px rgba(0, 0, 0, 0.9), 2px 2px 6px rgba(0, 0, 0, 0.7), 1px 1px 3px rgba(0, 0, 0, 0.5)'
+            }}>
               Empowering Women Entrepreneurs with MarTech Mastery
             </h1>
             <div className="max-w-3xl mx-auto">
-              <p className="text-base lg:text-lg mb-6 opacity-95 leading-relaxed">
+              <p className="text-base sm:text-lg lg:text-xl mb-6 opacity-95 leading-relaxed font-light drop-shadow-lg" style={{
+                textShadow: '2px 2px 8px rgba(0, 0, 0, 0.8), 1px 1px 4px rgba(0, 0, 0, 0.6), 0px 0px 2px rgba(0, 0, 0, 0.4)'
+              }}>
                 SHELeadsIndia is more than a platform—it is a movement designed exclusively for women 
                 entrepreneurs who want to scale their businesses using modern marketing technology (MarTech). 
                 We are on a mission to create India's largest business growth ecosystem for women-led ventures.
               </p>
-              <p className="text-base lg:text-lg opacity-95 leading-relaxed">
+              <p className="text-base sm:text-lg lg:text-xl opacity-95 leading-relaxed font-light drop-shadow-lg" style={{
+                textShadow: '2px 2px 8px rgba(0, 0, 0, 0.8), 1px 1px 4px rgba(0, 0, 0, 0.6), 0px 0px 2px rgba(0, 0, 0, 0.4)'
+              }}>
                 Our community brings together women entrepreneurs, MarTech trainers, digital strategists, 
                 and solution providers in one powerful network. We focus on practical, tech-enabled marketing 
                 solutions that drive real business results.
@@ -137,7 +154,7 @@ const Programs = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-2xl lg:text-3xl font-bold mb-4 text-gray-900">
+              <h2 className="text-2xl lg:text-3xl font-semibold mb-4 text-gray-900">
                 Our Impact Vision
               </h2>
               <p className="text-lg text-gray-600">We aim to:</p>
@@ -169,7 +186,7 @@ const Programs = () => {
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-8 items-center">
               <div className="order-2 lg:order-1">
-                <h2 className="text-2xl lg:text-3xl font-bold mb-4 text-gray-900">
+                <h2 className="text-2xl lg:text-3xl font-semibold mb-4 text-gray-900">
                   Founded by <span className="text-primary">Nikita Vora</span>
                 </h2>
                 <p className="text-base lg:text-lg text-gray-700 leading-relaxed mb-6">
@@ -202,7 +219,7 @@ const Programs = () => {
       <section className="py-12 lg:py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-2xl lg:text-3xl font-bold mb-4 text-gray-900">
+            <h2 className="text-2xl lg:text-3xl font-semibold mb-4 text-gray-900">
               Power Play Pricing Model
             </h2>
             <p className="text-lg text-gray-600">
@@ -284,7 +301,7 @@ const Programs = () => {
       <section className="py-12 lg:py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl lg:text-3xl font-bold mb-8 text-center text-gray-900">
+            <h2 className="text-2xl lg:text-3xl font-semibold mb-8 text-center text-gray-900">
               Plan Recommendations
             </h2>
             
@@ -305,23 +322,70 @@ const Programs = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-12 lg:py-16 text-white" style={{ background: 'linear-gradient(135deg, rgb(230, 0, 35), rgb(204, 0, 31))' }}>
-        <div className="container mx-auto px-4">
+      {/* CTA Section with Background Image */}
+      <section 
+        className="py-16 md:py-20 text-white relative bg-cover bg-center bg-no-repeat w-full overflow-hidden"
+        style={{ 
+          backgroundImage: 'url(/media/market-place.JPG)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center',
+          backgroundAttachment: 'scroll'
+        }}
+      >
+        {/* Light overlay for better text readability */}
+        <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+        
+        <div className="w-full px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <h3 className="text-2xl lg:text-3xl font-bold mb-6">
+            <h3 className="text-2xl lg:text-3xl font-medium mb-6 drop-shadow-xl" style={{
+              textShadow: '3px 3px 10px rgba(0, 0, 0, 0.9), 2px 2px 6px rgba(0, 0, 0, 0.7), 1px 1px 3px rgba(0, 0, 0, 0.5)'
+            }}>
               Ready to Lead?
             </h3>
-            <p className="text-lg mb-8 opacity-95 leading-relaxed">
+            <p className="text-lg mb-8 opacity-95 leading-relaxed font-light drop-shadow-lg" style={{
+              textShadow: '2px 2px 8px rgba(0, 0, 0, 0.8), 1px 1px 4px rgba(0, 0, 0, 0.6), 0px 0px 2px rgba(0, 0, 0, 0.4)'
+            }}>
               Pick your plan. Power your brand. SHELeadsIndia is here to walk with you—from spark to empire.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="secondary" size="lg" className="bg-white text-primary hover:bg-gray-100 font-semibold py-3 px-6">
-                Get Started Today
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="border-2 border-white text-white hover:bg-white hover:text-primary font-medium py-3 px-6 shadow-lg transition-all duration-200 bg-transparent"
+                style={{
+                  borderColor: 'white',
+                  color: 'white'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'white';
+                  e.currentTarget.style.color = '#E60023';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                  e.currentTarget.style.color = 'white';
+                }}
+              >
+                <span>Get Started Today</span>
                 <ArrowRight className="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" />
               </Button>
-              <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-primary font-semibold py-3 px-6">
-                Schedule a Call
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="border-2 border-white text-white hover:bg-white hover:text-primary font-medium py-3 px-6 shadow-lg transition-all duration-200 bg-transparent"
+                style={{
+                  borderColor: 'white',
+                  color: 'white'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'white';
+                  e.currentTarget.style.color = '#E60023';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent';
+                  e.currentTarget.style.color = 'white';
+                }}
+              >
+                <span>Schedule a Call</span>
               </Button>
             </div>
           </div>
