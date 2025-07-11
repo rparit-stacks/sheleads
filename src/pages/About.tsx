@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Award, Users, MapPin, Calendar, Target, Heart } from "lucide-react";
-import founderImage from "@/assets/founder-portrait.jpg";
+import founderImage from "@/assets/she-leads-membership.webp";
 
 const About = () => {
   const achievements = [

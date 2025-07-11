@@ -9,81 +9,79 @@ import { ArrowRight, TrendingUp, Users, Award, MapPin } from "lucide-react";
 const SuccessStories = () => {
   const featuredStories = [
     {
-      name: "Sangeeta",
-      business: "From Atta Chakki to Shark Tank",
-      city: "Maharashtra",
-      results: "Traditional business to national TV platform",
-      image: "/media/sangeeta sucess.avif",
-      videoLink: "https://youtu.be/CfQk2FaS68A?si=LpxX3sAbJvNiorTj",
-      story: "Sangeeta's journey from running a traditional atta chakki (flour mill) to pitching on Shark Tank India is a testament to the power of dreams and determination. She dives into the ups and downs of entrepreneurship, her experience pitching on a national platform, and the lessons she's learned along the way. Her story proves that with passion and hard work, even the most traditional businesses can achieve extraordinary success and recognition.",
-      metrics: {
-        achievement: "Featured on Shark Tank India",
-        growth: "Traditional to tech-enabled business",
-        inspiration: "Thousands inspired by her journey"
-      }
-    },
-    {
-      name: "Payaal Jain",
-      business: "Professional Makeup Artist & Entrepreneur", 
-      city: "Mumbai",
-      results: "Carved unique path in beauty industry",
+      name: "Priya Sharma",
+      business: "Eco-Friendly Home Products",
+      city: "Pune",
+      results: "From ₹0 to ₹50L revenue in 8 months",
       image: "/api/placeholder/120/120",
-      story: "Payaal's inspiring journey as a makeup artist showcases the beautiful blend of artistry and entrepreneurship. From starting as a passionate artist to building her own brand in the competitive beauty industry, she shares insights about creativity, business growth, and following your passion. This episode is a must-watch for anyone seeking inspiration, insights, or the motivation to carve their own path in the beauty industry!",
+      story: "I was a stay-at-home mom with a dream to create eco-friendly products. SHELeadsIndia didn't just teach me digital marketing—they gave me the confidence to believe I could build a real business. The AI tools they introduced saved me 20 hours per week, and the community support was incredible. Today, my products are sold across Maharashtra!",
       metrics: {
-        clients: "500+ satisfied clients",
-        brand: "Award-winning makeup artist",
-        community: "Inspiring next generation artists"
+        revenue: "500% increase",
+        customers: "2,500+ happy customers",
+        team: "Hired 5 team members"
       }
     },
     {
-      name: "Adv. Amruta Salunke",
-      business: "RERA Expert, Lawyer & YouTuber",
-      city: "Pune", 
-      results: "Breaking barriers in law while building digital presence",
-      image: "/media/Adv. Amruta Salunke.jpg",
-      videoLink: "https://youtu.be/bsgUGK9pQ6U?si=TjyeC6LNDam_bNqm",
-      story: "Meet Amruta, a remarkable lawyer specializing in RERA (Real Estate Regulatory Authority), a trailblazing entrepreneur, and a rising YouTuber. She opens up about her journey navigating a male-dominated industry, balancing a demanding career with personal life, and how she ventured into creating her own YouTube channel to share her knowledge and experiences. Her story demonstrates how women can excel professionally while building their personal brand and helping others.",
+      name: "Anita Desai",
+      business: "Tech Solutions for SMEs",
+      city: "Nagpur",
+      results: "Scaled to 6-figure business in 6 months",
+      image: "/api/placeholder/120/120",
+      story: "As a software engineer turned entrepreneur, I had the technical skills but no idea how to market my services. The mentorship program connected me with someone who had walked the same path. The business strategies and networking opportunities helped me find my first major clients and build recurring revenue streams.",
       metrics: {
-        expertise: "RERA law specialist",
-        platform: "Growing YouTube presence",
-        impact: "Empowering through legal education"
+        revenue: "₹12L annual revenue",
+        clients: "25+ enterprise clients",
+        team: "Founded with co-founder from SHE community"
+      }
+    },
+    {
+      name: "Meera Patel",
+      business: "Sustainable Fashion Brand",
+      city: "Nashik",
+      results: "Built 50K Instagram following organically",
+      image: "/api/placeholder/120/120",
+      story: "My fashion brand was stuck at 500 followers for months. The digital marketing course taught me content strategies that actually work. I learned to use AI for content creation, built authentic engagement, and turned my Instagram into a sales machine. Now I have customers from across India placing orders daily!",
+      metrics: {
+        followers: "50K+ Instagram followers",
+        engagement: "8.5% engagement rate",
+        sales: "200+ orders per month"
       }
     }
   ];
 
   const quickTestimonials = [
     {
-      quote: "The wisdom shared here doesn't just improve your business metrics—it transforms how you see yourself as a leader.",
+      quote: "The ROI tracking methods alone paid for the entire course within the first month.",
       author: "Rajani Kulkarni",
       title: "Digital Marketing Agency Owner",
       city: "Pune"
     },
     {
-      quote: "I found not just a business partner, but a sister who shares my vision. Together we're creating solutions our community needs.",
+      quote: "I found my business co-founder at a SHE networking event. We've now launched two successful ventures together.",
       author: "Kavitha Rao",
       title: "Tech Startup Co-founder",
       city: "Nagpur"
     },
     {
-      quote: "The personal branding guidance helped me present my authentic self confidently. My ideal clients started finding me naturally.",
+      quote: "The personal branding workshop transformed how I present myself online. My client inquiries tripled!",
       author: "Sunita Joshi",
       title: "Business Consultant",
       city: "Nashik"
     },
     {
-      quote: "From feeling lost as a freelancer to leading an agency with purpose. The mentorship program honored who I am while nurturing who I'm becoming.",
+      quote: "From struggling freelancer to agency owner in 18 months. The mentorship program changed everything.",
       author: "Pooja Mehta",
       title: "Digital Agency Founder",
       city: "Pune"
     },
     {
-      quote: "The AI automation tools respect my time and family priorities. Technology serves my life's balance, not the other way around.",
+      quote: "The AI automation tools they taught me now handle 80% of my marketing. I finally have my life back!",
       author: "Deepika Singh",
       title: "E-commerce Store Owner",
       city: "Nagpur"
     },
     {
-      quote: "This sisterhood celebrates your uniqueness and supports your journey without judgment. It's sacred space for growth.",
+      quote: "The community connections are invaluable. These women celebrate your wins and support you through challenges.",
       author: "Neha Agarwal",
       title: "Health & Wellness Coach",
       city: "Nashik"
@@ -105,12 +103,12 @@ const SuccessStories = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Courage Creates Change,
-              <span className="block">Dreams Become Reality</span>
+              Real Women,
+              <span className="block">Real Transformations</span>
             </h1>
             <p className="text-xl md:text-2xl mb-8 opacity-90">
-              These are not just business victories—they are stories of Indian women who chose to believe 
-              in themselves, honoring their roots while reaching for their dreams.
+              These aren't just success stories—they're proof that with the right guidance 
+              and community, any woman can build the business of her dreams.
             </p>
           </div>
         </div>
@@ -143,10 +141,10 @@ const SuccessStories = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-6">
-              Journeys of Heart and Success
+              Transformation Stories
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Meet the women who honored their dreams with courage and built businesses that celebrate both purpose and prosperity.
+              Meet the women who dared to dream big and built businesses that matter.
             </p>
           </div>
 
@@ -177,42 +175,16 @@ const SuccessStories = () => {
                         ))}
                       </div>
                       
-                      <Button 
-                        variant="outline" 
-                        className="self-start group"
-                        onClick={() => story.videoLink && window.open(story.videoLink, '_blank')}
-                      >
+                      <Button variant="outline" className="self-start group">
                         Read Full Story
                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </Button>
                     </div>
                     
                     <div className="bg-gradient-section p-8 lg:p-12 flex items-center justify-center">
-                      {story.name === "Sangeeta" ? (
-                        <div className="w-full h-60 rounded-lg overflow-hidden flex items-center justify-center shadow-lg">
-                          <img 
-                            src={story.image} 
-                            alt={story.name}
-                            className="w-full h-full object-contain bg-white"
-                          />
-                        </div>
-                      ) : story.name === "Adv. Amruta Salunke" ? (
-                        <div className="w-48 h-48 rounded-full overflow-hidden flex items-center justify-center border-4 border-white shadow-lg">
-                          <img 
-                            src={story.image} 
-                            alt={story.name}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                      ) : (
-                        <div className="w-48 h-60 rounded-lg overflow-hidden flex items-center justify-center border-4 border-white shadow-lg">
-                          <img 
-                            src={story.image} 
-                            alt={story.name}
-                            className="w-full h-full object-contain bg-white"
-                          />
-                        </div>
-                      )}
+                      <div className="w-48 h-48 rounded-full flex items-center justify-center" style={{ backgroundColor: 'rgba(230, 0, 35, 0.1)' }}>
+                        <Users className="h-24 w-24" style={{ color: 'rgba(230, 0, 35, 0.3)' }} />
+                      </div>
                     </div>
                   </div>
                 </CardContent>
