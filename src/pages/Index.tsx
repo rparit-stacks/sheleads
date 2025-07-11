@@ -5,7 +5,7 @@ import TestimonialCard from "@/components/TestimonialCard";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Download, Users, Award, TrendingUp, Mic, Play } from "lucide-react";
+import { ArrowRight, Download, Users, Award, TrendingUp, Mic, Play, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -17,6 +17,10 @@ const Index = () => {
   // Podcast carousel state
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  
+  // Media carousel state
+  const [mediaCurrentSlide, setMediaCurrentSlide] = useState(0);
+  const [isMediaAutoPlaying, setIsMediaAutoPlaying] = useState(true);
   
   const podcastEpisodes = [
     {
@@ -49,6 +53,44 @@ const Index = () => {
     }
   ];
 
+  const mediaFeatures = [
+    {
+      name: "United News of India",
+      url: "https://www.uniindia.com/empowerher24-of-sheleads-on-the-mission-to-transfoming-future-of-women-entrepreneurs/business-wire-india/news/3349214.html",
+      logo: "/media/united news of india.jpg"
+    },
+    {
+      name: "WN.com",
+      url: "https://article.wn.com/view/2024/12/19/EmpowerHER24_of_SHELeads_On_the_Mission_to_Transfoming_Futur/",
+      logo: "/media/wn logo.png"
+    },
+    {
+      name: "Ad Hoc News",
+      url: "https://www.ad-hoc-news.de/boerse/news/marktberichte/empowerher24-of-sheleads-on-the-mission-to-transforming-future-of-women/66321549",
+      logo: "/media/ad hoc news logo.jpg"
+    },
+    {
+      name: "Kalkine Media",
+      url: "https://kalkinemedia.com/in/business/healthcare/empowerher24-of-sheleads-on-the-mission-to-transfoming-future-of-women-entrepreneurs",
+      logo: "/media/kalkine media logo.png"
+    },
+    {
+      name: "Times Tech",
+      url: "https://timestech.in/businesswire/?for=N&Value=vEFxp6Mfc84tqvQIfqcl5QgsAe3llrbC%2fwjjK%2fc81l8bIQhJPPqb97lHYwI%3d",
+      logo: "/media/times tech logo.png"
+    },
+    {
+      name: "IANS Wire Service",
+      url: "https://www.ians.in/business-wire-detail/empowerher24-of-sheleads-on-the-mission-to-transfoming-future-of-women-entrepreneurs-19-12-2024",
+      logo: "/media/ians wire service  logo.png"
+    },
+    {
+      name: "Business News This Week",
+      url: "https://businessnewsthisweek.com/business-wire-listing/?for=N&Value=i%2bty63agk4y3eEYhhJ%2fIwAi9%2fjSGNJ6X4gi0UE8CfEgdDwjJIx4JqC6j%2fAI%3d",
+      logo: "/media/business news this week logo.jpg"
+    }
+  ];
+
   // Auto-play carousel
   useEffect(() => {
     const timer = setInterval(() => {
@@ -76,6 +118,43 @@ const Index = () => {
 
   const handlePlayClick = () => {
     setIsPlaying(true);
+  };
+
+  // Media carousel auto-rotation
+  useEffect(() => {
+    if (!isMediaAutoPlaying) return;
+    
+    const mediaTimer = setInterval(() => {
+      setMediaCurrentSlide((prev) => (prev + 1) % mediaFeatures.length);
+    }, 3000); // Change every 3 seconds
+
+    return () => clearInterval(mediaTimer);
+  }, [isMediaAutoPlaying, mediaFeatures.length]);
+
+  // Get visible media items for carousel (3 at a time on desktop, middle one changes)
+  const getVisibleMediaItems = () => {
+    const leftIndex = (mediaCurrentSlide - 1 + mediaFeatures.length) % mediaFeatures.length;
+    const centerIndex = mediaCurrentSlide;
+    const rightIndex = (mediaCurrentSlide + 1) % mediaFeatures.length;
+    
+    return [
+      mediaFeatures[leftIndex],
+      mediaFeatures[centerIndex],
+      mediaFeatures[rightIndex]
+    ];
+  };
+
+  // Media navigation functions
+  const goToMediaSlide = (index: number) => {
+    setMediaCurrentSlide(index);
+  };
+
+  const nextMediaSlide = () => {
+    setMediaCurrentSlide((prev) => (prev + 1) % mediaFeatures.length);
+  };
+
+  const prevMediaSlide = () => {
+    setMediaCurrentSlide((prev) => (prev - 1 + mediaFeatures.length) % mediaFeatures.length);
   };
 
   const fadeInUp = {
@@ -164,6 +243,20 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      <style>
+        {`
+          @keyframes popupSubtle {
+            0%, 100% { 
+              transform: scale(1) translateY(0px); 
+              box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            }
+            50% { 
+              transform: scale(1.05) translateY(-5px); 
+              box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04), 0 0 20px rgba(230, 0, 35, 0.2);
+            }
+          }
+        `}
+      </style>
       <Navigation />
       
       {/* Hero Section */}
@@ -523,6 +616,133 @@ const Index = () => {
               </div>
             </motion.div>
           </div>
+        </div>
+      </motion.section>
+
+      {/* Media Coverage & Recognition */}
+      <motion.section 
+        className="py-20 bg-gray-50"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-10%" }}
+        variants={fadeInUp}
+      >
+        <div className="container mx-auto px-4">
+          <motion.div className="text-center mb-16" variants={fadeInUp}>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Media Coverage & Recognition
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Our work has been recognized by leading publications and organizations 
+              across India.
+            </p>
+          </motion.div>
+
+          {/* Media Carousel */}
+          <motion.div 
+            className="relative"
+            variants={fadeInUp}
+            onMouseEnter={() => setIsMediaAutoPlaying(false)}
+            onMouseLeave={() => setIsMediaAutoPlaying(true)}
+          >
+            {/* Carousel Content */}
+            <div className="overflow-visible py-8">
+              <div className="flex transition-transform duration-500 ease-in-out">
+                {/* Desktop View - 3 items */}
+                <div className="hidden lg:flex w-full gap-8 items-center justify-center">
+                  {getVisibleMediaItems().map((publication, index) => (
+                    <motion.a 
+                      key={`${mediaCurrentSlide}-${index}`}
+                      href={publication.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex-1 bg-white p-6 rounded-2xl text-center shadow-md hover:shadow-xl transition-all duration-300 block group border border-gray-100 hover:border-primary/30"
+                      style={index === 1 ? {
+                        animation: 'popupSubtle 3s ease-in-out infinite'
+                      } : {}}
+                      whileHover={{ scale: 1.02, y: -2 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className="flex flex-col items-center justify-center h-full">
+                        <div className="w-full h-20 mb-4 flex items-center justify-center">
+                          <img 
+                            src={publication.logo} 
+                            alt={publication.name}
+                            className="max-w-full max-h-full object-contain transition-all duration-300 group-hover:scale-105"
+                          />
+                        </div>
+                        <div className={`font-medium text-sm transition-colors duration-300 ${
+                          index === 1 ? 'text-primary' : 'text-gray-600 group-hover:text-primary'
+                        }`}>
+                          {publication.name}
+                        </div>
+                      </div>
+                    </motion.a>
+                  ))}
+                </div>
+
+                {/* Mobile/Tablet View - 1 item */}
+                <div className="lg:hidden flex justify-center w-full py-4">
+                  {[mediaFeatures[mediaCurrentSlide]].map((publication, index) => (
+                    <motion.a 
+                      key={`mobile-${mediaCurrentSlide}-${index}`}
+                      href={publication.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="bg-white p-6 rounded-2xl text-center shadow-md hover:shadow-xl transition-all duration-300 block group border border-gray-100 hover:border-primary/30 max-w-md w-full"
+                      style={{
+                        animation: 'popupSubtle 3s ease-in-out infinite'
+                      }}
+                      whileHover={{ scale: 1.02, y: -2 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className="flex flex-col items-center justify-center h-full">
+                        <div className="w-full h-20 mb-4 flex items-center justify-center">
+                          <img 
+                            src={publication.logo} 
+                            alt={publication.name}
+                            className="max-w-full max-h-full object-contain transition-all duration-300 group-hover:scale-105"
+                          />
+                        </div>
+                        <div className="font-medium text-sm text-primary transition-colors duration-300">
+                          {publication.name}
+                        </div>
+                      </div>
+                    </motion.a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Navigation Arrows */}
+            <button
+              onClick={prevMediaSlide}
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-2 shadow-lg transition-all duration-300"
+            >
+              <ChevronLeft className="h-4 w-4 text-gray-600" />
+            </button>
+            <button
+              onClick={nextMediaSlide}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-2 shadow-lg transition-all duration-300"
+            >
+              <ChevronRight className="h-4 w-4 text-gray-600" />
+            </button>
+
+            {/* Carousel Dots */}
+            <div className="flex justify-center mt-6 space-x-2">
+              {mediaFeatures.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToMediaSlide(index)}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    index === mediaCurrentSlide 
+                      ? 'bg-primary scale-125' 
+                      : 'bg-gray-300 hover:bg-gray-400'
+                  }`}
+                />
+              ))}
+            </div>
+          </motion.div>
         </div>
       </motion.section>
 

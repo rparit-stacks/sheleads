@@ -37,33 +37,7 @@ const About = () => {
     }
   ];
 
-  const timeline = [
-    {
-      year: "2020",
-      title: "The Beginning",
-      description: "Started with a vision to bridge the digital divide for women entrepreneurs in Maharashtra."
-    },
-    {
-      year: "2021",
-      title: "First 100 Members",
-      description: "Launched our first mentorship program in Pune with overwhelming response."
-    },
-    {
-      year: "2022",
-      title: "Multi-City Expansion",
-      description: "Extended our reach to Nagpur and Nashik, building regional communities."
-    },
-    {
-      year: "2023",
-      title: "AI Integration",
-      description: "Became the first women's entrepreneurship program to integrate AI tools training."
-    },
-    {
-      year: "2024",
-      title: "500+ Success Stories",
-      description: "Celebrated our 500th successful transformation and launched advanced programs."
-    }
-  ];
+
 
   const mediaFeatures = [
     {
@@ -174,25 +148,49 @@ const About = () => {
               box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04), 0 0 20px rgba(230, 0, 35, 0.2);
             }
           }
+          
+          .text-shadow-strong {
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 1px 1px 4px rgba(0, 0, 0, 0.5);
+          }
+          
+          .text-shadow-medium {
+            text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7), 0px 0px 3px rgba(0, 0, 0, 0.4);
+          }
+          
+          @media (max-width: 768px) {
+            .text-shadow-strong {
+              text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6), 0px 0px 2px rgba(0, 0, 0, 0.3);
+            }
+            
+            .text-shadow-medium {
+              text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5), 0px 0px 2px rgba(0, 0, 0, 0.3);
+            }
+          }
         `}
       </style>
       <Navigation />
       
       {/* Hero Section */}
       <section 
-        className="py-24 text-white relative bg-cover bg-center bg-no-repeat min-h-[70vh]"
+        className="py-16 md:py-24 text-white relative bg-cover bg-center bg-no-repeat min-h-[60vh] md:min-h-[70vh] w-full overflow-hidden"
         style={{ 
           backgroundImage: 'url(/media/market-place.JPG)',
           backgroundSize: 'cover',
-          backgroundPosition: 'center'
+          backgroundPosition: 'center center',
+          backgroundAttachment: 'scroll',
+          margin: 0,
+          padding: 0
         }}
       >
-        <div className="container mx-auto px-4 relative z-10 flex items-center min-h-[60vh]">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-7xl font-bold mb-8">
+        {/* Light overlay for mobile, darker for desktop */}
+        <div className="absolute inset-0 bg-black bg-opacity-10 md:bg-opacity-25"></div>
+        
+        <div className="w-full px-4 relative z-10 flex items-center min-h-[50vh] md:min-h-[60vh]">
+          <div className="max-w-4xl mx-auto text-center w-full">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-light mb-4 md:mb-6 drop-shadow-2xl text-shadow-strong">
               About Us
             </h1>
-            <p className="text-xl md:text-2xl mb-8 opacity-90 leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl mb-6 md:mb-8 opacity-95 font-light leading-relaxed drop-shadow-xl text-shadow-medium max-w-3xl mx-auto">
               Discover the story behind SHELeads India and meet the team dedicated to empowering women entrepreneurs.
             </p>
           </div>
@@ -428,39 +426,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Timeline */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Our Journey
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              From a vision to transform women's entrepreneurship to becoming Maharashtra's 
-              leading business community.
-            </p>
-          </div>
 
-          <div className="max-w-4xl mx-auto">
-            {timeline.map((milestone, index) => (
-              <div key={index} className="flex gap-8 mb-12 last:mb-0">
-                <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold mb-4">
-                    {milestone.year}
-                  </div>
-                  {index < timeline.length - 1 && (
-                    <div className="w-0.5 h-16 flex-shrink-0" style={{ backgroundColor: 'rgba(230, 0, 35, 0.2)' }} />
-                  )}
-                </div>
-                <div className="flex-1 pb-8">
-                  <h3 className="text-xl font-semibold mb-2">{milestone.title}</h3>
-                  <p className="text-muted-foreground">{milestone.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Media Coverage */}
       <section className="py-20 bg-gradient-section">
