@@ -3,10 +3,16 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Award, Users, MapPin, Calendar, Target, Heart } from "lucide-react";
+import { ArrowRight, Award, Users, MapPin, Calendar, Target, Heart, ChevronLeft, ChevronRight, X } from "lucide-react";
 import founderImage from "@/assets/she-leads-membership.webp";
+import { useState, useEffect } from "react";
 
 const About = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupLogoIndex, setPopupLogoIndex] = useState(0);
+
   const achievements = [
     { icon: Users, title: "500+ Women Empowered", description: "Across 3 major cities" },
     { icon: Award, title: "Industry Recognition", description: "Featured in 15+ publications" },
@@ -60,29 +66,134 @@ const About = () => {
   ];
 
   const mediaFeatures = [
-    "Economic Times Women's Forum",
-    "Business Today",
-    "YourStory.com",
-    "SheThePeople",
-    "Women's Web",
-    "Entrepreneur India"
+    {
+      name: "United News of India",
+      url: "https://www.uniindia.com/empowerher24-of-sheleads-on-the-mission-to-transfoming-future-of-women-entrepreneurs/business-wire-india/news/3349214.html",
+      logo: "/media/united news of india.jpg"
+    },
+    {
+      name: "WN.com",
+      url: "https://article.wn.com/view/2024/12/19/EmpowerHER24_of_SHELeads_On_the_Mission_to_Transfoming_Futur/",
+      logo: "/media/wn logo.png"
+    },
+    {
+      name: "Ad Hoc News",
+      url: "https://www.ad-hoc-news.de/boerse/news/marktberichte/empowerher24-of-sheleads-on-the-mission-to-transforming-future-of-women/66321549",
+      logo: "/media/ad hoc news logo.jpg"
+    },
+    {
+      name: "Kalkine Media",
+      url: "https://kalkinemedia.com/in/business/healthcare/empowerher24-of-sheleads-on-the-mission-to-transfoming-future-of-women-entrepreneurs",
+      logo: "/media/kalkine media logo.png"
+    },
+    {
+      name: "Times Tech",
+      url: "https://timestech.in/businesswire/?for=N&Value=vEFxp6Mfc84tqvQIfqcl5QgsAe3llrbC%2fwjjK%2fc81l8bIQhJPPqb97lHYwI%3d",
+      logo: "/media/times tech logo.png"
+    },
+    {
+      name: "IANS Wire Service",
+      url: "https://www.ians.in/business-wire-detail/empowerher24-of-sheleads-on-the-mission-to-transfoming-future-of-women-entrepreneurs-19-12-2024",
+      logo: "/media/ians wire service  logo.png"
+    },
+    {
+      name: "Business News This Week",
+      url: "https://businessnewsthisweek.com/business-wire-listing/?for=N&Value=i%2bty63agk4y3eEYhhJ%2fIwAi9%2fjSGNJ6X4gi0UE8CfEgdDwjJIx4JqC6j%2fAI%3d",
+      logo: "/media/business news this week logo.jpg"
+    }
   ];
+
+  // Auto popup after 3 seconds
+  useEffect(() => {
+    const popupTimer = setTimeout(() => {
+      setShowPopup(true);
+    }, 3000);
+
+    return () => clearTimeout(popupTimer);
+  }, []);
+
+  // Auto-changing logos in popup
+  useEffect(() => {
+    if (!showPopup) return;
+    
+    const logoTimer = setInterval(() => {
+      setPopupLogoIndex((prev) => (prev + 1) % mediaFeatures.length);
+    }, 2000); // Change logo every 2 seconds
+
+    return () => clearInterval(logoTimer);
+  }, [showPopup, mediaFeatures.length]);
+
+  // Auto-rotation effect
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % mediaFeatures.length);
+    }, 3000); // Change every 3 seconds
+
+    return () => clearInterval(timer);
+  }, [isAutoPlaying, mediaFeatures.length]);
+
+  // Get visible items for carousel (3 at a time on desktop, middle one changes)
+  const getVisibleItems = () => {
+    const leftIndex = (currentSlide - 1 + mediaFeatures.length) % mediaFeatures.length;
+    const centerIndex = currentSlide;
+    const rightIndex = (currentSlide + 1) % mediaFeatures.length;
+    
+    return [
+      mediaFeatures[leftIndex],
+      mediaFeatures[centerIndex],
+      mediaFeatures[rightIndex]
+    ];
+  };
+
+  // Navigation functions
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+  };
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % mediaFeatures.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + mediaFeatures.length) % mediaFeatures.length);
+  };
 
   return (
     <div className="min-h-screen">
+      <style>
+        {`
+          @keyframes popupSubtle {
+            0%, 100% { 
+              transform: scale(1) translateY(0px); 
+              box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            }
+            50% { 
+              transform: scale(1.05) translateY(-5px); 
+              box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04), 0 0 20px rgba(230, 0, 35, 0.2);
+            }
+          }
+        `}
+      </style>
       <Navigation />
       
       {/* Hero Section */}
-      <section className="py-20 text-white" style={{ background: 'linear-gradient(135deg, rgb(230, 0, 35), rgb(204, 0, 31))' }}>
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Where Every Indian Woman's
-              <span className="block">Dreams Find Their Wings</span>
+      <section 
+        className="py-24 text-white relative bg-cover bg-center bg-no-repeat min-h-[70vh]"
+        style={{ 
+          backgroundImage: 'url(/media/market-place.JPG)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      >
+        <div className="container mx-auto px-4 relative z-10 flex items-center min-h-[60vh]">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-5xl md:text-7xl font-bold mb-8">
+              About Us
             </h1>
-            <p className="text-xl md:text-2xl mb-8 opacity-90">
-              Born from the belief that every woman deserves a platform to rise, SHELeadsIndia has become 
-              a sanctuary where tradition meets innovation, and sisterhood powers success.
+            <p className="text-xl md:text-2xl mb-8 opacity-90 leading-relaxed">
+              Discover the story behind SHELeads India and meet the team dedicated to empowering women entrepreneurs.
             </p>
           </div>
         </div>
@@ -364,15 +475,107 @@ const About = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {mediaFeatures.map((publication, index) => (
-              <div key={index} className="bg-background p-6 rounded-lg text-center shadow-card hover:shadow-elegant transition-all duration-300">
-                <div className="font-semibold text-sm text-muted-foreground">
-                  {publication}
-                </div>
+          {/* Media Carousel */}
+          <div 
+            className="relative"
+            onMouseEnter={() => setIsAutoPlaying(false)}
+            onMouseLeave={() => setIsAutoPlaying(true)}
+          >
+            {/* Carousel Content */}
+            <div className="overflow-visible py-8">
+              <div className="flex transition-transform duration-500 ease-in-out">
+                                 {/* Desktop View - 3 items */}
+                 <div className="hidden lg:flex w-full gap-8 items-center justify-center">
+                   {getVisibleItems().map((publication, index) => (
+                     <a 
+                       key={`${currentSlide}-${index}`}
+                       href={publication.url} 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       className="flex-1 bg-white p-6 rounded-2xl text-center shadow-md hover:shadow-xl transition-all duration-300 block group border border-gray-100 hover:border-primary/30"
+                       style={index === 1 ? {
+                         animation: 'popupSubtle 3s ease-in-out infinite'
+                       } : {}}
+                     >
+                       <div className="flex flex-col items-center justify-center h-full">
+                         <div className="w-full h-20 mb-4 flex items-center justify-center">
+                           <img 
+                             src={publication.logo} 
+                             alt={publication.name}
+                             className="max-w-full max-h-full object-contain transition-all duration-300 group-hover:scale-105"
+                           />
+                         </div>
+                         <div className={`font-medium text-sm transition-colors duration-300 ${
+                           index === 1 ? 'text-primary' : 'text-gray-600 group-hover:text-primary'
+                         }`}>
+                           {publication.name}
+                         </div>
+                       </div>
+                     </a>
+                   ))}
+                 </div>
+
+                                 {/* Mobile/Tablet View - 1 item */}
+                 <div className="lg:hidden flex justify-center w-full py-4">
+                   {[mediaFeatures[currentSlide]].map((publication, index) => (
+                     <a 
+                       key={`mobile-${currentSlide}-${index}`}
+                       href={publication.url} 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       className="bg-white p-6 rounded-2xl text-center shadow-md hover:shadow-xl transition-all duration-300 block group border border-gray-100 hover:border-primary/30 max-w-md w-full"
+                       style={{
+                         animation: 'popupSubtle 3s ease-in-out infinite'
+                       }}
+                     >
+                       <div className="flex flex-col items-center justify-center h-full">
+                         <div className="w-full h-20 mb-4 flex items-center justify-center">
+                           <img 
+                             src={publication.logo} 
+                             alt={publication.name}
+                             className="max-w-full max-h-full object-contain transition-all duration-300 group-hover:scale-105"
+                           />
+                         </div>
+                         <div className="font-medium text-sm text-primary transition-colors duration-300">
+                           {publication.name}
+                         </div>
+                       </div>
+                     </a>
+                   ))}
+                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+
+            {/* Navigation Arrows */}
+            <button
+              onClick={prevSlide}
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-2 shadow-lg transition-all duration-300"
+            >
+              <ChevronLeft className="h-4 w-4 text-gray-600" />
+            </button>
+            <button
+              onClick={nextSlide}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-80 hover:bg-opacity-100 rounded-full p-2 shadow-lg transition-all duration-300"
+            >
+              <ChevronRight className="h-4 w-4 text-gray-600" />
+            </button>
+
+            {/* Carousel Dots */}
+            <div className="flex justify-center mt-6 space-x-2">
+              {mediaFeatures.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    index === currentSlide 
+                      ? 'bg-primary scale-125' 
+                      : 'bg-gray-300 hover:bg-gray-400'
+                  }`}
+                />
+              ))}
+            </div>
+
+                       </div>
         </div>
       </section>
 
@@ -450,6 +653,63 @@ const About = () => {
           </div>
         </div>
       </section>
+
+      {/* Auto Popup Modal with Changing Logos */}
+      {showPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl p-8 max-w-lg mx-4 relative shadow-2xl">
+            <button
+              onClick={() => setShowPopup(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+            >
+              <X className="h-6 w-6" />
+            </button>
+            
+            <div className="text-center">
+              {/* Changing Media Logo */}
+              <div className="w-20 h-20 bg-gray-50 rounded-2xl flex items-center justify-center mx-auto mb-4 p-3">
+                <img 
+                  src={mediaFeatures[popupLogoIndex].logo} 
+                  alt={mediaFeatures[popupLogoIndex].name}
+                  className="max-w-full max-h-full object-contain transition-all duration-500"
+                />
+              </div>
+              
+              <p className="text-sm text-primary font-medium mb-2">
+                Featured in {mediaFeatures[popupLogoIndex].name}
+              </p>
+              
+              <h3 className="text-2xl font-bold mb-4 text-gray-900">
+                Welcome to SHELeads India!
+              </h3>
+              
+              <p className="text-gray-600 mb-6">
+                Join 500+ women entrepreneurs transforming their businesses with AI, MarTech, and digital strategies.
+              </p>
+              
+              <div className="space-y-3">
+                <Button 
+                  className="w-full rounded-xl" 
+                  onClick={() => setShowPopup(false)}
+                >
+                  Explore Our Programs
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="w-full rounded-xl"
+                  onClick={() => setShowPopup(false)}
+                >
+                  Join Free Masterclass
+                </Button>
+              </div>
+              
+              <p className="text-xs text-gray-500 mt-4">
+                ✨ Featured in 15+ publications • 98% success rate
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </div>

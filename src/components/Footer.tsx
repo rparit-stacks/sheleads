@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { MapPin, Mail, Phone, Instagram, Linkedin, Facebook, Youtube } from "lucide-react";
+import { MapPin, Mail, Phone, Instagram, Linkedin, Youtube } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 
 const Footer = () => {
@@ -136,18 +136,36 @@ const Footer = () => {
           <div>
             <h4 className="font-medium text-white text-base mb-2">Connect</h4>
             <div className="flex space-x-2 mb-3">
-              <Button variant="ghost" size="sm" className="rounded-full border border-gray-600 hover:bg-gray-800 text-gray-300 hover:text-white h-8 w-8 p-0">
-                <Facebook className="h-3 w-3" />
-              </Button>
-              <Button variant="ghost" size="sm" className="rounded-full border border-gray-600 hover:bg-gray-800 text-gray-300 hover:text-white h-8 w-8 p-0">
-                <Youtube className="h-3 w-3" />
-              </Button>
-              <Button variant="ghost" size="sm" className="rounded-full border border-gray-600 hover:bg-gray-800 text-gray-300 hover:text-white h-8 w-8 p-0">
-                <Instagram className="h-3 w-3" />
-              </Button>
-              <Button variant="ghost" size="sm" className="rounded-full border border-gray-600 hover:bg-gray-800 text-gray-300 hover:text-white h-8 w-8 p-0">
-                <Linkedin className="h-3 w-3" />
-              </Button>
+              <a 
+                href="https://www.linkedin.com/company/sheleadsindia/?originalSubdomain=in" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex"
+              >
+                <Button variant="ghost" size="sm" className="rounded-full border border-gray-600 hover:bg-blue-600 hover:border-blue-600 text-gray-300 hover:text-white h-8 w-8 p-0 transition-colors duration-300">
+                  <Linkedin className="h-3 w-3" />
+                </Button>
+              </a>
+              <a 
+                href="https://www.instagram.com/sheleadsofficial2023/?hl=en" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex"
+              >
+                <Button variant="ghost" size="sm" className="rounded-full border border-gray-600 hover:bg-pink-600 hover:border-pink-600 text-gray-300 hover:text-white h-8 w-8 p-0 transition-colors duration-300">
+                  <Instagram className="h-3 w-3" />
+                </Button>
+              </a>
+              <a 
+                href="https://www.youtube.com/@SHELeadsIndia" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex"
+              >
+                <Button variant="ghost" size="sm" className="rounded-full border border-gray-600 hover:bg-red-600 hover:border-red-600 text-gray-300 hover:text-white h-8 w-8 p-0 transition-colors duration-300">
+                  <Youtube className="h-3 w-3" />
+                </Button>
+              </a>
             </div>
             <p className="text-gray-300 text-xs leading-relaxed">
               The sacred mission of SHELeads is to nurture and celebrate the dreams of Indian women entrepreneurs, creating a sisterhood where tradition meets innovation and success honors our roots.
