@@ -36,7 +36,7 @@ const StartHere = () => {
     {
       number: "01",
       title: "Discover Your Tribe",
-      description: "Connect with your regional sister circle and access resources crafted specifically for your community.",
+      description: "Connect with your regional support circle and access resources crafted specifically for your community.",
       image: "/media/networking.JPG"
     },
     {
@@ -48,7 +48,7 @@ const StartHere = () => {
     {
       number: "03",
       title: "Begin Your Transformation",
-      description: "Step into a supportive sisterhood where your success is celebrated and your journey is honored.",
+      description: "Step into a supportive community where your success is celebrated and your journey is honored.",
       image: "/media/Mentoring.JPG"
     }
   ];
@@ -84,12 +84,14 @@ const StartHere = () => {
       <section 
         className="py-20 text-white relative overflow-hidden"
         style={{
-          backgroundImage: `linear-gradient(rgba(230, 0, 35, 0.8), rgba(204, 0, 31, 0.8)), url('/assets/hero-women-entrepreneurs.jpg')`,
+          backgroundImage: `url('/media/DSC02153.JPG')`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed'
         }}
       >
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-black/40"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg">
@@ -113,7 +115,7 @@ const StartHere = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-pink-600 bg-clip-text text-transparent">
-              Find Your Sister Circle
+              Find Your Support Circle
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Connect with the incredible women in your city who share your dreams and understand your journey.
@@ -310,7 +312,7 @@ const StartHere = () => {
               </Button>
               <Button variant="outline" size="xl" className="border-white text-white hover:bg-white hover:text-primary bg-white/10 backdrop-blur-sm">
                 <Users className="h-5 w-5 mr-2" />
-                Join Your Sister Circle
+                Join Your Support Circle
               </Button>
             </div>
           </div>

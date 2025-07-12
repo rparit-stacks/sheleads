@@ -6,24 +6,24 @@ const ProgramsShowcase = () => {
   const programs = [
     {
       icon: Users,
-      title: "Personalized Mentorship Program",
-      description: "Transform your business with guidance from successful women entrepreneurs. Learn proven strategies and gain the confidence to scale your venture.",
+      title: "Mentor & Grow",
+      description: "This is your heart piece — 1:1 guidance, branding, growth plans. Transform your business with personalized mentorship from successful women entrepreneurs.",
       features: ["One-on-one strategy sessions", "Brand development guidance", "Growth roadmap creation", "Entrepreneur network access"],
       cta: "Begin Your Journey",
       highlight: "Most Cherished"
     },
     {
       icon: Brain,
-      title: "Digital Mastery with Cultural Wisdom",
-      description: "Master cutting-edge tools while staying rooted in your values. Technology that serves your vision, not the other way around.",
+      title: "Learn & Upskill",
+      description: "This is all about learning — AI tools, culturally aware content, and marketing rooted in Indian values. Master cutting-edge tools while staying rooted in your values.",
       features: ["AI tools for Indian markets", "Culturally-aware content strategies", "Regional language optimization", "Community-focused marketing"],
       cta: "Embrace Innovation",
       highlight: ""
     },
     {
       icon: Rocket,
-      title: "Join Our Community",
-      description: "Connect with ambitious women entrepreneurs who understand your journey. Build meaningful relationships and grow together in a supportive environment.",
+      title: "Connect & Collaborate",
+      description: "This highlights connection, celebration, and peer learning. Connect with ambitious women entrepreneurs who understand your journey and grow together.",
       features: ["Regional networking circles", "Cultural celebration events", "Knowledge sharing sessions", "Success milestone celebrations"],
       cta: "Join Community",
       highlight: ""

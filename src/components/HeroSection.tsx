@@ -76,18 +76,18 @@ const HeroSection = () => {
             maxWidth: '100vw'
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-foreground/80 via-foreground/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-foreground/40 via-foreground/20 to-transparent" />
       </div>
 
       {/* Content */}
-      <div className="relative container mx-auto px-4 py-12 sm:py-16 md:py-20">
-        <div className="max-w-2xl text-background">
+      <div className="relative container mx-auto px-4 py-2 sm:py-3 md:py-4">
+        <div className="max-w-3xl text-background mt-4 sm:mt-6 md:mt-8" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.8)'}}>
           {/* Location Badge */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-                          className="inline-flex items-center gap-2 backdrop-blur-sm text-background px-4 py-2 rounded-full mb-6"
+                          className="inline-flex items-center gap-2 backdrop-blur-sm text-background px-4 py-2 rounded-full mb-3"
               style={{ backgroundColor: 'rgba(230, 0, 35, 0.2)' }}
           >
             <MapPin className="h-4 w-4" />
@@ -96,39 +96,51 @@ const HeroSection = () => {
 
           {/* Main Headline with Staggered Animation */}
           <motion.h1 
-            className="text-4xl md:text-6xl font-bold leading-tight mb-6"
+            className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-3"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
-            <div className="flex flex-wrap gap-x-4">
+            <div className="flex flex-wrap gap-x-3">
               <motion.span variants={wordVariants}>Every</motion.span>
               <motion.span variants={wordVariants}>Indian</motion.span>
             </div>
             <motion.div className="block" variants={wordVariants}>
-              <span className="text-primary mr-4">Woman</span>
+              <span className="text-primary mr-3">Woman</span>
               <span className="text-primary">Deserves</span>
             </motion.div>
-            <div className="flex flex-wrap gap-x-4">
+            <div className="flex flex-wrap gap-x-3">
               <motion.span variants={wordVariants}>Digital</motion.span>
-              <motion.span variants={wordVariants}>Success</motion.span>
+              <motion.span variants={wordVariants}>Power</motion.span>
             </div>
+            <motion.div className="block text-xl md:text-2xl lg:text-3xl mt-2" variants={wordVariants}>
+              <span className="text-background/90">— Not Just Digital Presence</span>
+            </motion.div>
           </motion.h1>
 
           {/* Subheadline */}
           <motion.p 
-            className="text-xl md:text-2xl mb-8 text-background/90"
+            className="text-base md:text-lg mb-5 text-background/90 leading-relaxed"
             variants={subheadingVariants}
             initial="hidden"
             animate="visible"
           >
-            From your dreams to digital reality - we walk alongside ambitious Indian women entrepreneurs 
-            as they master AI, build authentic brands, and create businesses that honor both tradition and innovation.
+            <span className="block mb-3">
+              <strong>She's not just running a business.<br />
+              She's reclaiming her space — digitally, financially, and unapologetically.</strong>
+            </span>
+            <span className="block mb-3">
+              At SHELeadsIndia, we help women entrepreneurs master AI, simplify marketing, and build brands that don't just sell — they shine.
+            </span>
+            <span className="block">
+              This is for the woman who wants to grow with clarity, community & courage.<br />
+              <strong>Because when SHE leads, India grows.</strong>
+            </span>
           </motion.p>
 
           {/* CTA Buttons */}
           <motion.div 
-            className="flex flex-col sm:flex-row gap-4"
+            className="flex flex-col sm:flex-row gap-3 mb-3"
             variants={ctaVariants}
             initial="hidden"
             animate="visible"
@@ -152,9 +164,9 @@ const HeroSection = () => {
               }}
               transition={{ duration: 0.3 }}
             >
-              <Button asChild variant="white" size="xl" className="w-full sm:w-auto">
+              <Button asChild variant="white" size="xl" className="w-full sm:w-auto text-sm">
                 <Link to="/success-stories">
-                  Watch Success Stories
+                  What is SHELeadsIndia? → Watch the Vision
                 </Link>
               </Button>
             </motion.div>
@@ -162,7 +174,7 @@ const HeroSection = () => {
 
           {/* Stats */}
           <motion.div 
-            className="flex flex-wrap gap-8 mt-12 pt-8 border-t border-background/20"
+            className="flex flex-wrap gap-6 mt-4 pt-4 border-t border-background/20"
             ref={sectionRef}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -170,26 +182,27 @@ const HeroSection = () => {
           >
             <div>
               <AnimatedCounter 
-                target={500} 
+                target={5} 
                 suffix="+" 
                 className="text-2xl font-bold text-primary" 
               />
-              <div className="text-sm text-background/80">Women Empowered</div>
+              <div className="text-sm text-background/80">Cities</div>
             </div>
             <div>
               <AnimatedCounter 
-                target={3} 
+                target={350} 
+                suffix="+" 
                 className="text-2xl font-bold text-primary" 
               />
-              <div className="text-sm text-background/80">Cities & Growing</div>
+              <div className="text-sm text-background/80">Training</div>
             </div>
             <div>
               <AnimatedCounter 
-                target={98} 
-                suffix="%" 
+                target={10000} 
+                suffix="+" 
                 className="text-2xl font-bold text-primary" 
               />
-              <div className="text-sm text-background/80">Success Rate</div>
+              <div className="text-sm text-background/80">Inspired</div>
             </div>
           </motion.div>
         </div>
