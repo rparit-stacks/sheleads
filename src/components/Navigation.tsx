@@ -13,7 +13,6 @@ const Navigation = () => {
     { name: "Start Here", href: "/start-here" },
     { name: "Programs", href: "/programs" },
     { name: "Upcoming Training", href: "/upcoming-training" },
-    { name: "Resources", href: "/resources" },
     { name: "About", href: "/about" },
     { name: "Blog", href: "/blog" },
     { name: "Events", href: "/events" },
