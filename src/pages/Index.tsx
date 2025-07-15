@@ -5,7 +5,7 @@ import TestimonialCard from "@/components/TestimonialCard";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Download, Users, Award, TrendingUp, Mic, Play, ChevronLeft, ChevronRight, Camera, Calendar } from "lucide-react";
+import { ArrowRight, Download, Users, Award, TrendingUp, Mic, Play, ChevronLeft, ChevronRight, Camera, Calendar, Zap, Heart, Star, CheckCircle } from "lucide-react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -261,6 +261,138 @@ const Index = () => {
       
       {/* Hero Section */}
       <HeroSection />
+
+      {/* Event Banner - CANVA & AI WORKSHOP */}
+      <motion.section 
+        className="py-20 bg-white relative overflow-hidden"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.5 }}
+      >
+        {/* Subtle background pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-10 left-10 w-32 h-32 border-2 border-red-600 rounded-full"></div>
+          <div className="absolute bottom-10 right-10 w-24 h-24 border-2 border-red-600 rounded-full"></div>
+          <div className="absolute top-1/2 left-1/4 w-16 h-16 border-2 border-red-600 rounded-full"></div>
+        </div>
+
+        {/* Decorative border */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-600 via-red-500 to-red-600"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-red-600 via-red-500 to-red-600"></div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div 
+            className="text-center max-w-4xl mx-auto"
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.3 }}
+          >
+            {/* Attention-grabbing badge */}
+            <motion.div 
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-3 rounded-full text-sm font-bold mb-6 shadow-lg"
+              animate={{ 
+                scale: [1, 1.05, 1],
+                rotate: [0, 1, -1, 0]
+              }}
+              transition={{ 
+                duration: 2, 
+                repeat: Infinity,
+                repeatType: "reverse"
+              }}
+            >
+              <Star className="h-4 w-4" />
+              ⚡ SPECIAL WORKSHOP ANNOUNCEMENT ⚡
+              <Star className="h-4 w-4" />
+            </motion.div>
+            
+            {/* Main content card with shadow */}
+            <motion.div 
+              className="bg-white rounded-3xl p-8 shadow-2xl border border-gray-100 mb-8"
+              whileHover={{ y: -5, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)" }}
+              transition={{ duration: 0.3 }}
+            >
+              <h2 className="text-3xl md:text-5xl font-bold mb-4 text-gray-900">
+                🎨 CANVA & AI WORKSHOP
+              </h2>
+              
+              <p className="text-xl md:text-2xl mb-2 text-red-600 font-semibold">
+                Design Bold. Write Smart. Build Consistently.
+              </p>
+              
+              <p className="text-lg mb-6 text-gray-700">
+                | Nashik | ₹1500/-
+              </p>
+
+              {/* Feature highlights */}
+              <div className="flex flex-wrap justify-center gap-4 mb-8">
+                <div className="flex items-center gap-2 bg-red-50 px-4 py-2 rounded-full">
+                  <CheckCircle className="h-4 w-4 text-red-600" />
+                  <span className="text-sm font-medium text-gray-700">Lunch Included</span>
+                </div>
+                <div className="flex items-center gap-2 bg-red-50 px-4 py-2 rounded-full">
+                  <CheckCircle className="h-4 w-4 text-red-600" />
+                  <span className="text-sm font-medium text-gray-700">Take-home Materials</span>
+                </div>
+                <div className="flex items-center gap-2 bg-red-50 px-4 py-2 rounded-full">
+                  <CheckCircle className="h-4 w-4 text-red-600" />
+                  <span className="text-sm font-medium text-gray-700">Networking</span>
+                </div>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button 
+                    asChild 
+                    size="lg" 
+                    className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold px-8 py-4 rounded-xl shadow-lg text-lg"
+                  >
+                    <Link to="/canva-ai-workshop">
+                      <Zap className="h-5 w-5 mr-2" />
+                      Learn More & Register
+                      <ArrowRight className="h-5 w-5 ml-2" />
+                    </Link>
+                  </Button>
+                </motion.div>
+                
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button 
+                    asChild 
+                    variant="outline" 
+                    size="lg" 
+                    className="border-2 border-red-600 text-red-600 bg-white hover:bg-red-50 font-bold px-8 py-4 rounded-xl text-lg shadow-md"
+                  >
+                    <a href="https://rzp.io/rzp/TmsWQUS" target="_blank" rel="noopener noreferrer">
+                      <Heart className="h-5 w-5 mr-2" />
+                      Quick Register - ₹1500/-
+                    </a>
+                  </Button>
+                </motion.div>
+              </div>
+            </motion.div>
+            
+            {/* Urgency indicator */}
+            <motion.div 
+              className="inline-flex items-center gap-2 bg-red-100 px-6 py-3 rounded-full text-red-800 font-semibold"
+              animate={{ 
+                backgroundColor: ["rgb(254 226 226)", "rgb(254 202 202)", "rgb(254 226 226)"]
+              }}
+              transition={{ 
+                duration: 2, 
+                repeat: Infinity,
+                repeatType: "reverse"
+              }}
+            >
+              <div className="w-2 h-2 bg-red-600 rounded-full animate-pulse"></div>
+              ⚡ <strong>Limited Seats</strong> • Registration closes soon
+            </motion.div>
+          </motion.div>
+        </div>
+      </motion.section>
 
       {/* Programs Section */}
       <ProgramsShowcase />
