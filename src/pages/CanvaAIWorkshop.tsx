@@ -237,7 +237,7 @@ const CanvaAIWorkshop = () => {
               <div className="relative mb-6">
                 <div className="w-48 h-48 mx-auto rounded-full overflow-hidden shadow-2xl border-4 border-red-200 group-hover:border-red-300 transition-all duration-300">
                   <img 
-                    src="/media/she leads membership.webp" 
+                    src="/media/founder-nikita.webp" 
                     alt="Nikita Vora - Founder" 
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
