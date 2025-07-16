@@ -3,6 +3,9 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { preloadCriticalResources, monitorCoreWebVitals } from "@/lib/performance";
+import { initGA } from "@/lib/analytics";
 import Index from "./pages/Index";
 import StartHere from "./pages/StartHere";
 import Programs from "./pages/Programs";
@@ -25,37 +28,48 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/start-here" element={<StartHere />} />
-          <Route path="/programs" element={<Programs />} />
-          <Route path="/resources" element={<Resources />} />
-          <Route path="/success-stories" element={<SuccessStories />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/events" element={<Events />} />
-          <Route path="/events/:eventId" element={<EventDetails />} />
-          <Route path="/events/:eventId/register" element={<EventRegistration />} />
-          <Route path="/upcoming-training" element={<UpcomingTraining />} />
-          <Route path="/training/:trainingId" element={<TrainingDetails />} />
-          <Route path="/training/:trainingId/register" element={<TrainingRegistration />} />
-          <Route path="/podcast" element={<Podcast />} />
-          <Route path="/events-gallery" element={<EventsGallery />} />
-          <Route path="/canva-ai-workshop" element={<CanvaAIWorkshop />} />
-          <Route path="/admin" element={<AdminPanel />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  useEffect(() => {
+    // Initialize performance optimizations
+    preloadCriticalResources();
+    monitorCoreWebVitals();
+    
+    // Initialize Google Analytics
+    initGA();
+  }, []);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/start-here" element={<StartHere />} />
+            <Route path="/programs" element={<Programs />} />
+            <Route path="/resources" element={<Resources />} />
+            <Route path="/success-stories" element={<SuccessStories />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/events/:eventId" element={<EventDetails />} />
+            <Route path="/events/:eventId/register" element={<EventRegistration />} />
+            <Route path="/upcoming-training" element={<UpcomingTraining />} />
+            <Route path="/training/:trainingId" element={<TrainingDetails />} />
+            <Route path="/training/:trainingId/register" element={<TrainingRegistration />} />
+            <Route path="/podcast" element={<Podcast />} />
+            <Route path="/events-gallery" element={<EventsGallery />} />
+            <Route path="/canva-ai-workshop" element={<CanvaAIWorkshop />} />
+            <Route path="/admin" element={<AdminPanel />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;

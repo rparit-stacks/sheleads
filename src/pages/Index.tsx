@@ -187,7 +187,7 @@ const Index = () => {
       scale: 1,
       opacity: 1,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 200,
         damping: 25,
         opacity: { duration: 0.4 }
@@ -685,7 +685,7 @@ const Index = () => {
                   <div className="w-full h-48 rounded-xl mb-3 overflow-hidden bg-gray-50">
                     <img 
                       src="/media/Mentoring.JPG" 
-                      alt="Mentoring" 
+                      alt="Women entrepreneurs receiving mentoring guidance at SHELeadsIndia workshop" 
                       className="w-full h-full object-cover object-center"
                       style={{
                         filter: 'brightness(0.75) contrast(1.15) saturate(1.1)',
@@ -707,7 +707,7 @@ const Index = () => {
                   <div className="w-full h-48 rounded-xl mb-3 overflow-hidden bg-gray-50">
                     <img 
                       src="/media/networking.JPG" 
-                      alt="Networking" 
+                      alt="Women entrepreneurs networking and building connections at SHELeadsIndia event" 
                       className="w-full h-full object-cover object-center"
                       style={{
                         filter: 'brightness(0.7) contrast(1.2) saturate(1.1)',
@@ -746,7 +746,7 @@ const Index = () => {
                   <div className="w-full h-48 rounded-xl mb-3 overflow-hidden bg-gray-50">
                     <img 
                       src="/media/market-place.JPG" 
-                      alt="Market Place" 
+                      alt="SHELeadsIndia marketplace showcasing women-led businesses and products" 
                       className="w-full h-full object-cover object-center"
                       style={{
                         filter: 'brightness(0.75) contrast(1.15) saturate(1.1)',
@@ -932,7 +932,7 @@ const Index = () => {
             >
               <img
                 src="/media/DSC02058.JPG"
-                alt="Event photo 1"
+                alt="SHELeadsIndia workshop participants learning digital marketing skills"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
               />
             </motion.div>
@@ -945,7 +945,7 @@ const Index = () => {
             >
               <img
                 src="/media/DSC02132.JPG"
-                alt="Event photo 2"
+                alt="Women entrepreneurs collaborating during SHELeadsIndia training session"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
               />
             </motion.div>
@@ -958,7 +958,7 @@ const Index = () => {
             >
               <img
                 src="/media/IMG_0013.JPG"
-                alt="Event photo 3"
+                alt="SHELeadsIndia founder addressing women entrepreneurs at workshop"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
               />
             </motion.div>
@@ -971,7 +971,7 @@ const Index = () => {
             >
               <img
                 src="/media/DSC02233.JPG"
-                alt="Event photo 4"
+                alt="Women entrepreneurs celebrating success at SHELeadsIndia event"
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
               />
             </motion.div>
@@ -1107,6 +1107,82 @@ const Index = () => {
                 </Button>
               </motion.div>
             </div>
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* Internal Links Section for SEO */}
+      <motion.section 
+        className="py-16 bg-gray-50"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-10%" }}
+        variants={fadeInUp}
+      >
+        <div className="container mx-auto px-4">
+          <motion.div className="text-center mb-12" variants={fadeInUp}>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">
+              Explore More Resources
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Discover comprehensive resources to support your entrepreneurial journey
+            </p>
+          </motion.div>
+
+          <motion.div 
+            className="grid grid-cols-2 md:grid-cols-4 gap-4"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-10%" }}
+          >
+            <motion.div variants={fadeInUp}>
+              <Link 
+                to="/programs" 
+                className="block p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 text-center group"
+              >
+                <h3 className="font-semibold text-gray-900 mb-2 group-hover:text-red-600 transition-colors">
+                  Digital Marketing Programs
+                </h3>
+                <p className="text-sm text-gray-600">Master digital marketing strategies</p>
+              </Link>
+            </motion.div>
+
+            <motion.div variants={fadeInUp}>
+              <Link 
+                to="/upcoming-training" 
+                className="block p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 text-center group"
+              >
+                <h3 className="font-semibold text-gray-900 mb-2 group-hover:text-red-600 transition-colors">
+                  AI Training Workshops
+                </h3>
+                <p className="text-sm text-gray-600">Learn AI tools for business growth</p>
+              </Link>
+            </motion.div>
+
+            <motion.div variants={fadeInUp}>
+              <Link 
+                to="/success-stories" 
+                className="block p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 text-center group"
+              >
+                <h3 className="font-semibold text-gray-900 mb-2 group-hover:text-red-600 transition-colors">
+                  Women Success Stories
+                </h3>
+                <p className="text-sm text-gray-600">Be inspired by real entrepreneurs</p>
+              </Link>
+            </motion.div>
+
+            <motion.div variants={fadeInUp}>
+              <Link 
+                to="/resources" 
+                className="block p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 text-center group"
+              >
+                <h3 className="font-semibold text-gray-900 mb-2 group-hover:text-red-600 transition-colors">
+                  Business Resources
+                </h3>
+                <p className="text-sm text-gray-600">Free tools and guides</p>
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
       </motion.section>
