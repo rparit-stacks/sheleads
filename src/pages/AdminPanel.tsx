@@ -37,6 +37,7 @@ const emptyEventForm = {
   max_attendees: 100,
   price: 0,
   currency: "USD",
+  payment_link: "",
   status: "draft" as const,
   registration_fields: ["name", "email", "phone"],
   thank_you_message: "Thank you for registering! We'll send you more details soon.",
@@ -56,6 +57,7 @@ const emptyTrainingForm = {
   max_participants: 50,
   price: 0,
   currency: "USD",
+  payment_link: "",
   status: "draft" as const,
   topics: [] as string[],
   requirements: [] as string[],
@@ -1093,10 +1095,24 @@ export default function AdminPanel() {
                           className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
                         >
                           <option value="USD">USD</option>
+                          <option value="INR">INR</option>
                           <option value="EUR">EUR</option>
                           <option value="GBP">GBP</option>
                         </select>
                       </div>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-gray-700">Payment Link</label>
+                      <input 
+                        name="payment_link" 
+                        type="url" 
+                        value={eventForm.payment_link} 
+                        onChange={handleEventChange} 
+                        placeholder="https://rzp.io/rzp/your-payment-link" 
+                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200" 
+                      />
+                      <p className="text-xs text-gray-500">Enter the payment gateway link (e.g., Razorpay, Stripe, etc.)</p>
                     </div>
                     
                     <div className="grid gap-4 md:grid-cols-2">
@@ -1412,7 +1428,7 @@ export default function AdminPanel() {
                       </div>
                     </div>
                     
-                    <div className="grid gap-4 md:grid-cols-3">
+                    <div className="grid gap-4 md:grid-cols-4">
                       <div className="space-y-2">
                         <label className="text-sm font-medium text-gray-700">Max Participants</label>
                         <input 
@@ -1437,6 +1453,20 @@ export default function AdminPanel() {
                         />
                       </div>
                       <div className="space-y-2">
+                        <label className="text-sm font-medium text-gray-700">Currency</label>
+                        <select 
+                          name="currency" 
+                          value={trainingForm.currency} 
+                          onChange={handleTrainingChange} 
+                          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200"
+                        >
+                          <option value="USD">USD</option>
+                          <option value="INR">INR</option>
+                          <option value="EUR">EUR</option>
+                          <option value="GBP">GBP</option>
+                        </select>
+                      </div>
+                      <div className="space-y-2">
                         <label className="text-sm font-medium text-gray-700">Status</label>
                         <select 
                           name="status" 
@@ -1450,6 +1480,19 @@ export default function AdminPanel() {
                           <option value="cancelled">Cancelled</option>
                         </select>
                       </div>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-gray-700">Payment Link</label>
+                      <input 
+                        name="payment_link" 
+                        type="url" 
+                        value={trainingForm.payment_link} 
+                        onChange={handleTrainingChange} 
+                        placeholder="https://rzp.io/rzp/your-payment-link" 
+                        className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all duration-200" 
+                      />
+                      <p className="text-xs text-gray-500">Enter the payment gateway link (e.g., Razorpay, Stripe, etc.)</p>
                     </div>
                     
                     <div className="flex items-center gap-6">

@@ -72,14 +72,30 @@ export default function TrainingRegistration() {
     setError(null);
 
     try {
-      // Create registration with the new structure
-      await createTrainingRegistration({
-        training_id: trainingId,
-        registration_data: formData,
-        status: "confirmed",
-      });
+      // If training has a price and payment link, redirect to payment
+      if (training.price > 0 && training.payment_link) {
+        // Create registration first
+        await createTrainingRegistration({
+          training_id: trainingId,
+          registration_data: formData,
+          status: "pending", // Set as pending until payment is confirmed
+        });
+        
+        // Redirect to payment link
+        window.open(training.payment_link, '_blank');
+        
+        // Show success message
+        setSuccess(true);
+      } else {
+        // Free training or no payment link - create registration directly
+        await createTrainingRegistration({
+          training_id: trainingId,
+          registration_data: formData,
+          status: "confirmed",
+        });
 
-      setSuccess(true);
+        setSuccess(true);
+      }
     } catch (err: any) {
       setError(err.message || "Failed to register for training");
     } finally {
@@ -121,6 +137,16 @@ export default function TrainingRegistration() {
     return labels[field] || field.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
   };
 
+  const getCurrencySymbol = (currency: string) => {
+    const symbols: { [key: string]: string } = {
+      'USD': '$',
+      'INR': '₹',
+      'EUR': '€',
+      'GBP': '£'
+    };
+    return symbols[currency] || currency;
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-background">
@@ -159,12 +185,30 @@ export default function TrainingRegistration() {
           <div className="text-center">
             <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-6" />
             <h1 className="text-3xl font-bold text-foreground mb-4">
-              Registration Successful!
+              {training.price > 0 && training.payment_link ? "Registration Initiated!" : "Registration Successful!"}
             </h1>
             <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-6">
-              <p className="text-green-800 whitespace-pre-line">
-                Thank you for registering for our training program! We'll send you more details and materials soon.
-              </p>
+              {training.price > 0 && training.payment_link ? (
+                <div>
+                  <p className="text-green-800 mb-4">
+                    Your registration has been initiated! A payment window should have opened in a new tab.
+                  </p>
+                  <p className="text-green-800 mb-4">
+                    Please complete your payment to confirm your registration. If the payment window didn't open, 
+                    please check your browser's popup blocker or click the button below.
+                  </p>
+                  <Button 
+                    onClick={() => window.open(training.payment_link, '_blank')}
+                    className="bg-blue-600 hover:bg-blue-700 text-white"
+                  >
+                    Complete Payment
+                  </Button>
+                </div>
+              ) : (
+                <p className="text-green-800 whitespace-pre-line">
+                  Thank you for registering for our training program! We'll send you more details and materials soon.
+                </p>
+              )}
             </div>
             <div className="space-y-4">
               <Button onClick={() => navigate("/upcoming-training")} className="mr-4">
@@ -211,7 +255,9 @@ export default function TrainingRegistration() {
                 </div>
                 {training.price > 0 && (
                   <Badge variant="outline" className="flex items-center gap-1">
-                    <DollarSign className="h-3 w-3" />
+                    <span className="text-sm font-medium">
+                      {getCurrencySymbol(training.currency)}
+                    </span>
                     {training.price} {training.currency}
                   </Badge>
                 )}

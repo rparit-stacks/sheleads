@@ -300,7 +300,7 @@ const Index = () => {
               }}
             >
               <Star className="h-4 w-4" />
-              ⚡ SPECIAL WORKSHOP ANNOUNCEMENT ⚡
+              SPECIAL WORKSHOP ANNOUNCEMENT
               <Star className="h-4 w-4" />
             </motion.div>
             
@@ -311,7 +311,7 @@ const Index = () => {
               transition={{ duration: 0.3 }}
             >
               <h2 className="text-3xl md:text-5xl font-bold mb-4 text-gray-900">
-                🎨 CANVA & AI WORKSHOP
+                CANVA & AI WORKSHOP
               </h2>
               
               <p className="text-xl md:text-2xl mb-2 text-red-600 font-semibold">
@@ -388,7 +388,7 @@ const Index = () => {
               }}
             >
               <div className="w-2 h-2 bg-red-600 rounded-full animate-pulse"></div>
-              ⚡ <strong>Limited Seats</strong> • Registration closes soon
+              <strong>Limited Seats</strong> • Registration closes soon
             </motion.div>
           </motion.div>
         </div>

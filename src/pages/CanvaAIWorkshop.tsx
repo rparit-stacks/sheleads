@@ -220,7 +220,7 @@ const CanvaAIWorkshop = () => {
                   City Leader
                 </div>
               </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-2">Brinda</h3>
+              <h3 className="text-2xl font-bold text-gray-800 mb-2">Brinda Rawal </h3>
               <p className="text-red-600 font-semibold mb-3">SHELeads Nashik City Leader</p>
               <p className="text-gray-600 leading-relaxed">
                 Leading entrepreneur and mentor who has guided hundreds of women 

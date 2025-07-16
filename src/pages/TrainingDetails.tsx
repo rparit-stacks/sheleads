@@ -49,6 +49,16 @@ export default function TrainingDetails() {
     });
   };
 
+  const getCurrencySymbol = (currency: string) => {
+    const symbols: { [key: string]: string } = {
+      'USD': '$',
+      'INR': '₹',
+      'EUR': '€',
+      'GBP': '£'
+    };
+    return symbols[currency] || currency;
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-background">
@@ -108,7 +118,9 @@ export default function TrainingDetails() {
               </div>
               {training.price > 0 && (
                 <Badge variant="outline" className="flex items-center gap-1">
-                  <DollarSign className="h-3 w-3" />
+                  <span className="text-sm font-medium">
+                    {getCurrencySymbol(training.currency)}
+                  </span>
                   {training.price} {training.currency}
                 </Badge>
               )}
@@ -243,13 +255,18 @@ export default function TrainingDetails() {
                 <h3 className="text-xl font-semibold mb-3">Pricing</h3>
                 <div className="bg-green-50 border border-green-200 rounded-lg p-4">
                   <div className="flex items-center gap-2">
-                    <DollarSign className="h-5 w-5 text-green-600" />
+                    <span className="text-2xl font-bold text-green-600">
+                      {getCurrencySymbol(training.currency)}
+                    </span>
                     <span className="text-2xl font-bold text-green-800">
                       {training.price} {training.currency}
                     </span>
                   </div>
                   <p className="text-sm text-green-700 mt-1">
-                    Payment will be processed during registration
+                    {training.payment_link 
+                      ? "Payment will be processed securely through our payment gateway"
+                      : "Payment will be processed during registration"
+                    }
                   </p>
                 </div>
               </div>

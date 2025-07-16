@@ -12,6 +12,7 @@ export interface Event {
   max_attendees: number;
   price: number;
   currency: string;
+  payment_link?: string;
   created_at: string;
   updated_at: string;
   status: 'draft' | 'published' | 'ended';

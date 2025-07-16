@@ -15,6 +15,7 @@ export interface Training {
   max_participants: number;
   price: number;
   currency: string;
+  payment_link?: string;
   status: 'draft' | 'published' | 'completed' | 'cancelled';
   topics: string[];
   requirements?: string[];
