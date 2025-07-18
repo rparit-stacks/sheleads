@@ -24,6 +24,9 @@ import AdminPanel from "./pages/AdminPanel";
 import Podcast from "./pages/Podcast";
 import EventsGallery from "./pages/EventsGallery";
 import CanvaAIWorkshop from "./pages/CanvaAIWorkshop";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
+import Content from "./pages/Content";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -61,10 +64,13 @@ const App = () => {
             <Route path="/training/:trainingId/register" element={<TrainingRegistration />} />
             <Route path="/podcast" element={<Podcast />} />
             <Route path="/events-gallery" element={<EventsGallery />} />
-                      <Route path="/canva-ai-workshop" element={<CanvaAIWorkshop />} />
-          <Route path="/admin" element={<AdminPanel />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
+            <Route path="/canva-ai-workshop" element={<CanvaAIWorkshop />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/content" element={<Content />} />
+            <Route path="/admin" element={<AdminPanel />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>

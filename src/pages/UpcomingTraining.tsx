@@ -199,12 +199,12 @@ export default function UpcomingTraining() {
         </div>
       </section>
 
-      {/* Training Sessions Grid */}
+      {/* Training Sessions Carousel */}
       <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              Available Training Sessions
+              Upcoming Training Sessions
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Choose from our carefully curated training programs designed to accelerate your business growth.
@@ -222,144 +222,222 @@ export default function UpcomingTraining() {
               </p>
             </div>
           ) : (
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {trainings.map((training, index) => {
-                const cardVariants = [
-                  'bg-gradient-to-br from-blue-50 to-indigo-100 border-l-4 border-blue-500',
-                  'bg-gradient-to-br from-purple-50 to-pink-100 border-l-4 border-purple-500',
-                  'bg-gradient-to-br from-green-50 to-emerald-100 border-l-4 border-green-500',
-                  'bg-gradient-to-br from-orange-50 to-red-100 border-l-4 border-orange-500',
-                  'bg-gradient-to-br from-teal-50 to-cyan-100 border-l-4 border-teal-500',
-                  'bg-gradient-to-br from-rose-50 to-pink-100 border-l-4 border-rose-500'
-                ];
-                
-                const iconColors = [
-                  'text-blue-600 bg-blue-100',
-                  'text-purple-600 bg-purple-100',
-                  'text-green-600 bg-green-100',
-                  'text-orange-600 bg-orange-100',
-                  'text-teal-600 bg-teal-100',
-                  'text-rose-600 bg-rose-100'
-                ];
-                
-                const badgeColors = [
-                  'bg-blue-100 text-blue-700 border-blue-200',
-                  'bg-purple-100 text-purple-700 border-purple-200',
-                  'bg-green-100 text-green-700 border-green-200',
-                  'bg-orange-100 text-orange-700 border-orange-200',
-                  'bg-teal-100 text-teal-700 border-teal-200',
-                  'bg-rose-100 text-rose-700 border-rose-200'
-                ];
-                
-                const cardVariant = cardVariants[index % cardVariants.length];
-                const iconColor = iconColors[index % iconColors.length];
-                const badgeColor = badgeColors[index % badgeColors.length];
-                
-                return (
-                  <div key={training.id} className={`group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-4 ${cardVariant}`}>
-                    {/* Decorative elements */}
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
-                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12"></div>
-                    
-                    {training.image_url && (
-                      <div className="relative aspect-video overflow-hidden">
-                        <img
-                          src={training.image_url}
-                          alt={training.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                        <div className="absolute top-4 left-4 flex gap-2">
-                          <Badge className={`${badgeColor} border font-medium`}>
-                            <Award className="h-3 w-3 mr-1" />
-                            {training.level}
-                          </Badge>
-                          <Badge className={`${badgeColor} border font-medium`}>
-                            <Clock className="h-3 w-3 mr-1" />
-                            {training.duration}
-                          </Badge>
-                        </div>
-                      </div>
-                    )}
-                    
-                    <div className="relative p-8">
-                      <div className="flex items-start justify-between mb-4">
-                        <h3 className="text-2xl font-bold text-gray-900 group-hover:text-gray-700 transition-colors duration-300 flex-1">
-                          {training.title}
-                        </h3>
-                        <div className={`w-12 h-12 rounded-xl ${iconColor} flex items-center justify-center ml-4 group-hover:scale-110 transition-transform duration-300`}>
-                          <BookOpen className="h-6 w-6" />
-                        </div>
-                      </div>
-                      
-                      <p className="text-gray-700 mb-6 line-clamp-3 text-base leading-relaxed">
-                        {training.description}
-                      </p>
-                      
-                      {/* Info Cards */}
-                      <div className="grid grid-cols-2 gap-3 mb-6">
-                        <div className="bg-white/50 backdrop-blur-sm rounded-xl p-3 border border-white/20">
-                          <div className="flex items-center gap-2 text-sm text-gray-700">
-                            <Calendar className="h-4 w-4" />
-                            <span className="font-medium truncate">{formatDate(training.start_date)}</span>
+            <div className="relative">
+              {/* Carousel Container */}
+              <div className="flex gap-8 overflow-x-auto pb-8 scrollbar-hide">
+                {trainings.map((training, index) => {
+                  const cardThemes = [
+                    {
+                      gradient: 'from-blue-500 via-blue-600 to-indigo-600',
+                      accent: 'from-blue-400 to-blue-500',
+                      text: 'text-blue-50',
+                      border: 'border-blue-200',
+                      shadow: 'shadow-blue-500/20'
+                    },
+                    {
+                      gradient: 'from-purple-500 via-purple-600 to-pink-600',
+                      accent: 'from-purple-400 to-purple-500',
+                      text: 'text-purple-50',
+                      border: 'border-purple-200',
+                      shadow: 'shadow-purple-500/20'
+                    },
+                    {
+                      gradient: 'from-emerald-500 via-emerald-600 to-teal-600',
+                      accent: 'from-emerald-400 to-emerald-500',
+                      text: 'text-emerald-50',
+                      border: 'border-emerald-200',
+                      shadow: 'shadow-emerald-500/20'
+                    },
+                    {
+                      gradient: 'from-orange-500 via-orange-600 to-red-600',
+                      accent: 'from-orange-400 to-orange-500',
+                      text: 'text-orange-50',
+                      border: 'border-orange-200',
+                      shadow: 'shadow-orange-500/20'
+                    },
+                    {
+                      gradient: 'from-rose-500 via-rose-600 to-pink-600',
+                      accent: 'from-rose-400 to-rose-500',
+                      text: 'text-rose-50',
+                      border: 'border-rose-200',
+                      shadow: 'shadow-rose-500/20'
+                    },
+                    {
+                      gradient: 'from-violet-500 via-violet-600 to-purple-600',
+                      accent: 'from-violet-400 to-violet-500',
+                      text: 'text-violet-50',
+                      border: 'border-violet-200',
+                      shadow: 'shadow-violet-500/20'
+                    }
+                  ];
+                  
+                  const theme = cardThemes[index % cardThemes.length];
+                  
+                  return (
+                    <div key={training.id} className="flex-shrink-0 w-full max-w-md">
+                      <div className={`group relative overflow-hidden rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-700 hover:-translate-y-6 bg-gradient-to-br ${theme.gradient} ${theme.shadow} border ${theme.border}`}>
+                        {/* Decorative Background Elements */}
+                        <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-20 -mt-20 blur-xl"></div>
+                        <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full -ml-16 -mb-16 blur-xl"></div>
+                        <div className="absolute top-1/2 left-1/2 w-24 h-24 bg-white/5 rounded-full -translate-x-12 -translate-y-12 blur-lg"></div>
+                        
+                        {/* Header Section with Image */}
+                        <div className="relative h-48 overflow-hidden rounded-t-3xl">
+                          {training.image_url ? (
+                            <img
+                              src={training.image_url}
+                              alt={training.title}
+                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-gradient-to-br from-white/20 to-white/10 flex items-center justify-center">
+                              <BookOpen className="h-16 w-16 text-white/60" />
+                            </div>
+                          )}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/20 to-transparent"></div>
+                          
+                          {/* Floating Badges */}
+                          <div className="absolute top-4 left-4 flex flex-col gap-2">
+                            <Badge className={`bg-white/90 text-gray-800 border-0 font-semibold shadow-lg`}>
+                              <Award className="h-3 w-3 mr-1" />
+                              {training.level}
+                            </Badge>
+                            <Badge className={`bg-white/90 text-gray-800 border-0 font-semibold shadow-lg`}>
+                              <Clock className="h-3 w-3 mr-1" />
+                              {training.duration}
+                            </Badge>
+                          </div>
+                          
+                          {/* Price Tag */}
+                          <div className="absolute top-4 right-4">
+                            <div className="bg-white/95 backdrop-blur-sm rounded-2xl px-4 py-2 shadow-lg">
+                              <div className="text-2xl font-bold text-gray-900">₹{training.price}</div>
+                              <div className="text-xs text-gray-600">Complete Program</div>
+                            </div>
                           </div>
                         </div>
-                        <div className="bg-white/50 backdrop-blur-sm rounded-xl p-3 border border-white/20">
-                          <div className="flex items-center gap-2 text-sm text-gray-700">
-                            <Clock className="h-4 w-4" />
-                            <span className="font-medium">{formatTime(training.start_time)}</span>
+                        
+                        {/* Content Section */}
+                        <div className="relative p-8">
+                          {/* Title and Icon */}
+                          <div className="flex items-start justify-between mb-6">
+                            <h3 className="text-2xl font-bold text-white group-hover:text-white/90 transition-colors duration-300 flex-1 leading-tight">
+                              {training.title}
+                            </h3>
+                            <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center ml-4 group-hover:scale-110 transition-transform duration-300 border border-white/30">
+                              <BookOpen className="h-7 w-7 text-white" />
+                            </div>
                           </div>
-                        </div>
-                        <div className="bg-white/50 backdrop-blur-sm rounded-xl p-3 border border-white/20">
-                          <div className="flex items-center gap-2 text-sm text-gray-700">
-                            <MapPin className="h-4 w-4" />
-                            <span className="font-medium truncate">{training.location}</span>
+                          
+                          {/* Description */}
+                          <p className="text-white/90 mb-6 line-clamp-3 text-base leading-relaxed">
+                            {training.description}
+                          </p>
+                          
+                          {/* Info Grid */}
+                          <div className="grid grid-cols-2 gap-3 mb-6">
+                            <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 border border-white/30">
+                              <div className="flex items-center gap-2 text-sm text-white">
+                                <Calendar className="h-4 w-4" />
+                                <span className="font-medium truncate">{formatDate(training.start_date)}</span>
+                              </div>
+                            </div>
+                            <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 border border-white/30">
+                              <div className="flex items-center gap-2 text-sm text-white">
+                                <Clock className="h-4 w-4" />
+                                <span className="font-medium">{formatTime(training.start_time)}</span>
+                              </div>
+                            </div>
+                            <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 border border-white/30">
+                              <div className="flex items-center gap-2 text-sm text-white">
+                                <MapPin className="h-4 w-4" />
+                                <span className="font-medium truncate">{training.location}</span>
+                              </div>
+                            </div>
+                            <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 border border-white/30">
+                              <div className="flex items-center gap-2 text-sm text-white">
+                                <Users className="h-4 w-4" />
+                                <span className="font-medium">{training.max_participants} max</span>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                        <div className="bg-white/50 backdrop-blur-sm rounded-xl p-3 border border-white/20">
-                          <div className="flex items-center gap-2 text-sm text-gray-700">
-                            <Users className="h-4 w-4" />
-                            <span className="font-medium">{training.max_participants} max</span>
-                          </div>
-                        </div>
-                      </div>
 
-                      {training.topics && training.topics.length > 0 && (
-                        <div className="mb-6">
-                          <p className="text-sm font-bold mb-3 text-gray-900">Topics covered:</p>
-                          <div className="flex flex-wrap gap-2">
-                            {training.topics.slice(0, 3).map((topic, topicIndex) => (
-                              <Badge key={topicIndex} className="text-xs bg-white/70 text-gray-700 border border-white/30 hover:bg-white/80">
-                                {topic}
-                              </Badge>
-                            ))}
-                            {training.topics.length > 3 && (
-                              <Badge className="text-xs bg-white/70 text-gray-700 border border-white/30 hover:bg-white/80">
-                                +{training.topics.length - 3} more
-                              </Badge>
+                          {/* What's Included Section */}
+                          <div className="mb-6">
+                            <h4 className="text-lg font-bold mb-4 text-white">What's Included:</h4>
+                            <div className="space-y-3">
+                              <div className="flex items-center gap-3">
+                                <div className="w-2 h-2 bg-white rounded-full flex-shrink-0"></div>
+                                <span className="text-white/90 text-base font-medium">Hands-on Canva design session</span>
+                              </div>
+                              <div className="flex items-center gap-3">
+                                <div className="w-2 h-2 bg-white rounded-full flex-shrink-0"></div>
+                                <span className="text-white/90 text-base font-medium">AI-powered content writing</span>
+                              </div>
+                              <div className="flex items-center gap-3">
+                                <div className="w-2 h-2 bg-white rounded-full flex-shrink-0"></div>
+                                <span className="text-white/90 text-base font-medium">Take-home materials</span>
+                              </div>
+                              <div className="flex items-center gap-3">
+                                <div className="w-2 h-2 bg-white rounded-full flex-shrink-0"></div>
+                                <span className="text-white/90 text-base font-medium">Networking opportunities</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Topics */}
+                          {training.topics && training.topics.length > 0 && (
+                            <div className="mb-6">
+                              <p className="text-sm font-bold mb-3 text-white/90">Topics covered:</p>
+                              <div className="flex flex-wrap gap-2">
+                                {training.topics.slice(0, 3).map((topic, topicIndex) => (
+                                  <Badge key={topicIndex} className="text-xs bg-white/30 text-white border border-white/40 hover:bg-white/40 backdrop-blur-sm">
+                                    {topic}
+                                  </Badge>
+                                ))}
+                                {training.topics.length > 3 && (
+                                  <Badge className="text-xs bg-white/30 text-white border border-white/40 hover:bg-white/40 backdrop-blur-sm">
+                                    +{training.topics.length - 3} more
+                                  </Badge>
+                                )}
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Action Buttons */}
+                          <div className="flex gap-3">
+                            <Button asChild className="flex-1 h-12 text-base font-semibold rounded-2xl bg-white/20 hover:bg-white/30 text-white border border-white/30 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300">
+                              <Link to={`/training/${training.id}`}>
+                                View Details
+                              </Link>
+                            </Button>
+                            {training.registration_enabled && (
+                              <Button asChild className="h-12 px-6 rounded-2xl bg-white hover:bg-white/90 text-gray-900 border-0 shadow-lg hover:shadow-xl transition-all duration-300 font-semibold">
+                                <Link to={`/training/${training.id}/register`}>
+                                  Register Now
+                                </Link>
+                              </Button>
                             )}
                           </div>
                         </div>
-                      )}
-
-                      <div className="flex gap-3">
-                        <Button asChild className="flex-1 h-12 text-base font-semibold rounded-2xl bg-gray-900 hover:bg-gray-800 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-                          <Link to={`/training/${training.id}`}>
-                            View Details
-                          </Link>
-                        </Button>
-                        {training.registration_enabled && (
-                          <Button asChild className="h-12 px-6 rounded-2xl bg-white/80 hover:bg-white text-gray-900 border border-gray-200 shadow-md hover:shadow-lg transition-all duration-300">
-                            <Link to={`/training/${training.id}/register`}>
-                              Register
-                            </Link>
-                          </Button>
-                        )}
+                        
+                        {/* Hover Effect Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/0 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
+              
+              {/* Scroll Indicators */}
+              <div className="flex justify-center mt-8 gap-2">
+                {trainings.map((_, index) => (
+                  <div
+                    key={index}
+                    className="w-3 h-3 rounded-full bg-gray-300 hover:bg-primary transition-colors duration-300 cursor-pointer"
+                  ></div>
+                ))}
+              </div>
             </div>
           )}
         </div>

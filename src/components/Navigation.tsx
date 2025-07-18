@@ -23,7 +23,7 @@ const Navigation = () => {
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <motion.div 
@@ -34,7 +34,7 @@ const Navigation = () => {
               <img 
                 src="/she-leads-logo.png" 
                 alt="SHE Leads India" 
-                className="h-12 w-auto object-contain"
+                className="h-14 w-auto object-contain"
               />
             </motion.div>
           </Link>

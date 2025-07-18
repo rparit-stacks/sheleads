@@ -117,6 +117,15 @@ All colors MUST be HSL.
   .hero-button:hover {
     background: linear-gradient(135deg, rgb(204, 0, 31), rgb(179, 0, 27));
   }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @keyframes progress {
