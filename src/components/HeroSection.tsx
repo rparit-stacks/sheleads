@@ -4,11 +4,13 @@ import { motion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AnimatedCounter from "@/components/AnimatedCounter";
+import JourneyModal from "@/components/JourneyModal";
 // Using direct path to media folder image
 
 const HeroSection = () => {
   const sectionRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
   useEffect(() => {
     const checkMobile = () => {
@@ -101,20 +103,11 @@ const HeroSection = () => {
             initial="hidden"
             animate="visible"
           >
-            <div className="flex flex-wrap gap-x-3">
-              <motion.span variants={wordVariants}>Every</motion.span>
-              <motion.span variants={wordVariants}>Indian</motion.span>
-            </div>
-            <motion.div className="block" variants={wordVariants}>
-              <span className="text-primary mr-3">Woman</span>
-              <span className="text-primary">Deserves</span>
+            <motion.div className="block mb-2" variants={wordVariants}>
+              <span className="text-background/90"># She doesn't need permission.</span>
             </motion.div>
-            <div className="flex flex-wrap gap-x-3">
-              <motion.span variants={wordVariants}>Digital</motion.span>
-              <motion.span variants={wordVariants}>Power</motion.span>
-            </div>
-            <motion.div className="block text-xl md:text-2xl lg:text-3xl mt-2" variants={wordVariants}>
-              <span className="text-background/90">— Not Just Digital Presence</span>
+            <motion.div className="block text-xl md:text-2xl lg:text-3xl mb-3" variants={wordVariants}>
+              <span className="text-primary font-bold">She just needs digital power.</span>
             </motion.div>
           </motion.h1>
 
@@ -126,15 +119,7 @@ const HeroSection = () => {
             animate="visible"
           >
             <span className="block mb-3">
-              <strong>She's not just running a business.<br />
-              She's reclaiming her space — digitally, financially, and unapologetically.</strong>
-            </span>
-            <span className="block mb-3">
-              At SHELeadsIndia, we help women entrepreneurs master AI, simplify marketing, and build brands that don't just sell — they shine.
-            </span>
-            <span className="block">
-              This is for the woman who wants to grow with clarity, community & courage.<br />
-              <strong>Because when SHE leads, India grows.</strong>
+              <strong>SHELeadsIndia helps women grow with <span className="text-primary">AI, marketing, and community</span> — not just survive online, but shine.</strong>
             </span>
           </motion.p>
 
@@ -152,7 +137,12 @@ const HeroSection = () => {
               }}
               transition={{ duration: 0.3 }}
             >
-              <Button variant="hero" size="xl" className="group w-full sm:w-auto">
+              <Button 
+                variant="hero" 
+                size="xl" 
+                className="group w-full sm:w-auto"
+                onClick={() => setIsModalOpen(true)}
+              >
                 Start Your Journey
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
@@ -180,33 +170,22 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 2.2 }}
           >
-            <div>
-              <AnimatedCounter 
-                target={5} 
-                suffix="+" 
-                className="text-2xl font-bold text-primary" 
-              />
-              <div className="text-sm text-background/80">Cities</div>
-            </div>
-            <div>
-              <AnimatedCounter 
-                target={350} 
-                suffix="+" 
-                className="text-2xl font-bold text-primary" 
-              />
-              <div className="text-sm text-background/80">Training</div>
-            </div>
-            <div>
-              <AnimatedCounter 
-                target={10000} 
-                suffix="+" 
-                className="text-2xl font-bold text-primary" 
-              />
-              <div className="text-sm text-background/80">Inspired</div>
+            <div className="text-center">
+              <div className="text-lg text-background/90">
+                <span>10,000+ Women. </span>
+                <span>1 Vision. </span>
+                <span className="font-bold text-primary">Digital India, Led by Her.</span>
+              </div>
             </div>
           </motion.div>
         </div>
       </div>
+
+      {/* Journey Modal */}
+      <JourneyModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </section>
   );
 };

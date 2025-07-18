@@ -1,32 +1,32 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, Brain, Rocket, ArrowRight } from "lucide-react";
+import { Zap, TrendingUp, Rocket, ArrowRight } from "lucide-react";
 
 const ProgramsShowcase = () => {
   const programs = [
     {
-      icon: Users,
-      title: "Mentor & Grow",
-      description: "This is your heart piece — 1:1 guidance, branding, growth plans. Transform your business with personalized mentorship from successful women entrepreneurs.",
-      features: ["One-on-one strategy sessions", "Brand development guidance", "Growth roadmap creation", "Entrepreneur network access"],
+      icon: Zap,
+      title: "The Spark Plan",
+      description: "For women just getting started, your first spark of success. Weekly live training on digital marketing with access to our supportive WhatsApp community.",
+      features: ["Weekly live training on digital marketing", "Access to our supportive WhatsApp community", "Learn. Connect. Begin.", "Perfect for solopreneurs and early-stage founders"],
       cta: "Begin Your Journey",
-      highlight: "Most Cherished"
+      highlight: "Getting Started"
     },
     {
-      icon: Brain,
-      title: "Learn & Upskill",
-      description: "This is all about learning — AI tools, culturally aware content, and marketing rooted in Indian values. Master cutting-edge tools while staying rooted in your values.",
-      features: ["AI tools for Indian markets", "Culturally-aware content strategies", "Regional language optimization", "Community-focused marketing"],
-      cta: "Embrace Innovation",
-      highlight: ""
+      icon: TrendingUp,
+      title: "The Rise Plan",
+      description: "You're done surviving. Now it's time to rise. Exclusive monthly meetings focused on implementation with unlimited access to all training session recordings.",
+      features: ["Everything in The Spark Plan", "Exclusive monthly implementation meetings", "Your business featured on our podcast", "Unlimited access to training recordings"],
+      cta: "Embrace Growth",
+      highlight: "Most Popular"
     },
     {
       icon: Rocket,
-      title: "Connect & Collaborate",
-      description: "This highlights connection, celebration, and peer learning. Connect with ambitious women entrepreneurs who understand your journey and grow together.",
-      features: ["Regional networking circles", "Cultural celebration events", "Knowledge sharing sessions", "Success milestone celebrations"],
-      cta: "Join Community",
-      highlight: ""
+      title: "The Thrive Plan",
+      description: "Your business is growing—and so is your leadership. One 1:1 strategy call/month with our senior mentor and exclusive discounts on digital tools.",
+      features: ["Everything in The Rise Plan", "One 1:1 strategy call/month", "Exclusive discounts on digital tools", "Priority access to resources and templates"],
+      cta: "Scale Your Business",
+      highlight: "Growing Business"
     }
   ];
 
@@ -57,7 +57,7 @@ const ProgramsShowcase = () => {
                   </div>
                 )}
                 <CardHeader>
-                                      <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4" style={{ backgroundColor: 'rgba(230, 0, 35, 0.1)' }}>
+                  <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-4" style={{ backgroundColor: 'rgba(230, 0, 35, 0.1)' }}>
                     <IconComponent className="h-6 w-6 text-primary" />
                   </div>
                   <CardTitle className="text-xl">{program.title}</CardTitle>
@@ -75,7 +75,7 @@ const ProgramsShowcase = () => {
                     ))}
                   </ul>
                   <Button 
-                    variant={program.highlight ? "hero" : "outline"} 
+                    variant={program.highlight === "Most Popular" ? "hero" : "outline"} 
                     className="w-full group"
                   >
                     {program.cta}
@@ -122,11 +122,11 @@ const ProgramsShowcase = () => {
           </div>
           <div className="relative">
             <img
-              src="/media/digital wisdom.JPG"
+              src="/media/_PAS5285.JPG"
               alt="Digital Wisdom Training"
               className="rounded-lg shadow-card"
             />
-                            <div className="absolute inset-0 rounded-lg" style={{ background: 'linear-gradient(to top, rgba(230, 0, 35, 0.2), transparent)' }} />
+            <div className="absolute inset-0 rounded-lg" style={{ background: 'linear-gradient(to top, rgba(230, 0, 35, 0.2), transparent)' }} />
           </div>
         </div>
       </div>

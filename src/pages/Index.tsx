@@ -5,7 +5,7 @@ import TestimonialCard from "@/components/TestimonialCard";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Download, Users, Award, TrendingUp, Mic, Play, ChevronLeft, ChevronRight, Camera, Calendar, Zap, Heart, Star, CheckCircle } from "lucide-react";
+import { ArrowRight, Download, Users, Award, TrendingUp, Mic, Play, ChevronLeft, ChevronRight, Camera, Calendar, Zap, Heart, Star, CheckCircle, Clock, MapPin } from "lucide-react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -21,6 +21,12 @@ const Index = () => {
   // Media carousel state
   const [mediaCurrentSlide, setMediaCurrentSlide] = useState(0);
   const [isMediaAutoPlaying, setIsMediaAutoPlaying] = useState(true);
+  
+  // Reviews carousel state
+  const [currentReview, setCurrentReview] = useState(0);
+  
+  // Events carousel state
+  const [currentEventIndex, setCurrentEventIndex] = useState(0);
   
   const podcastEpisodes = [
     {
@@ -130,6 +136,24 @@ const Index = () => {
 
     return () => clearInterval(mediaTimer);
   }, [isMediaAutoPlaying, mediaFeatures.length]);
+
+  // Reviews carousel auto-rotation
+  useEffect(() => {
+    const reviewsTimer = setInterval(() => {
+      setCurrentReview((prev) => (prev + 1) % 3);
+    }, 3000); // Change every 3 seconds
+
+    return () => clearInterval(reviewsTimer);
+  }, []);
+
+  // Events carousel auto-rotation
+  useEffect(() => {
+    const eventsTimer = setInterval(() => {
+      setCurrentEventIndex((prev) => (prev + 1) % 3);
+    }, 3000); // Change every 3 seconds
+
+    return () => clearInterval(eventsTimer);
+  }, []);
 
   // Get visible media items for carousel (3 at a time on desktop, middle one changes)
   const getVisibleMediaItems = () => {
@@ -262,140 +286,948 @@ const Index = () => {
       {/* Hero Section */}
       <HeroSection />
 
-      {/* Event Banner - CANVA & AI WORKSHOP */}
+      {/* Community Reach Section */}
       <motion.section 
-        className="py-20 bg-white relative overflow-hidden"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.5 }}
+        className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-10%" }}
+        transition={{ duration: 0.8 }}
       >
-        {/* Subtle background pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-10 left-10 w-32 h-32 border-2 border-red-600 rounded-full"></div>
-          <div className="absolute bottom-10 right-10 w-24 h-24 border-2 border-red-600 rounded-full"></div>
-          <div className="absolute top-1/2 left-1/4 w-16 h-16 border-2 border-red-600 rounded-full"></div>
-        </div>
-
-        {/* Decorative border */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-600 via-red-500 to-red-600"></div>
-        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-red-600 via-red-500 to-red-600"></div>
-
         <div className="container mx-auto px-4 relative z-10">
           <motion.div 
-            className="text-center max-w-4xl mx-auto"
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.3 }}
+            className="text-center max-w-4xl mx-auto mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            {/* Attention-grabbing badge */}
-            <motion.div 
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-3 rounded-full text-sm font-bold mb-6 shadow-lg"
-              animate={{ 
-                scale: [1, 1.05, 1],
-                rotate: [0, 1, -1, 0]
-              }}
-              transition={{ 
-                duration: 2, 
-                repeat: Infinity,
-                repeatType: "reverse"
-              }}
-            >
-              <Star className="h-4 w-4" />
-              SPECIAL WORKSHOP ANNOUNCEMENT
-              <Star className="h-4 w-4" />
-            </motion.div>
-            
-            {/* Main content card with shadow */}
-            <motion.div 
-              className="bg-white rounded-3xl p-8 shadow-2xl border border-gray-100 mb-8"
-              whileHover={{ y: -5, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)" }}
-              transition={{ duration: 0.3 }}
-            >
-              <h2 className="text-3xl md:text-5xl font-bold mb-4 text-gray-900">
-                CANVA & AI WORKSHOP
-              </h2>
-              
-              <p className="text-xl md:text-2xl mb-2 text-red-600 font-semibold">
-                Design Bold. Write Smart. Build Consistently.
-              </p>
-              
-              <p className="text-lg mb-6 text-gray-700">
-                | Nashik | ₹1500/-
-              </p>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent">
+              You're Not Alone in This.
+            </h2>
+            <p className="text-xl md:text-2xl text-gray-700 mb-4 leading-relaxed">
+              <span className="font-bold text-red-600">Over 10,000 women</span> across India have already started building their digital growth stories with us.
+            </p>
+            <p className="text-lg md:text-xl text-gray-600">
+              Across Pune, Nashik, Nagpur, and now expanding city by city.
+            </p>
+          </motion.div>
 
-              {/* Feature highlights */}
-              <div className="flex flex-wrap justify-center gap-4 mb-8">
-                <div className="flex items-center gap-2 bg-red-50 px-4 py-2 rounded-full">
-                  <CheckCircle className="h-4 w-4 text-red-600" />
-                  <span className="text-sm font-medium text-gray-700">Lunch Included</span>
+          {/* Map and Testimonials Section */}
+          <motion.div 
+            className="grid lg:grid-cols-2 gap-24 items-start max-w-7xl mx-auto px-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            {/* Left Side - Clean Map Only */}
+            <motion.div 
+              className="flex flex-col items-start lg:pr-8"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <h3 className="text-2xl font-bold text-red-600 mb-6 text-center lg:text-left">
+                Our Presence Across India
+              </h3>
+              
+              {/* Clean Map - No Dots */}
+              <img 
+                src="/media/india map.jpg" 
+                alt="India Map - SHELeads presence" 
+                className="w-full max-w-sm h-auto"
+              />
+            </motion.div>
+
+            {/* Right Side - Testimonials */}
+            <motion.div 
+              className="space-y-8 lg:pl-8"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">
+                What Our <span className="text-red-600">Community</span> Says
+              </h3>
+              
+              {/* Testimonial 1 - Pune */}
+              <div className="mb-8">
+                <div className="flex items-start space-x-4 mb-4">
+                  <img 
+                    src="/media/IMG_20250101_201136 - Gopi V.jpg" 
+                    alt="Gopi Vishrolia Joshi"
+                    className="w-16 h-16 rounded-full object-cover"
+                  />
+                  <div>
+                    <h4 className="font-semibold text-red-600 text-lg">Gopi Vishrolia Joshi</h4>
+                    <p className="text-gray-900 text-sm font-medium">Digital Entrepreneur</p>
+                    <p className="text-gray-600 text-sm">Pune</p>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 bg-red-50 px-4 py-2 rounded-full">
-                  <CheckCircle className="h-4 w-4 text-red-600" />
-                  <span className="text-sm font-medium text-gray-700">Take-home Materials</span>
-                </div>
-                <div className="flex items-center gap-2 bg-red-50 px-4 py-2 rounded-full">
-                  <CheckCircle className="h-4 w-4 text-red-600" />
-                  <span className="text-sm font-medium text-gray-700">Networking</span>
-                </div>
+                <p className="text-gray-700 leading-relaxed">
+                  "SHELeadsIndia has been a game-changer! From learning AI tools and Canva to mastering social media management, their sessions have helped streamline my work and provided very good inputs to boost my brand visibility."
+                </p>
               </div>
               
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Button 
-                    asChild 
-                    size="lg" 
-                    className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold px-8 py-4 rounded-xl shadow-lg text-lg"
-                  >
-                    <Link to="/canva-ai-workshop">
-                      <Zap className="h-5 w-5 mr-2" />
-                      Learn More & Register
-                      <ArrowRight className="h-5 w-5 ml-2" />
-                    </Link>
-                  </Button>
-                </motion.div>
-                
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Button 
-                    asChild 
-                    variant="outline" 
-                    size="lg" 
-                    className="border-2 border-red-600 text-red-600 bg-white hover:bg-red-50 font-bold px-8 py-4 rounded-xl text-lg shadow-md"
-                  >
-                    <a href="https://rzp.io/rzp/TmsWQUS" target="_blank" rel="noopener noreferrer">
-                      <Heart className="h-5 w-5 mr-2" />
-                      Quick Register - ₹1500/-
-                    </a>
-                  </Button>
-                </motion.div>
+              {/* Testimonial 2 - Pune */}
+              <div className="mb-8">
+                <div className="flex items-start space-x-4 mb-4">
+                  <img 
+                    src="/media/IMG_6764 - Manjusha Bhaskarwar.jpeg" 
+                    alt="Manjusha Ravi Bhaskarwar"
+                    className="w-16 h-16 rounded-full object-cover"
+                  />
+                  <div>
+                    <h4 className="font-semibold text-red-600 text-lg">Manjusha Ravi Bhaskarwar</h4>
+                    <p className="text-gray-900 text-sm font-medium">Content Creator</p>
+                    <p className="text-gray-600 text-sm">Pune</p>
+                  </div>
+                </div>
+                <p className="text-gray-700 leading-relaxed">
+                  "SHELeadsIndia helped me by providing regular AI tools, and challenging me with the YouTube and Instagram challenges, along with more Canva learning. Since joining, I've updated my channel and social media with better content and quality."
+                </p>
               </div>
-            </motion.div>
-            
-            {/* Urgency indicator */}
-            <motion.div 
-              className="inline-flex items-center gap-2 bg-red-100 px-6 py-3 rounded-full text-red-800 font-semibold"
-              animate={{ 
-                backgroundColor: ["rgb(254 226 226)", "rgb(254 202 202)", "rgb(254 226 226)"]
-              }}
-              transition={{ 
-                duration: 2, 
-                repeat: Infinity,
-                repeatType: "reverse"
-              }}
-            >
-              <div className="w-2 h-2 bg-red-600 rounded-full animate-pulse"></div>
-              <strong>Limited Seats</strong> • Registration closes soon
+              
+              {/* Testimonial 3 - Nashik */}
+              <div className="mb-8">
+                <div className="flex items-start space-x-4 mb-4">
+                  <img 
+                    src="/media/png_20230407_202102_0000 - Ankita Creation.png" 
+                    alt="Anjali Arvikar"
+                    className="w-16 h-16 rounded-full object-cover"
+                  />
+                  <div>
+                    <h4 className="font-semibold text-red-600 text-lg">Anjali Arvikar</h4>
+                    <p className="text-gray-900 text-sm font-medium">Social Media Expert</p>
+                    <p className="text-gray-600 text-sm">Nashik</p>
+                  </div>
+                </div>
+                <p className="text-gray-700 leading-relaxed">
+                  "SHELeadsIndia helped me in many areas through their trainings. I learned about many social media tools and, of course, gained confidence."
+                </p>
+              </div>
             </motion.div>
           </motion.div>
         </div>
       </motion.section>
 
+      {/* Upcoming Events Carousel Section */}
+      <motion.section 
+        className="py-12 bg-white"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-10%" }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-4xl font-bold mb-4 text-black">
+              Upcoming <span className="text-red-600">Events</span>
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Join our transformative events designed specifically for women entrepreneurs
+            </p>
+          </div>
+
+          {/* Events Carousel */}
+          <div className="max-w-4xl mx-auto">
+            <div className="relative">
+              {/* Carousel Container */}
+              <div className="overflow-hidden">
+                <div 
+                  className="flex transition-transform duration-500 ease-in-out"
+                  style={{ transform: `translateX(-${currentEventIndex * 100}%)` }}
+                >
+                  {/* Event 1: CANVA & AI WORKSHOP */}
+                  <div className="w-full flex-shrink-0 px-4">
+                    <div className="relative overflow-hidden bg-white rounded-2xl shadow-xl border border-gray-200 group h-[380px]">
+                      {/* Background Image */}
+                      <div className="absolute inset-0 opacity-15">
+                        <img 
+                          src="/media/IMG_0011.JPG" 
+                          alt="Hero Background" 
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      
+                      {/* Content */}
+                      <div className="relative z-10 p-4 h-full flex flex-col">
+                        {/* Header with Brand Colors */}
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="flex items-center gap-3">
+                            <div className="relative">
+                              <div className="w-10 h-10 bg-red-600 rounded-xl flex items-center justify-center shadow-lg">
+                                <Zap className="h-5 w-5 text-white" />
+                              </div>
+                              <div className="absolute -top-1 -right-1 w-3 h-3 bg-black rounded-full flex items-center justify-center">
+                                <span className="text-xs font-bold text-white">🔥</span>
+                              </div>
+                            </div>
+                            <div>
+                              <h3 className="text-xl font-bold text-black mb-1">CANVA & AI WORKSHOP</h3>
+                              <p className="text-red-600 font-semibold text-sm">Design Bold. Write Smart. Build Consistently.</p>
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <div className="text-2xl font-bold text-red-600 mb-1">₹1500</div>
+                            <div className="text-xs text-gray-600 bg-white px-2 py-1 rounded-full">includes lunch & kit</div>
+                          </div>
+                        </div>
+                        
+                        {/* Event Details with Brand Colors */}
+                        <div className="grid md:grid-cols-2 gap-4 mb-4 flex-1">
+                          <div className="space-y-2">
+                            <div className="flex items-center gap-2 p-2 bg-white/90 backdrop-blur-sm rounded-lg">
+                              <div className="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center">
+                                <Calendar className="h-3 w-3 text-red-600" />
+                              </div>
+                              <div>
+                                <div className="font-semibold text-black text-sm">1st August 2025</div>
+                                <div className="text-xs text-gray-600">Workshop Day</div>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-2 p-2 bg-white/90 backdrop-blur-sm rounded-lg">
+                              <div className="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center">
+                                <Clock className="h-3 w-3 text-red-600" />
+                              </div>
+                              <div>
+                                <div className="font-semibold text-black text-sm">11 AM – 4 PM</div>
+                                <div className="text-xs text-gray-600">5 Hours Intensive</div>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-2 p-2 bg-white/90 backdrop-blur-sm rounded-lg">
+                              <div className="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center">
+                                <MapPin className="h-3 w-3 text-red-600" />
+                              </div>
+                              <div>
+                                <div className="font-semibold text-black text-sm">Nashik</div>
+                                <div className="text-xs text-gray-600">In-Person Event</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-sm mb-2 text-black flex items-center gap-2">
+                              <div className="w-2 h-2 bg-red-600 rounded-full"></div>
+                              What's Included:
+                            </h4>
+                            <div className="space-y-1">
+                              <div className="flex items-center gap-2 p-1 bg-white/90 backdrop-blur-sm rounded-lg">
+                                <div className="w-1 h-1 bg-red-600 rounded-full"></div>
+                                <span className="font-medium text-xs">Hands-on Canva design session</span>
+                              </div>
+                              <div className="flex items-center gap-2 p-1 bg-white/90 backdrop-blur-sm rounded-lg">
+                                <div className="w-1 h-1 bg-red-600 rounded-full"></div>
+                                <span className="font-medium text-xs">AI-powered content writing</span>
+                              </div>
+                              <div className="flex items-center gap-2 p-1 bg-white/90 backdrop-blur-sm rounded-lg">
+                                <div className="w-1 h-1 bg-red-600 rounded-full"></div>
+                                <span className="font-medium text-xs">Take-home materials</span>
+                              </div>
+                              <div className="flex items-center gap-2 p-1 bg-white/90 backdrop-blur-sm rounded-lg">
+                                <div className="w-1 h-1 bg-red-600 rounded-full"></div>
+                                <span className="font-medium text-xs">Networking opportunities</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Brand Color Buttons */}
+                        <div className="flex gap-2 mt-auto">
+                          <Button asChild className="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200 text-sm">
+                            <Link to="/canva-ai-workshop">
+                              Learn More & Register
+                            </Link>
+                          </Button>
+                          <Button asChild variant="outline" className="flex-1 border-2 border-red-600 text-red-600 bg-white hover:bg-red-50 font-bold py-2 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200 text-sm">
+                            <a href="https://rzp.io/rzp/TmsWQUS" target="_blank" rel="noopener noreferrer">
+                              Quick Register
+                            </a>
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Event 2: Weekly Free Training */}
+                  <div className="w-full flex-shrink-0 px-4">
+                    <div className="relative overflow-hidden bg-white rounded-2xl shadow-xl border border-gray-200 group h-[380px]">
+                      {/* Background Image */}
+                      <div className="absolute inset-0 opacity-15">
+                        <img 
+                          src="/media/market place.JPG" 
+                          alt="Market Place Background" 
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      
+                      {/* Content */}
+                      <div className="relative z-10 p-4 h-full flex flex-col">
+                        {/* Header with Brand Colors */}
+                        <div className="text-center mb-4">
+                          <div className="relative inline-block mb-3">
+                            <div className="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center shadow-lg mx-auto">
+                              <Play className="h-6 w-6 text-white" />
+                            </div>
+                            <div className="absolute -top-1 -right-1 w-4 h-4 bg-black rounded-full flex items-center justify-center">
+                              <span className="text-xs font-bold text-white">FREE</span>
+                            </div>
+                          </div>
+                          <h3 className="text-xl font-bold text-black mb-1">Weekly Free Training</h3>
+                          <p className="text-red-600 font-semibold text-sm">Online Session</p>
+                        </div>
+                        
+                        {/* Main Topic with Brand Colors */}
+                        <div className="text-center mb-4 flex-1">
+                          <div className="bg-red-50 rounded-lg p-3 mb-3">
+                            <h4 className="text-lg font-bold text-black mb-1">Instagram Growth for Women Entrepreneurs</h4>
+                            <p className="text-red-700 font-medium text-sm">Master the art of social media marketing</p>
+                          </div>
+                          
+                          {/* Event Details with Brand Colors */}
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                            <div className="bg-white/90 backdrop-blur-sm rounded-lg p-2 text-center">
+                              <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-1">
+                                <Calendar className="h-4 w-4 text-red-600" />
+                              </div>
+                              <div className="font-semibold text-black text-sm">Tuesday, 23rd July</div>
+                              <div className="text-xs text-gray-600">Weekly Session</div>
+                            </div>
+                            <div className="bg-white/90 backdrop-blur-sm rounded-lg p-2 text-center">
+                              <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-1">
+                                <Clock className="h-4 w-4 text-red-600" />
+                              </div>
+                              <div className="font-semibold text-black text-sm">5 PM – 6 PM</div>
+                              <div className="text-xs text-gray-600">1 Hour Session</div>
+                            </div>
+                            <div className="bg-white/90 backdrop-blur-sm rounded-lg p-2 text-center">
+                              <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-1">
+                                <div className="w-4 h-4 text-red-600">
+                                  <svg fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                  </svg>
+                                </div>
+                              </div>
+                              <div className="font-semibold text-black text-sm">Zoom Platform</div>
+                              <div className="text-xs text-gray-600">Virtual Event</div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Brand Color Button */}
+                        <Button className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200 mt-auto text-sm">
+                          Join Free
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Event 3: 5-Day Challenge */}
+                  <div className="w-full flex-shrink-0 px-4">
+                    <div className="relative overflow-hidden bg-white rounded-2xl shadow-xl border border-gray-200 group h-[380px]">
+                      {/* Background Image */}
+                      <div className="absolute inset-0 opacity-15">
+                        <img 
+                          src="/media/Mentoring.JPG" 
+                          alt="Mentoring Background" 
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      
+                      {/* Content */}
+                      <div className="relative z-10 p-4 h-full flex flex-col">
+                        {/* Header with Brand Colors */}
+                        <div className="flex items-center justify-between mb-4">
+                          <div className="flex items-center gap-3">
+                            <div className="relative">
+                              <div className="w-10 h-10 bg-red-600 rounded-xl flex items-center justify-center shadow-lg">
+                                <div className="text-lg font-bold text-white">5</div>
+                              </div>
+                              <div className="absolute -top-1 -right-1 w-3 h-3 bg-black rounded-full flex items-center justify-center">
+                                <span className="text-xs font-bold text-white">⚡</span>
+                              </div>
+                            </div>
+                            <div>
+                              <h3 className="text-xl font-bold text-black mb-1">5-Day Challenge</h3>
+                              <p className="text-red-600 font-semibold text-sm">Content That Converts</p>
+                            </div>
+                          </div>
+                          <div className="text-right">
+                            <div className="text-2xl font-bold text-red-600 mb-1">₹1500</div>
+                            <div className="text-xs text-gray-600 bg-white px-2 py-1 rounded-full">complete program</div>
+                          </div>
+                        </div>
+                        
+                        {/* Event Details with Brand Colors */}
+                        <div className="grid grid-cols-2 gap-2 mb-4">
+                          <div className="bg-white/90 backdrop-blur-sm rounded-lg p-2 text-center">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-1">
+                              <Calendar className="h-4 w-4 text-red-600" />
+                            </div>
+                            <div className="font-semibold text-black text-sm">Starts 5th August</div>
+                            <div className="text-xs text-gray-600">5-Day Program</div>
+                          </div>
+                          <div className="bg-white/90 backdrop-blur-sm rounded-lg p-2 text-center">
+                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-1">
+                              <div className="w-4 h-4 text-red-600">
+                                <svg fill="currentColor" viewBox="0 0 24 24">
+                                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                              </div>
+                            </div>
+                            <div className="font-semibold text-black text-sm">WhatsApp + Live Zoom</div>
+                            <div className="text-xs text-gray-600">Hybrid Format</div>
+                          </div>
+                        </div>
+                        
+                        {/* Focus Areas with Brand Colors */}
+                        <div className="mb-4 flex-1">
+                          <h4 className="font-bold text-sm mb-2 text-black flex items-center gap-2">
+                            <div className="w-2 h-2 bg-red-600 rounded-full"></div>
+                            Focus Areas:
+                          </h4>
+                          <div className="space-y-1">
+                            <div className="flex items-center gap-2 p-1 bg-white/90 backdrop-blur-sm rounded-lg">
+                              <div className="w-1 h-1 bg-red-600 rounded-full"></div>
+                              <span className="font-medium text-xs">AI-powered content calendar</span>
+                            </div>
+                            <div className="flex items-center gap-2 p-1 bg-white/90 backdrop-blur-sm rounded-lg">
+                              <div className="w-1 h-1 bg-red-600 rounded-full"></div>
+                              <span className="font-medium text-xs">Lead magnets creation</span>
+                            </div>
+                            <div className="flex items-center gap-2 p-1 bg-white/90 backdrop-blur-sm rounded-lg">
+                              <div className="w-1 h-1 bg-red-600 rounded-full"></div>
+                              <span className="font-medium text-xs">CTA writing techniques</span>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Brand Color Button */}
+                        <Button className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200 mt-auto text-sm">
+                          Join Challenge
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Navigation Dots */}
+              <div className="flex justify-center mt-8 space-x-2">
+                {[0, 1, 2].map((index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentEventIndex(index)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      currentEventIndex === index ? 'bg-red-600 w-8' : 'bg-gray-300'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Why We Exist Section */}
+      <motion.section 
+        className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-10%" }}
+        transition={{ duration: 0.8 }}
+      >
+        {/* Background decorative elements */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-red-600 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-10 w-40 h-40 bg-pink-500 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-7xl mx-auto">
+            {/* Main Heading */}
+            <div className="text-center mb-20">
+              <div className="flex justify-center mb-6">
+                <img 
+                  src="/she-leads-logo.png" 
+                  alt="SHE Leads India Logo" 
+                  className="h-16 md:h-20 object-contain"
+                />
+              </div>
+              <h2 className="text-4xl md:text-6xl font-bold mb-6 text-gray-900">
+                Why We Exist
+              </h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-red-500 to-pink-500 mx-auto rounded-full"></div>
+            </div>
+            
+            {/* Content Grid - Problem on Left, Solution on Right */}
+            <div className="grid lg:grid-cols-2 gap-16 items-start">
+              {/* Left Side - Problem */}
+              <motion.div 
+                className="space-y-8 h-full"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                {/* Problem Image */}
+                <div className="relative mb-8">
+                  <img 
+                    src="/media/IMG_0013.JPG" 
+                    alt="Women entrepreneurs facing challenges" 
+                    className="w-full h-64 object-cover rounded-2xl shadow-2xl"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-2xl"></div>
+                  <div className="absolute bottom-4 left-4">
+                    <h3 className="text-3xl font-bold text-white mb-2">
+                      The Problem
+                    </h3>
+                  </div>
+                </div>
+                
+                {/* Problem Points */}
+                <div className="space-y-6">
+                  <div className="flex items-start space-x-4 group">
+                    <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-red-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-sm group-hover:scale-110 transition-transform duration-300">
+                      1
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-gray-700 leading-relaxed text-lg font-medium">
+                        <span className="text-red-600 font-bold">There's no shortage of women with ideas</span> - brilliant, innovative, world-changing ideas
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-4 group">
+                    <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-red-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-sm group-hover:scale-110 transition-transform duration-300">
+                      2
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-gray-700 leading-relaxed text-lg font-medium">
+                        <span className="text-red-600 font-bold">But most don't get the support, tools, or tribe</span> to turn those ideas into income
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start space-x-4 group">
+                    <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-red-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-sm group-hover:scale-110 transition-transform duration-300">
+                      3
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-gray-700 leading-relaxed text-lg font-medium">
+                        <span className="text-red-600 font-bold">They lack the ecosystem</span> needed to build sustainable businesses
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+              
+              {/* Right Side - Solution */}
+              <motion.div 
+                className="space-y-8 h-full"
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                {/* Solution Image */}
+                <div className="relative mb-8">
+                  <img 
+                    src="/media/DSC02153.JPG" 
+                    alt="Women entrepreneurs succeeding together" 
+                    className="w-full h-64 object-cover rounded-2xl shadow-2xl"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-2xl"></div>
+                  <div className="absolute bottom-4 left-4">
+                    <h3 className="text-3xl font-bold text-white mb-2">
+                      Our Solution
+                    </h3>
+                  </div>
+                </div>
+                
+                {/* Solution Content */}
+                <div className="space-y-6">
+                  <div className="mb-6">
+                    <p className="text-4xl font-bold mb-3">
+                      <span className="text-gray-900">SHE</span> 
+                      <span className="bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent"> Leads India</span>
+                    </p>
+                    <p className="text-xl text-gray-700 font-medium">is here to change that.</p>
+                  </div>
+                  
+                  {/* Solution Features */}
+                  <div className="space-y-4">
+                    <div className="flex items-center space-x-4 group">
+                      <div className="flex-shrink-0 w-4 h-4 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
+                      <span className="text-gray-700 font-semibold text-lg">AI-powered tools & training</span>
+                    </div>
+                    <div className="flex items-center space-x-4 group">
+                      <div className="flex-shrink-0 w-4 h-4 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
+                      <span className="text-gray-700 font-semibold text-lg">Digital marketing mastery</span>
+                    </div>
+                    <div className="flex items-center space-x-4 group">
+                      <div className="flex-shrink-0 w-4 h-4 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
+                      <span className="text-gray-700 font-semibold text-lg">Community support network</span>
+                    </div>
+                    <div className="flex items-center space-x-4 group">
+                      <div className="flex-shrink-0 w-4 h-4 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
+                      <span className="text-gray-700 font-semibold text-lg">All built for Indian businesswomen</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+            
+            {/* Mission Statement */}
+            <motion.div 
+              className="text-center mt-20"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              <p className="text-2xl md:text-3xl text-gray-900 font-semibold mb-4 italic">
+                Because when <span className="bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent font-bold">she</span> learns, <span className="bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent font-bold">she</span> leads.
+              </p>
+              <p className="text-2xl md:text-3xl text-gray-900 font-semibold">
+                And when she leads, we all rise.
+              </p>
+            </motion.div>
+            
+            {/* CTA Button */}
+            <motion.div 
+              className="flex justify-center mt-16"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+            >
+              <Button 
+                asChild 
+                size="lg" 
+                className="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg text-lg transform hover:scale-105 transition-all duration-300"
+              >
+                <Link to="/about">
+                  Learn More About Our Work
+                  <ArrowRight className="h-5 w-5 ml-2" />
+                </Link>
+              </Button>
+            </motion.div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Red Separator */}
+      <div className="w-full h-1 bg-gradient-to-r from-red-500 to-red-600"></div>
+
+      {/* What We Do Section */}
+      <motion.section 
+        className="py-20 bg-white"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-10%" }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            {/* Main Heading */}
+            <div className="text-center mb-16">
+              <div className="flex justify-center mb-6">
+                <img 
+                  src="/she-leads-logo.png" 
+                  alt="SHE Leads India Logo" 
+                  className="h-16 md:h-20 object-contain"
+                />
+              </div>
+              <h2 className="text-4xl md:text-6xl font-bold mb-6">
+                <span className="text-gray-900">What We </span>
+                <span className="bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent">Do</span>
+              </h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-red-500 to-pink-500 mx-auto rounded-full mb-8"></div>
+              
+              <p className="text-xl md:text-2xl font-semibold mb-6">
+                <span className="text-gray-900">Practical. </span>
+                <span className="text-red-600">Personal. </span>
+                <span className="bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent">Powered by Purpose.</span>
+              </p>
+              
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                At <span className="text-red-600 font-semibold">SHELeadsIndia</span>, we don't just teach theory — we give you the <span className="text-red-600 font-semibold">tools</span>, <span className="text-red-600 font-semibold">confidence</span>, and <span className="text-red-600 font-semibold">community</span> to take real action in your business.
+              </p>
+              
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto mt-4 leading-relaxed">
+                Here's how we help <span className="text-red-600 font-semibold">women entrepreneurs</span> grow — <span className="italic text-gray-700">one step, one story at a time.</span>
+              </p>
+            </div>
+            
+            {/* Services Grid */}
+            <div className="grid lg:grid-cols-2 gap-8">
+              {/* 1. Hands-on Trainings */}
+              <motion.div 
+                className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                whileHover={{ y: -5 }}
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <span className="text-white font-bold text-2xl">1</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900">Hands-on Trainings</h3>
+                </div>
+                <div className="mb-6">
+                  <img 
+                    src="/media/IMG_0137.JPG" 
+                    alt="Women learning digital skills" 
+                    className="w-full h-48 object-cover rounded-xl mb-6"
+                  />
+                </div>
+                <div className="space-y-4 text-gray-700 leading-relaxed">
+                  <p className="text-lg">We break down digital marketing, AI tools, and content creation into simple, doable steps.</p>
+                  <p className="text-lg">Our trainings are built for women who are juggling home, business, and everything in between.</p>
+                  <p className="text-lg">Whether it's learning how to automate your WhatsApp, create content using AI, or build a lead magnet — you'll walk out with skills, not confusion.</p>
+                </div>
+              </motion.div>
+
+              {/* 2. Weekly Challenges */}
+              <motion.div 
+                className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                whileHover={{ y: -5 }}
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <span className="text-white font-bold text-2xl">2</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900">Weekly Challenges</h3>
+                </div>
+                <div className="mb-6">
+                  <img 
+                    src="/media/IMG_0011.JPG" 
+                    alt="Women collaborating and networking" 
+                    className="w-full h-48 object-cover rounded-xl mb-6"
+                  />
+                </div>
+                <div className="space-y-4 text-gray-700 leading-relaxed">
+                  <p className="text-lg">These aren't just tasks — they're momentum-builders.</p>
+                  <p className="text-lg">Our 5-day and 7-day challenges help you stay consistent, push past tech fear, and actually <em>launch</em> that idea you've been sitting on.</p>
+                  <p className="text-lg">Each challenge comes with guidance, checklists, and group energy that keeps you going.</p>
+                </div>
+              </motion.div>
+
+              {/* 3. Offline + Online Events */}
+              <motion.div 
+                className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                whileHover={{ y: -5 }}
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <span className="text-white font-bold text-2xl">3</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900">Offline + Online Events</h3>
+                </div>
+                <div className="mb-6">
+                  <img 
+                    src="/media/Mentoring.JPG" 
+                    alt="Women mentoring and learning together" 
+                    className="w-full h-48 object-cover rounded-xl mb-6"
+                  />
+                </div>
+                <div className="space-y-4 text-gray-700 leading-relaxed">
+                  <p className="text-lg">We believe in hugs and high-fives <em>as much as</em> hacks and how-tos.</p>
+                  <p className="text-lg">Our in-person sessions in cities like Pune, Nashik, and Nagpur give women a chance to connect beyond the screen — while our virtual events make sure no one is left out.</p>
+                  <p className="text-lg">From strategy workshops to panel discussions, we curate experiences that spark both learning and collaboration.</p>
+                </div>
+              </motion.div>
+
+              {/* 4. Community & Collaboration */}
+              <motion.div 
+                className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                whileHover={{ y: -5 }}
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center shadow-lg">
+                    <span className="text-white font-bold text-2xl">4</span>
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900">Community & Collaboration</h3>
+                </div>
+                <div className="mb-6">
+                  <img 
+                    src="/media/market place.JPG" 
+                    alt="Women entrepreneurs collaborating" 
+                    className="w-full h-48 object-cover rounded-xl mb-6"
+                  />
+                </div>
+                <div className="space-y-4 text-gray-700 leading-relaxed">
+                  <p className="text-lg">This is not a Facebook group with ghost members.</p>
+                  <p className="text-lg">This is a curated space where women business owners ask questions, share wins, hire each other, and build confidence together.</p>
+                  <p className="text-lg">You're not just joining a platform. You're becoming part of a circle that genuinely wants you to win — and shows up to help you do it.</p>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </motion.section>
+
       {/* Programs Section */}
       <ProgramsShowcase />
+
+      {/* Community Section */}
+      <motion.section 
+        className="py-20 bg-gradient-to-br from-red-50 via-white to-pink-50 relative overflow-hidden"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-10%" }}
+        transition={{ duration: 0.8 }}
+      >
+        {/* Background decorative elements */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-red-600 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 right-10 w-40 h-40 bg-pink-500 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-6xl mx-auto">
+            {/* Header with SHE Leads Logo */}
+            <div className="text-center mb-16">
+              <div className="flex justify-center mb-6">
+                <img 
+                  src="/she-leads-logo.png" 
+                  alt="SHE Leads India Logo" 
+                  className="h-16 md:h-20 object-contain"
+                />
+              </div>
+              <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900">
+                You Don't Need to Figure It All Out Alone
+              </h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-red-500 to-pink-500 mx-auto rounded-full mb-8"></div>
+            </div>
+
+            {/* Main Content Grid */}
+            <div className="grid lg:grid-cols-2 gap-12 items-start mb-12">
+              {/* Left Side - Text Content */}
+              <motion.div 
+                className="space-y-6"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <div className="space-y-4">
+                  <p className="text-xl text-gray-700 leading-relaxed">
+                    Inside our community, you'll find women just like you — building, learning, failing, rising, and helping each other grow.
+                  </p>
+                  <p className="text-xl text-gray-700 leading-relaxed">
+                    This isn't just a chat group.
+                  </p>
+                  <p className="text-xl text-gray-700 leading-relaxed">
+                    It's where collaborations happen, tools are exchanged, wins are celebrated, and businesses grow — together.
+                  </p>
+                  <p className="text-xl text-gray-700 leading-relaxed">
+                    Whether you're just starting out or scaling up, there's space for you here.
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Right Side - Benefits Content */}
+              <motion.div 
+                className="space-y-6"
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                <div className="text-left mb-6">
+                  <div className="w-12 h-12 bg-gradient-to-br from-red-500 to-pink-500 rounded-full flex items-center justify-center mb-4">
+                    <span className="text-lg">💡</span>
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-4">What You Get Inside:</h3>
+                </div>
+                
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-5 h-5 bg-red-600 rounded-full flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">✓</span>
+                    </div>
+                    <span className="font-medium text-gray-900 text-sm">Access to members-only WhatsApp groups</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-5 h-5 bg-red-600 rounded-full flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">✓</span>
+                    </div>
+                    <span className="font-medium text-gray-900 text-sm">Priority invites to events and trainings</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-5 h-5 bg-red-600 rounded-full flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">✓</span>
+                    </div>
+                    <span className="font-medium text-gray-900 text-sm">Peer support + accountability</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-5 h-5 bg-red-600 rounded-full flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">✓</span>
+                    </div>
+                    <span className="font-medium text-gray-900 text-sm">Early access to tools, resources, and deals</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-5 h-5 bg-red-600 rounded-full flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">✓</span>
+                    </div>
+                    <span className="font-medium text-gray-900 text-sm">Visibility through SHE Leads India platforms</span>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* CTA Buttons */}
+            <motion.div 
+              className="text-center space-y-4"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Button asChild className="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-xl shadow-lg transform hover:scale-105 transition-all duration-200">
+                    <a href="https://digitalstepup.kit.com/ceb549565c" target="_blank" rel="noopener noreferrer">
+                      Become a Member
+                    </a>
+                  </Button>
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Button asChild variant="outline" className="border-2 border-red-600 text-red-600 bg-white hover:bg-red-50 font-bold py-4 px-8 rounded-xl shadow-lg transform hover:scale-105 transition-all duration-200">
+                    <a href="https://digitalstepup.kit.com/ceb549565c" target="_blank" rel="noopener noreferrer">
+                      Join the Community
+                    </a>
+                  </Button>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </motion.section>
 
       {/* Thin black line divider */}
       <div className="w-full h-px bg-black opacity-20"></div>
@@ -673,10 +1505,10 @@ const Index = () => {
               </div>
             </motion.div>
 
-            {/* Right Content - Features Grid */}
+            {/* Right Content - What We Do Grid */}
             <motion.div variants={fadeInUp}>
               <div className="grid grid-cols-2 gap-6">
-                {/* Mentoring */}
+                {/* 1. Hands-on Trainings */}
                 <motion.div 
                   className="bg-white rounded-2xl p-4 text-center hover:shadow-lg transition-all duration-300 border border-gray-100"
                   whileHover={{ scale: 1.05, y: -5 }}
@@ -684,8 +1516,8 @@ const Index = () => {
                 >
                   <div className="w-full h-48 rounded-xl mb-3 overflow-hidden bg-gray-50">
                     <img 
-                      src="/media/Mentoring.JPG" 
-                      alt="Women entrepreneurs receiving mentoring guidance at SHELeadsIndia workshop" 
+                      src="/media/IMG_0137.JPG" 
+                      alt="Women learning digital skills" 
                       className="w-full h-full object-cover object-center"
                       style={{
                         filter: 'brightness(0.75) contrast(1.15) saturate(1.1)',
@@ -694,11 +1526,11 @@ const Index = () => {
                       }}
                     />
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-1">Mentoring</h3>
-                  <p className="text-sm text-gray-800">Expert guidance to accelerate your business growth</p>
+                  <h3 className="text-lg font-semibold text-gray-800 mb-1">Hands-on Trainings</h3>
+                  <p className="text-sm text-gray-800">We break down digital marketing, AI tools, and content creation into simple, doable steps.</p>
                 </motion.div>
 
-                {/* Networking */}
+                {/* 2. Weekly Challenges */}
                 <motion.div 
                   className="bg-white rounded-2xl p-4 text-center hover:shadow-lg transition-all duration-300 border border-gray-100"
                   whileHover={{ scale: 1.05, y: -5 }}
@@ -706,8 +1538,8 @@ const Index = () => {
                 >
                   <div className="w-full h-48 rounded-xl mb-3 overflow-hidden bg-gray-50">
                     <img 
-                      src="/media/networking.JPG" 
-                      alt="Women entrepreneurs networking and building connections at SHELeadsIndia event" 
+                      src="/media/IMG_0011.JPG" 
+                      alt="Women collaborating and networking" 
                       className="w-full h-full object-cover object-center"
                       style={{
                         filter: 'brightness(0.7) contrast(1.2) saturate(1.1)',
@@ -716,28 +1548,11 @@ const Index = () => {
                       }}
                     />
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-1">Networking</h3>
-                  <p className="text-sm text-gray-800">Connect with like-minded women entrepreneurs</p>
+                  <h3 className="text-lg font-semibold text-gray-800 mb-1">Weekly Challenges</h3>
+                  <p className="text-sm text-gray-800">These aren't just tasks — they're momentum-builders that help you stay consistent.</p>
                 </motion.div>
 
-                {/* Building Website */}
-                <motion.div 
-                  className="bg-white rounded-2xl p-4 text-center hover:shadow-lg transition-all duration-300 border border-gray-100"
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="w-full h-48 bg-gradient-to-br from-purple-100 to-purple-200 rounded-xl mb-3 flex items-center justify-center">
-                    <div className="w-24 h-24 bg-white rounded-lg flex items-center justify-center shadow-md">
-                      <svg className="w-12 h-12 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                      </svg>
-                    </div>
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-1">Building Website</h3>
-                  <p className="text-sm text-gray-800">Create your professional online presence</p>
-                </motion.div>
-
-                {/* Market Place */}
+                {/* 3. Offline + Online Events */}
                 <motion.div 
                   className="bg-white rounded-2xl p-4 text-center hover:shadow-lg transition-all duration-300 border border-gray-100"
                   whileHover={{ scale: 1.05, y: -5 }}
@@ -745,8 +1560,8 @@ const Index = () => {
                 >
                   <div className="w-full h-48 rounded-xl mb-3 overflow-hidden bg-gray-50">
                     <img 
-                      src="/media/market-place.JPG" 
-                      alt="SHELeadsIndia marketplace showcasing women-led businesses and products" 
+                      src="/media/Mentoring.JPG" 
+                      alt="Women mentoring and learning together" 
                       className="w-full h-full object-cover object-center"
                       style={{
                         filter: 'brightness(0.75) contrast(1.15) saturate(1.1)',
@@ -755,8 +1570,30 @@ const Index = () => {
                       }}
                     />
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-1">Market Place</h3>
-                  <p className="text-sm text-gray-800">Exclusive platform for women-led businesses</p>
+                  <h3 className="text-lg font-semibold text-gray-800 mb-1">Offline + Online Events</h3>
+                  <p className="text-sm text-gray-800">We believe in hugs and high-fives as much as hacks and how-tos.</p>
+                </motion.div>
+
+                {/* 4. Community & Collaboration */}
+                <motion.div 
+                  className="bg-white rounded-2xl p-4 text-center hover:shadow-lg transition-all duration-300 border border-gray-100"
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="w-full h-48 rounded-xl mb-3 overflow-hidden bg-gray-50">
+                    <img 
+                      src="/media/market place.JPG" 
+                      alt="Women entrepreneurs collaborating" 
+                      className="w-full h-full object-cover object-center"
+                      style={{
+                        filter: 'brightness(0.75) contrast(1.15) saturate(1.1)',
+                        imageRendering: 'crisp-edges',
+                        transition: 'none'
+                      }}
+                    />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-800 mb-1">Community & Collaboration</h3>
+                  <p className="text-sm text-gray-800">This is a curated space where women business owners ask questions, share wins, and build confidence together.</p>
                 </motion.div>
               </div>
             </motion.div>

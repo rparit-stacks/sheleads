@@ -61,10 +61,10 @@ const App = () => {
             <Route path="/training/:trainingId/register" element={<TrainingRegistration />} />
             <Route path="/podcast" element={<Podcast />} />
             <Route path="/events-gallery" element={<EventsGallery />} />
-            <Route path="/canva-ai-workshop" element={<CanvaAIWorkshop />} />
-            <Route path="/admin" element={<AdminPanel />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
+                      <Route path="/canva-ai-workshop" element={<CanvaAIWorkshop />} />
+          <Route path="/admin" element={<AdminPanel />} />
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
