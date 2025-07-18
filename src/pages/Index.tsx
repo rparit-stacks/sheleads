@@ -1911,40 +1911,7 @@ const Index = () => {
             })}
           </motion.div>
 
-          {/* Final CTA */}
-          <motion.div 
-            className="text-center bg-background rounded-2xl p-12 shadow-card" 
-            variants={fadeInUp}
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.3 }}
-          >
-            <h3 className="text-2xl md:text-3xl font-bold mb-4">
-              Ready to Honor Your Entrepreneurial Dreams?
-            </h3>
-            <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-              Join a growing sisterhood of Indian women entrepreneurs who've chosen courage over comfort 
-              and are building businesses that celebrate both success and values. Your transformation begins with one brave step.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Button variant="hero" size="xl" className="group">
-                  Begin Your Sacred Journey
-                  <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Button variant="outline" size="xl">
-                  Connect with Your Sister Guide
-                </Button>
-              </motion.div>
-            </div>
-          </motion.div>
+
         </div>
       </motion.section>
 
