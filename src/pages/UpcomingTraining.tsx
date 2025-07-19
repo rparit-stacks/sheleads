@@ -224,7 +224,7 @@ export default function UpcomingTraining() {
           ) : (
             <div className="relative">
               {/* Carousel Container */}
-              <div className="flex gap-8 overflow-x-auto pb-8 scrollbar-hide">
+              <div className="flex gap-6 md:gap-8 overflow-x-auto pb-12 scrollbar-hide px-6 md:px-0 -mx-6 md:mx-0">
                 {trainings.map((training, index) => {
                   const cardThemes = [
                     {
@@ -274,15 +274,15 @@ export default function UpcomingTraining() {
                   const theme = cardThemes[index % cardThemes.length];
                   
                   return (
-                    <div key={training.id} className="flex-shrink-0 w-full max-w-md">
-                      <div className={`group relative overflow-hidden rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-700 hover:-translate-y-6 bg-gradient-to-br ${theme.gradient} ${theme.shadow} border ${theme.border}`}>
+                    <div key={training.id} className="flex-shrink-0 w-[calc(100vw-1rem)] sm:w-[450px] md:w-[500px] lg:w-[550px] max-w-none">
+                      <div className={`group relative overflow-hidden rounded-3xl shadow-2xl hover:shadow-3xl transition-all duration-700 hover:-translate-y-6 bg-gradient-to-br ${theme.gradient} ${theme.shadow} border ${theme.border} min-h-[700px] md:min-h-[750px]`}>
                         {/* Decorative Background Elements */}
                         <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-20 -mt-20 blur-xl"></div>
                         <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full -ml-16 -mb-16 blur-xl"></div>
                         <div className="absolute top-1/2 left-1/2 w-24 h-24 bg-white/5 rounded-full -translate-x-12 -translate-y-12 blur-lg"></div>
                         
                         {/* Header Section with Image */}
-                        <div className="relative h-48 overflow-hidden rounded-t-3xl">
+                        <div className="relative h-40 md:h-56 overflow-hidden rounded-t-3xl">
                           {training.image_url ? (
                             <img
                               src={training.image_url}
@@ -291,105 +291,105 @@ export default function UpcomingTraining() {
                             />
                           ) : (
                             <div className="w-full h-full bg-gradient-to-br from-white/20 to-white/10 flex items-center justify-center">
-                              <BookOpen className="h-16 w-16 text-white/60" />
+                              <BookOpen className="h-8 w-8 md:h-16 md:w-16 text-white/60" />
                             </div>
                           )}
                           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/20 to-transparent"></div>
                           
                           {/* Floating Badges */}
-                          <div className="absolute top-4 left-4 flex flex-col gap-2">
-                            <Badge className={`bg-white/90 text-gray-800 border-0 font-semibold shadow-lg`}>
-                              <Award className="h-3 w-3 mr-1" />
+                          <div className="absolute top-2 md:top-4 left-2 md:left-4 flex flex-col gap-1 md:gap-2">
+                            <Badge className={`bg-white/90 text-gray-800 border-0 font-semibold shadow-lg text-xs`}>
+                              <Award className="h-2 w-2 md:h-3 md:w-3 mr-1" />
                               {training.level}
                             </Badge>
-                            <Badge className={`bg-white/90 text-gray-800 border-0 font-semibold shadow-lg`}>
-                              <Clock className="h-3 w-3 mr-1" />
+                            <Badge className={`bg-white/90 text-gray-800 border-0 font-semibold shadow-lg text-xs`}>
+                              <Clock className="h-2 w-2 md:h-3 md:w-3 mr-1" />
                               {training.duration}
                             </Badge>
                           </div>
                           
                           {/* Price Tag */}
-                          <div className="absolute top-4 right-4">
-                            <div className="bg-white/95 backdrop-blur-sm rounded-2xl px-4 py-2 shadow-lg">
-                              <div className="text-2xl font-bold text-gray-900">₹{training.price}</div>
+                          <div className="absolute top-2 md:top-4 right-2 md:right-4">
+                            <div className="bg-white/95 backdrop-blur-sm rounded-xl md:rounded-2xl px-2 md:px-4 py-1 md:py-2 shadow-lg">
+                              <div className="text-lg md:text-2xl font-bold text-gray-900">₹{training.price}</div>
                               <div className="text-xs text-gray-600">Complete Program</div>
                             </div>
                           </div>
                         </div>
                         
                         {/* Content Section */}
-                        <div className="relative p-8">
+                        <div className="relative p-6 md:p-8 flex flex-col h-full">
                           {/* Title and Icon */}
-                          <div className="flex items-start justify-between mb-6">
-                            <h3 className="text-2xl font-bold text-white group-hover:text-white/90 transition-colors duration-300 flex-1 leading-tight">
+                          <div className="flex items-start justify-between mb-5 md:mb-6">
+                            <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-white/90 transition-colors duration-300 flex-1 leading-tight">
                               {training.title}
                             </h3>
-                            <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center ml-4 group-hover:scale-110 transition-transform duration-300 border border-white/30">
-                              <BookOpen className="h-7 w-7 text-white" />
+                            <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center ml-3 md:ml-4 group-hover:scale-110 transition-transform duration-300 border border-white/30">
+                              <BookOpen className="h-6 w-6 md:h-7 md:w-7 text-white" />
                             </div>
                           </div>
                           
                           {/* Description */}
-                          <p className="text-white/90 mb-6 line-clamp-3 text-base leading-relaxed">
+                          <p className="text-white/90 mb-5 md:mb-6 line-clamp-2 md:line-clamp-3 text-base md:text-base leading-relaxed">
                             {training.description}
                           </p>
                           
                           {/* Info Grid */}
-                          <div className="grid grid-cols-2 gap-3 mb-6">
-                            <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 border border-white/30">
-                              <div className="flex items-center gap-2 text-sm text-white">
-                                <Calendar className="h-4 w-4" />
+                          <div className="grid grid-cols-2 gap-3 md:gap-3 mb-5 md:mb-6">
+                            <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 md:p-3 border border-white/30">
+                              <div className="flex items-center gap-2 md:gap-2 text-sm md:text-sm text-white">
+                                <Calendar className="h-4 w-4 md:h-4 md:w-4" />
                                 <span className="font-medium truncate">{formatDate(training.start_date)}</span>
                               </div>
                             </div>
-                            <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 border border-white/30">
-                              <div className="flex items-center gap-2 text-sm text-white">
-                                <Clock className="h-4 w-4" />
+                            <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 md:p-3 border border-white/30">
+                              <div className="flex items-center gap-2 md:gap-2 text-sm md:text-sm text-white">
+                                <Clock className="h-4 w-4 md:h-4 md:w-4" />
                                 <span className="font-medium">{formatTime(training.start_time)}</span>
                               </div>
                             </div>
-                            <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 border border-white/30">
-                              <div className="flex items-center gap-2 text-sm text-white">
-                                <MapPin className="h-4 w-4" />
+                            <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 md:p-3 border border-white/30">
+                              <div className="flex items-center gap-2 md:gap-2 text-sm md:text-sm text-white">
+                                <MapPin className="h-4 w-4 md:h-4 md:w-4" />
                                 <span className="font-medium truncate">{training.location}</span>
                               </div>
                             </div>
-                            <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 border border-white/30">
-                              <div className="flex items-center gap-2 text-sm text-white">
-                                <Users className="h-4 w-4" />
+                            <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 md:p-3 border border-white/30">
+                              <div className="flex items-center gap-2 md:gap-2 text-sm md:text-sm text-white">
+                                <Users className="h-4 w-4 md:h-4 md:w-4" />
                                 <span className="font-medium">{training.max_participants} max</span>
                               </div>
                             </div>
                           </div>
 
                           {/* What's Included Section */}
-                          <div className="mb-6">
-                            <h4 className="text-lg font-bold mb-4 text-white">What's Included:</h4>
-                            <div className="space-y-3">
-                              <div className="flex items-center gap-3">
-                                <div className="w-2 h-2 bg-white rounded-full flex-shrink-0"></div>
-                                <span className="text-white/90 text-base font-medium">Hands-on Canva design session</span>
+                          <div className="mb-5 md:mb-6">
+                            <h4 className="text-lg md:text-lg font-bold mb-4 md:mb-4 text-white">What's Included:</h4>
+                            <div className="space-y-3 md:space-y-3">
+                              <div className="flex items-center gap-3 md:gap-3">
+                                <div className="w-2 h-2 md:w-2 md:h-2 bg-white rounded-full flex-shrink-0"></div>
+                                <span className="text-white/90 text-base md:text-base font-medium">Hands-on Canva design session</span>
                               </div>
-                              <div className="flex items-center gap-3">
-                                <div className="w-2 h-2 bg-white rounded-full flex-shrink-0"></div>
-                                <span className="text-white/90 text-base font-medium">AI-powered content writing</span>
+                              <div className="flex items-center gap-3 md:gap-3">
+                                <div className="w-2 h-2 md:w-2 md:h-2 bg-white rounded-full flex-shrink-0"></div>
+                                <span className="text-white/90 text-base md:text-base font-medium">AI-powered content writing</span>
                               </div>
-                              <div className="flex items-center gap-3">
-                                <div className="w-2 h-2 bg-white rounded-full flex-shrink-0"></div>
-                                <span className="text-white/90 text-base font-medium">Take-home materials</span>
+                              <div className="flex items-center gap-3 md:gap-3">
+                                <div className="w-2 h-2 md:w-2 md:h-2 bg-white rounded-full flex-shrink-0"></div>
+                                <span className="text-white/90 text-base md:text-base font-medium">Take-home materials</span>
                               </div>
-                              <div className="flex items-center gap-3">
-                                <div className="w-2 h-2 bg-white rounded-full flex-shrink-0"></div>
-                                <span className="text-white/90 text-base font-medium">Networking opportunities</span>
+                              <div className="flex items-center gap-3 md:gap-3">
+                                <div className="w-2 h-2 md:w-2 md:h-2 bg-white rounded-full flex-shrink-0"></div>
+                                <span className="text-white/90 text-base md:text-base font-medium">Networking opportunities</span>
                               </div>
                             </div>
                           </div>
 
                           {/* Topics */}
                           {training.topics && training.topics.length > 0 && (
-                            <div className="mb-6">
-                              <p className="text-sm font-bold mb-3 text-white/90">Topics covered:</p>
-                              <div className="flex flex-wrap gap-2">
+                            <div className="mb-4 md:mb-6">
+                              <p className="text-xs md:text-sm font-bold mb-2 md:mb-3 text-white/90">Topics covered:</p>
+                              <div className="flex flex-wrap gap-1 md:gap-2">
                                 {training.topics.slice(0, 3).map((topic, topicIndex) => (
                                   <Badge key={topicIndex} className="text-xs bg-white/30 text-white border border-white/40 hover:bg-white/40 backdrop-blur-sm">
                                     {topic}
@@ -405,14 +405,14 @@ export default function UpcomingTraining() {
                           )}
 
                           {/* Action Buttons */}
-                          <div className="flex gap-3">
-                            <Button asChild className="flex-1 h-12 text-base font-semibold rounded-2xl bg-white/20 hover:bg-white/30 text-white border border-white/30 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300">
+                          <div className="flex flex-col sm:flex-row gap-3 md:gap-3 mt-auto pt-6">
+                            <Button asChild className="flex-1 h-14 md:h-12 text-base md:text-base font-semibold rounded-2xl bg-white/20 hover:bg-white/30 text-white border border-white/30 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 min-h-[56px]">
                               <Link to={`/training/${training.id}`}>
                                 View Details
                               </Link>
                             </Button>
                             {training.registration_enabled && (
-                              <Button asChild className="h-12 px-6 rounded-2xl bg-white hover:bg-white/90 text-gray-900 border-0 shadow-lg hover:shadow-xl transition-all duration-300 font-semibold">
+                              <Button asChild className="h-14 md:h-12 px-6 md:px-6 rounded-2xl bg-white hover:bg-white/90 text-gray-900 border-0 shadow-lg hover:shadow-xl transition-all duration-300 font-semibold text-base md:text-base min-h-[56px]">
                                 <Link to={`/training/${training.id}/register`}>
                                   Register Now
                                 </Link>

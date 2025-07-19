@@ -443,7 +443,7 @@ const Index = () => {
                 >
                   {/* Event 1: CANVA & AI WORKSHOP */}
                   <div className="w-full flex-shrink-0 px-4">
-                    <div className="relative overflow-hidden bg-white rounded-2xl shadow-xl border border-gray-200 group h-[380px]">
+                    <div className="relative overflow-hidden bg-white rounded-2xl shadow-xl border border-gray-200 group h-[320px] md:h-[380px]">
                       {/* Background Image */}
                       <div className="absolute inset-0 opacity-15">
                         <img 
@@ -454,106 +454,82 @@ const Index = () => {
                       </div>
                       
                       {/* Content */}
-                      <div className="relative z-10 p-4 h-full flex flex-col">
+                      <div className="relative z-10 p-3 md:p-4 h-full flex flex-col">
                         {/* Header with Brand Colors */}
-                        <div className="flex items-center justify-between mb-4">
-                          <div className="flex items-center gap-3">
+                        <div className="flex items-center justify-between mb-3 md:mb-4">
+                          <div className="flex items-center gap-2 md:gap-3 flex-1">
                             <div className="relative">
-                              <div className="w-10 h-10 bg-red-600 rounded-xl flex items-center justify-center shadow-lg">
-                                <Zap className="h-5 w-5 text-white" />
+                              <div className="w-8 h-8 md:w-10 md:h-10 bg-red-600 rounded-xl flex items-center justify-center shadow-lg">
+                                <Zap className="h-4 w-4 md:h-5 md:w-5 text-white" />
                               </div>
                               <div className="absolute -top-1 -right-1 w-3 h-3 bg-black rounded-full flex items-center justify-center">
                                 <span className="text-xs font-bold text-white">🔥</span>
                               </div>
                             </div>
-                            <div>
-                              <h3 className="text-xl font-bold text-black mb-1">CANVA & AI WORKSHOP</h3>
-                              <p className="text-red-600 font-semibold text-sm">Design Bold. Write Smart. Build Consistently.</p>
+                            <div className="flex-1 min-w-0">
+                              <h3 className="text-lg md:text-xl font-bold text-black mb-1">CANVA & AI WORKSHOP</h3>
+                              <p className="text-red-600 font-semibold text-xs md:text-sm">Design Bold. Write Smart.</p>
                             </div>
                           </div>
-                          <div className="text-right">
-                            <div className="text-2xl font-bold text-red-600 mb-1">₹1500</div>
+                          <div className="text-right ml-2">
+                            <div className="text-xl md:text-2xl font-bold text-red-600 mb-1">₹1500</div>
                             <div className="text-xs text-gray-600 bg-white px-2 py-1 rounded-full">includes lunch & kit</div>
                           </div>
                         </div>
                         
                         {/* Event Details with Brand Colors */}
-                        <div className="grid md:grid-cols-2 gap-4 mb-4 flex-1">
-                          <div className="space-y-2">
-                            <div className="flex items-center gap-2 p-2 bg-white/90 backdrop-blur-sm rounded-lg">
-                              <div className="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center">
-                                <Calendar className="h-3 w-3 text-red-600" />
-                              </div>
-                              <div>
-                                <div className="font-semibold text-black text-sm">1st August 2025</div>
-                                <div className="text-xs text-gray-600">Workshop Day</div>
-                              </div>
+                        <div className="grid grid-cols-2 gap-2 mb-3 md:mb-4">
+                          <div className="bg-white/90 backdrop-blur-sm rounded-lg p-1 md:p-2 text-center">
+                            <div className="w-6 h-6 md:w-8 md:h-8 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-1">
+                              <Calendar className="h-3 w-3 md:h-4 md:w-4 text-red-600" />
                             </div>
-                            <div className="flex items-center gap-2 p-2 bg-white/90 backdrop-blur-sm rounded-lg">
-                              <div className="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center">
-                                <Clock className="h-3 w-3 text-red-600" />
-                              </div>
-                              <div>
-                                <div className="font-semibold text-black text-sm">11 AM – 4 PM</div>
-                                <div className="text-xs text-gray-600">5 Hours Intensive</div>
-                              </div>
-                            </div>
-                            <div className="flex items-center gap-2 p-2 bg-white/90 backdrop-blur-sm rounded-lg">
-                              <div className="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center">
-                                <MapPin className="h-3 w-3 text-red-600" />
-                              </div>
-                              <div>
-                                <div className="font-semibold text-black text-sm">Nashik</div>
-                                <div className="text-xs text-gray-600">In-Person Event</div>
-                              </div>
-                            </div>
+                            <div className="font-semibold text-black text-xs md:text-sm">1st August 2025</div>
+                            <div className="text-xs text-gray-600">Workshop Day</div>
                           </div>
-                          <div>
-                            <h4 className="font-bold text-sm mb-2 text-black flex items-center gap-2">
-                              <div className="w-2 h-2 bg-red-600 rounded-full"></div>
-                              What's Included:
-                            </h4>
-                            <div className="space-y-1">
-                              <div className="flex items-center gap-2 p-1 bg-white/90 backdrop-blur-sm rounded-lg">
-                                <div className="w-1 h-1 bg-red-600 rounded-full"></div>
-                                <span className="font-medium text-xs">Hands-on Canva design session</span>
-                              </div>
-                              <div className="flex items-center gap-2 p-1 bg-white/90 backdrop-blur-sm rounded-lg">
-                                <div className="w-1 h-1 bg-red-600 rounded-full"></div>
-                                <span className="font-medium text-xs">AI-powered content writing</span>
-                              </div>
-                              <div className="flex items-center gap-2 p-1 bg-white/90 backdrop-blur-sm rounded-lg">
-                                <div className="w-1 h-1 bg-red-600 rounded-full"></div>
-                                <span className="font-medium text-xs">Take-home materials</span>
-                              </div>
-                              <div className="flex items-center gap-2 p-1 bg-white/90 backdrop-blur-sm rounded-lg">
-                                <div className="w-1 h-1 bg-red-600 rounded-full"></div>
-                                <span className="font-medium text-xs">Networking opportunities</span>
-                              </div>
+                          <div className="bg-white/90 backdrop-blur-sm rounded-lg p-1 md:p-2 text-center">
+                            <div className="w-6 h-6 md:w-8 md:h-8 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-1">
+                              <Clock className="h-3 w-3 md:h-4 md:w-4 text-red-600" />
+                            </div>
+                            <div className="font-semibold text-black text-xs md:text-sm">11 AM – 4 PM</div>
+                            <div className="text-xs text-gray-600">5 Hours Intensive</div>
+                          </div>
+                        </div>
+                        
+                        {/* Focus Areas with Brand Colors */}
+                        <div className="mb-3 md:mb-4 flex-1">
+                          <h4 className="font-bold text-xs md:text-sm mb-2 text-black flex items-center gap-2">
+                            <div className="w-2 h-2 bg-red-600 rounded-full"></div>
+                            What's Included:
+                          </h4>
+                          <div className="space-y-1">
+                            <div className="flex items-center gap-2 p-1 bg-white/90 backdrop-blur-sm rounded-lg">
+                              <div className="w-1 h-1 bg-red-600 rounded-full"></div>
+                              <span className="font-medium text-xs">Canva design session</span>
+                            </div>
+                            <div className="flex items-center gap-2 p-1 bg-white/90 backdrop-blur-sm rounded-lg">
+                              <div className="w-1 h-1 bg-red-600 rounded-full"></div>
+                              <span className="font-medium text-xs">AI content writing</span>
+                            </div>
+                            <div className="flex items-center gap-2 p-1 bg-white/90 backdrop-blur-sm rounded-lg">
+                              <div className="w-1 h-1 bg-red-600 rounded-full"></div>
+                              <span className="font-medium text-xs">Take-home materials</span>
                             </div>
                           </div>
                         </div>
                         
-                        {/* Brand Color Buttons */}
-                        <div className="flex gap-2 mt-auto">
-                          <Button asChild className="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200 text-sm">
-                            <Link to="/canva-ai-workshop">
-                              Learn More & Register
-                            </Link>
-                          </Button>
-                          <Button asChild variant="outline" className="flex-1 border-2 border-red-600 text-red-600 bg-white hover:bg-red-50 font-bold py-2 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200 text-sm">
-                            <a href="https://rzp.io/rzp/TmsWQUS" target="_blank" rel="noopener noreferrer">
-                              Quick Register
-                            </a>
-                          </Button>
-                        </div>
+                        {/* Brand Color Button */}
+                        <Button asChild className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200 mt-auto text-xs md:text-sm">
+                          <a href="https://rzp.io/rzp/TmsWQUS" target="_blank" rel="noopener noreferrer">
+                            Register Now
+                          </a>
+                        </Button>
                       </div>
                     </div>
                   </div>
 
                   {/* Event 2: Weekly Free Training */}
                   <div className="w-full flex-shrink-0 px-4">
-                    <div className="relative overflow-hidden bg-white rounded-2xl shadow-xl border border-gray-200 group h-[380px]">
+                    <div className="relative overflow-hidden bg-white rounded-2xl shadow-xl border border-gray-200 group h-[320px] md:h-[380px]">
                       {/* Background Image */}
                       <div className="absolute inset-0 opacity-15">
                         <img 
@@ -564,60 +540,71 @@ const Index = () => {
                       </div>
                       
                       {/* Content */}
-                      <div className="relative z-10 p-4 h-full flex flex-col">
+                      <div className="relative z-10 p-3 md:p-4 h-full flex flex-col">
                         {/* Header with Brand Colors */}
-                        <div className="text-center mb-4">
-                          <div className="relative inline-block mb-3">
-                            <div className="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center shadow-lg mx-auto">
-                              <Play className="h-6 w-6 text-white" />
+                        <div className="flex items-center justify-between mb-3 md:mb-4">
+                          <div className="flex items-center gap-2 md:gap-3 flex-1">
+                            <div className="relative">
+                              <div className="w-8 h-8 md:w-10 md:h-10 bg-red-600 rounded-xl flex items-center justify-center shadow-lg">
+                                <Play className="h-4 w-4 md:h-5 md:w-5 text-white" />
+                              </div>
+                              <div className="absolute -top-1 -right-1 w-3 h-3 bg-black rounded-full flex items-center justify-center">
+                                <span className="text-xs font-bold text-white">FREE</span>
+                              </div>
                             </div>
-                            <div className="absolute -top-1 -right-1 w-4 h-4 bg-black rounded-full flex items-center justify-center">
-                              <span className="text-xs font-bold text-white">FREE</span>
+                            <div className="flex-1 min-w-0">
+                              <h3 className="text-lg md:text-xl font-bold text-black mb-1">Weekly Free Training</h3>
+                              <p className="text-red-600 font-semibold text-xs md:text-sm">Online Session</p>
                             </div>
                           </div>
-                          <h3 className="text-xl font-bold text-black mb-1">Weekly Free Training</h3>
-                          <p className="text-red-600 font-semibold text-sm">Online Session</p>
+                          <div className="text-right ml-2">
+                            <div className="text-xl md:text-2xl font-bold text-red-600 mb-1">FREE</div>
+                            <div className="text-xs text-gray-600 bg-white px-2 py-1 rounded-full">weekly session</div>
+                          </div>
                         </div>
                         
-                        {/* Main Topic with Brand Colors */}
-                        <div className="text-center mb-4 flex-1">
-                          <div className="bg-red-50 rounded-lg p-3 mb-3">
-                            <h4 className="text-lg font-bold text-black mb-1">Instagram Growth for Women Entrepreneurs</h4>
-                            <p className="text-red-700 font-medium text-sm">Master the art of social media marketing</p>
+                        {/* Event Details with Brand Colors */}
+                        <div className="grid grid-cols-2 gap-2 mb-3 md:mb-4">
+                          <div className="bg-white/90 backdrop-blur-sm rounded-lg p-1 md:p-2 text-center">
+                            <div className="w-6 h-6 md:w-8 md:h-8 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-1">
+                              <Calendar className="h-3 w-3 md:h-4 md:w-4 text-red-600" />
+                            </div>
+                            <div className="font-semibold text-black text-xs md:text-sm">Tuesday, 23rd July</div>
+                            <div className="text-xs text-gray-600">Weekly Session</div>
                           </div>
-                          
-                          {/* Event Details with Brand Colors */}
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-                            <div className="bg-white/90 backdrop-blur-sm rounded-lg p-2 text-center">
-                              <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-1">
-                                <Calendar className="h-4 w-4 text-red-600" />
-                              </div>
-                              <div className="font-semibold text-black text-sm">Tuesday, 23rd July</div>
-                              <div className="text-xs text-gray-600">Weekly Session</div>
+                          <div className="bg-white/90 backdrop-blur-sm rounded-lg p-1 md:p-2 text-center">
+                            <div className="w-6 h-6 md:w-8 md:h-8 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-1">
+                              <Clock className="h-3 w-3 md:h-4 md:w-4 text-red-600" />
                             </div>
-                            <div className="bg-white/90 backdrop-blur-sm rounded-lg p-2 text-center">
-                              <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-1">
-                                <Clock className="h-4 w-4 text-red-600" />
-                              </div>
-                              <div className="font-semibold text-black text-sm">5 PM – 6 PM</div>
-                              <div className="text-xs text-gray-600">1 Hour Session</div>
+                            <div className="font-semibold text-black text-xs md:text-sm">5 PM – 6 PM</div>
+                            <div className="text-xs text-gray-600">1 Hour Session</div>
+                          </div>
+                        </div>
+                        
+                        {/* Focus Areas with Brand Colors */}
+                        <div className="mb-3 md:mb-4 flex-1">
+                          <h4 className="font-bold text-xs md:text-sm mb-2 text-black flex items-center gap-2">
+                            <div className="w-2 h-2 bg-red-600 rounded-full"></div>
+                            This Week's Topic:
+                          </h4>
+                          <div className="space-y-1">
+                            <div className="flex items-center gap-2 p-1 bg-white/90 backdrop-blur-sm rounded-lg">
+                              <div className="w-1 h-1 bg-red-600 rounded-full"></div>
+                              <span className="font-medium text-xs">Instagram Growth for Women Entrepreneurs</span>
                             </div>
-                            <div className="bg-white/90 backdrop-blur-sm rounded-lg p-2 text-center">
-                              <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-1">
-                                <div className="w-4 h-4 text-red-600">
-                                  <svg fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                                  </svg>
-                                </div>
-                              </div>
-                              <div className="font-semibold text-black text-sm">Zoom Platform</div>
-                              <div className="text-xs text-gray-600">Virtual Event</div>
+                            <div className="flex items-center gap-2 p-1 bg-white/90 backdrop-blur-sm rounded-lg">
+                              <div className="w-1 h-1 bg-red-600 rounded-full"></div>
+                              <span className="font-medium text-xs">Master social media marketing</span>
+                            </div>
+                            <div className="flex items-center gap-2 p-1 bg-white/90 backdrop-blur-sm rounded-lg">
+                              <div className="w-1 h-1 bg-red-600 rounded-full"></div>
+                              <span className="font-medium text-xs">Zoom platform access</span>
                             </div>
                           </div>
                         </div>
                         
                         {/* Brand Color Button */}
-                        <Button className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200 mt-auto text-sm">
+                        <Button className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200 mt-auto text-xs md:text-sm">
                           Join Free
                         </Button>
                       </div>
@@ -626,7 +613,7 @@ const Index = () => {
 
                   {/* Event 3: 5-Day Challenge */}
                   <div className="w-full flex-shrink-0 px-4">
-                    <div className="relative overflow-hidden bg-white rounded-2xl shadow-xl border border-gray-200 group h-[380px]">
+                    <div className="relative overflow-hidden bg-white rounded-2xl shadow-xl border border-gray-200 group h-[320px] md:h-[380px]">
                       {/* Background Image */}
                       <div className="absolute inset-0 opacity-15">
                         <img 
@@ -637,54 +624,54 @@ const Index = () => {
                       </div>
                       
                       {/* Content */}
-                      <div className="relative z-10 p-4 h-full flex flex-col">
+                      <div className="relative z-10 p-3 md:p-4 h-full flex flex-col">
                         {/* Header with Brand Colors */}
-                        <div className="flex items-center justify-between mb-4">
-                          <div className="flex items-center gap-3">
+                        <div className="flex items-center justify-between mb-3 md:mb-4">
+                          <div className="flex items-center gap-2 md:gap-3 flex-1">
                             <div className="relative">
-                              <div className="w-10 h-10 bg-red-600 rounded-xl flex items-center justify-center shadow-lg">
-                                <div className="text-lg font-bold text-white">5</div>
+                              <div className="w-8 h-8 md:w-10 md:h-10 bg-red-600 rounded-xl flex items-center justify-center shadow-lg">
+                                <div className="text-base md:text-lg font-bold text-white">5</div>
                               </div>
                               <div className="absolute -top-1 -right-1 w-3 h-3 bg-black rounded-full flex items-center justify-center">
                                 <span className="text-xs font-bold text-white">⚡</span>
                               </div>
                             </div>
-                            <div>
-                              <h3 className="text-xl font-bold text-black mb-1">5-Day Challenge</h3>
-                              <p className="text-red-600 font-semibold text-sm">Content That Converts</p>
+                            <div className="flex-1 min-w-0">
+                              <h3 className="text-lg md:text-xl font-bold text-black mb-1">5-Day Challenge</h3>
+                              <p className="text-red-600 font-semibold text-xs md:text-sm">Content That Converts</p>
                             </div>
                           </div>
-                          <div className="text-right">
-                            <div className="text-2xl font-bold text-red-600 mb-1">₹1500</div>
+                          <div className="text-right ml-2">
+                            <div className="text-xl md:text-2xl font-bold text-red-600 mb-1">₹1500</div>
                             <div className="text-xs text-gray-600 bg-white px-2 py-1 rounded-full">complete program</div>
                           </div>
                         </div>
                         
                         {/* Event Details with Brand Colors */}
-                        <div className="grid grid-cols-2 gap-2 mb-4">
-                          <div className="bg-white/90 backdrop-blur-sm rounded-lg p-2 text-center">
-                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-1">
-                              <Calendar className="h-4 w-4 text-red-600" />
+                        <div className="grid grid-cols-2 gap-2 mb-3 md:mb-4">
+                          <div className="bg-white/90 backdrop-blur-sm rounded-lg p-1 md:p-2 text-center">
+                            <div className="w-6 h-6 md:w-8 md:h-8 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-1">
+                              <Calendar className="h-3 w-3 md:h-4 md:w-4 text-red-600" />
                             </div>
-                            <div className="font-semibold text-black text-sm">Starts 5th August</div>
+                            <div className="font-semibold text-black text-xs md:text-sm">Starts 5th August</div>
                             <div className="text-xs text-gray-600">5-Day Program</div>
                           </div>
-                          <div className="bg-white/90 backdrop-blur-sm rounded-lg p-2 text-center">
-                            <div className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-1">
-                              <div className="w-4 h-4 text-red-600">
+                          <div className="bg-white/90 backdrop-blur-sm rounded-lg p-1 md:p-2 text-center">
+                            <div className="w-6 h-6 md:w-8 md:h-8 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-1">
+                              <div className="w-3 h-3 md:w-4 md:h-4 text-red-600">
                                 <svg fill="currentColor" viewBox="0 0 24 24">
                                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                                 </svg>
                               </div>
                             </div>
-                            <div className="font-semibold text-black text-sm">WhatsApp + Live Zoom</div>
+                            <div className="font-semibold text-black text-xs md:text-sm">WhatsApp + Live Zoom</div>
                             <div className="text-xs text-gray-600">Hybrid Format</div>
                           </div>
                         </div>
                         
                         {/* Focus Areas with Brand Colors */}
-                        <div className="mb-4 flex-1">
-                          <h4 className="font-bold text-sm mb-2 text-black flex items-center gap-2">
+                        <div className="mb-3 md:mb-4 flex-1">
+                          <h4 className="font-bold text-xs md:text-sm mb-2 text-black flex items-center gap-2">
                             <div className="w-2 h-2 bg-red-600 rounded-full"></div>
                             Focus Areas:
                           </h4>
@@ -705,7 +692,7 @@ const Index = () => {
                         </div>
                         
                         {/* Brand Color Button */}
-                        <Button className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200 mt-auto text-sm">
+                        <Button className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200 mt-auto text-xs md:text-sm">
                           Join Challenge
                         </Button>
                       </div>
