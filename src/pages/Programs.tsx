@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Users, Brain, Rocket, CheckCircle, Clock, Award, Target, Heart, TrendingUp, Zap } from "lucide-react";
 import membershipImage from "@/assets/she-leads-membership.webp";
+import PricingSection from "@/components/pricing-section"
 
 const Programs = () => {
   const pricingPlans = [
@@ -206,87 +207,9 @@ const Programs = () => {
         </div>
       </section>
 
-      {/* Pricing Section - Properly Organized */}
-      <section className="py-12 lg:py-16">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl lg:text-3xl font-light mb-4 text-gray-900">
-              Power Play Pricing Model
-            </h2>
-            <p className="text-lg text-gray-600">
-              Choose a plan that matches your momentum:
-            </p>
-          </div>
+    
+<PricingSection />
 
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-              {pricingPlans.map((plan, index) => {
-                const IconComponent = plan.icon;
-              return (
-                  <div key={plan.id} className="flex flex-col group">
-                    <Card className={`relative flex flex-col h-full transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:border-primary/50 ${plan.highlight ? "border-2 border-primary shadow-lg ring-1 ring-primary/20" : "border border-gray-200 hover:border-primary/30"}`}>
-                      {plan.badge && (
-                        <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-10">
-                          <Badge className={`${plan.highlight ? "bg-primary text-white" : "bg-gray-800 text-white"} px-3 py-1 text-xs font-normal whitespace-nowrap transition-all duration-300 group-hover:scale-105`}>
-                            {plan.badge}
-                      </Badge>
-                    </div>
-                  )}
-                  
-                      <CardHeader className="text-center pb-4 pt-8">
-                        <div className={`w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 ${plan.color} transition-all duration-300 group-hover:scale-110`}>
-                          <IconComponent className="h-8 w-8 text-primary transition-all duration-300" />
-                    </div>
-                        <CardTitle className="text-xl font-normal mb-2 text-gray-900 transition-colors duration-300 group-hover:text-primary">{plan.name}</CardTitle>
-                        
-                        <div className="mb-4">
-                          <div className="flex items-baseline justify-center gap-1">
-                            <span className="text-3xl font-normal text-primary transition-all duration-300 group-hover:scale-105">{plan.price}</span>
-                            <span className="text-sm text-gray-500">/{plan.period}</span>
-                      </div>
-                    </div>
-                        
-                        <CardDescription className="text-gray-600 text-sm leading-relaxed px-2 transition-colors duration-300 group-hover:text-gray-700">
-                          {plan.tagline}
-                        </CardDescription>
-                  </CardHeader>
-
-                      <CardContent className="flex-1 flex flex-col px-6 pb-6">
-                        <ul className="space-y-3 mb-6 flex-1">
-                          {plan.features.map((feature, idx) => (
-                            <li key={idx} className="flex items-start gap-3 transition-all duration-300 group-hover:translate-x-1">
-                              <CheckCircle className="h-4 w-4 text-primary mt-1 flex-shrink-0 transition-colors duration-300 group-hover:text-primary" />
-                              <span className="text-gray-700 text-sm leading-relaxed transition-colors duration-300 group-hover:text-gray-800">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-
-                    <Button 
-                          variant={plan.highlight ? "default" : "outline"} 
-                          className={`w-full py-3 text-sm font-normal mt-auto transition-all duration-300 active:scale-95 focus:outline-none focus:ring-2 focus:ring-primary/50 ${
-                            plan.highlight 
-                              ? "bg-primary hover:bg-primary/90 text-white shadow-md hover:shadow-lg" 
-                              : "hover:bg-primary hover:text-white hover:border-primary"
-                          }`}
-                          onClick={() => {
-                            // Add click handler here if needed
-                            console.log(`Selected plan: ${plan.name}`);
-                          }}
-                        >
-                          <span className="flex items-center justify-center gap-2">
-                            <span>Choose Plan</span>
-                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                          </span>
-                    </Button>
-                  </CardContent>
-                </Card>
-                  </div>
-              );
-            })}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Plan Recommendations */}
       <section className="py-12 lg:py-16 bg-gray-50">

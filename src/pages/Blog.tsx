@@ -7,6 +7,7 @@ import { ArrowRight, Calendar, Clock, User, TrendingUp, Brain, Users, Target, Bo
 import { fetchBlogPosts, BlogPost } from "@/lib/blogService";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import BlogSection from "@/components/blog-section"
 
 const Blog = () => {
   const navigate = useNavigate();
@@ -313,107 +314,9 @@ const Blog = () => {
         </div>
       </section>
 
-      {/* Recent Posts */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              Latest Insights
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Stay updated with our latest business tips, strategies, and success stories.
-            </p>
-          </div>
+     <BlogSection />
 
-          {loading ? (
-            <div className="text-center">Loading...</div>
-          ) : error ? (
-            <div className="text-center" style={{ color: '#E60023' }}>{error}</div>
-          ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {recentPosts.map((post, index) => {
-                const cardVariants = [
-                  'bg-gradient-to-br from-blue-50 to-indigo-100 border-l-4 border-blue-500',
-                  'bg-gradient-to-br from-purple-50 to-pink-100 border-l-4 border-purple-500',
-                  'bg-gradient-to-br from-green-50 to-emerald-100 border-l-4 border-green-500',
-                  'bg-gradient-to-br from-orange-50 to-red-100 border-l-4 border-orange-500',
-                  'bg-gradient-to-br from-teal-50 to-cyan-100 border-l-4 border-teal-500',
-                  'bg-gradient-to-br from-rose-50 to-pink-100 border-l-4 border-rose-500'
-                ];
-                
-                const iconColors = [
-                  'text-blue-600 bg-blue-100',
-                  'text-purple-600 bg-purple-100',
-                  'text-green-600 bg-green-100',
-                  'text-orange-600 bg-orange-100',
-                  'text-teal-600 bg-teal-100',
-                  'text-rose-600 bg-rose-100'
-                ];
-                
-                const cardVariant = cardVariants[index % cardVariants.length];
-                const iconColor = iconColors[index % iconColors.length];
-                
-                return (
-                  <div key={post.id} className={`group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-4 cursor-pointer ${cardVariant}`} onClick={() => handlePostClick(post.id)}>
-                    {/* Decorative elements */}
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
-                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12"></div>
-                    
-                    <div className="relative p-6">
-                      <div className="flex items-start justify-between mb-4">
-                        <div className="flex-1">
-                          <Badge className="mb-3 bg-white/70 text-gray-700 border border-white/30 text-xs">
-                            {post.category}
-                          </Badge>
-                          <h3 className="text-xl font-bold text-gray-900 group-hover:text-gray-700 transition-colors duration-300 mb-3">
-                            {post.title}
-                          </h3>
-                        </div>
-                        <div className={`w-10 h-10 rounded-xl ${iconColor} flex items-center justify-center ml-3 group-hover:scale-110 transition-transform duration-300`}>
-                          <BookOpen className="h-5 w-5" />
-                        </div>
-                      </div>
-                      
-                      <p className="text-gray-700 mb-4 text-sm leading-relaxed line-clamp-3">
-                        {post.excerpt}
-                      </p>
-                      
-                      {/* Info Cards */}
-                      <div className="grid grid-cols-2 gap-2 mb-4">
-                        <div className="bg-white/50 backdrop-blur-sm rounded-lg p-2 border border-white/20">
-                          <div className="flex items-center gap-1 text-xs text-gray-700">
-                            <User className="h-3 w-3" />
-                            <span className="font-medium truncate">{post.author}</span>
-                          </div>
-                        </div>
-                        <div className="bg-white/50 backdrop-blur-sm rounded-lg p-2 border border-white/20">
-                          <div className="flex items-center gap-1 text-xs text-gray-700">
-                            <Clock className="h-3 w-3" />
-                            <span className="font-medium">{post.read_time}</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <Button className="w-full h-10 text-sm font-semibold rounded-xl bg-gray-900 hover:bg-gray-800 text-white border-0 shadow-md hover:shadow-lg transition-all duration-300">
-                        Read More
-                        <ArrowRight className="h-3 w-3 ml-1" />
-                      </Button>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-
-          <div className="text-center mt-16">
-            <Button size="lg" className="h-14 px-8 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1" style={{ backgroundColor: '#E60023' }}>
-              View All Articles
-              <ArrowRight className="h-5 w-5 ml-2" />
-            </Button>
-          </div>
-        </div>
-      </section>
-
+   
       {/* Call to Action Section */}
       <section className="py-20 bg-gradient-to-br from-primary/5 via-white to-primary/10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

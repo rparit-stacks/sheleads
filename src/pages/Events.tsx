@@ -7,6 +7,10 @@ import { Calendar, MapPin, Users, DollarSign, Clock, Target, Brain, Zap, Trendin
 import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import PricingSection from "@/components/pricing-section"
+import BlogSection from "@/components/blog-section"
+import EventsSection from "@/components/events-section"
+import TrainingSection from "@/components/training-section"
 
 export default function Events() {
   const [events, setEvents] = useState<Event[]>([]);
@@ -208,154 +212,9 @@ export default function Events() {
         </div>
       </section>
 
-      {/* Events Grid */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              Available Events
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Join our upcoming workshops, networking events, and educational sessions.
-            </p>
-          </div>
+    
+    <EventsSection />
 
-          {events.length === 0 ? (
-            <div className="text-center py-20">
-              <div className="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
-                <Calendar className="h-12 w-12 text-primary" />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">No upcoming events</h3>
-              <p className="text-lg text-gray-600 max-w-md mx-auto">
-                Check back soon for new workshops and networking opportunities!
-              </p>
-            </div>
-          ) : (
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {events.map((event, index) => {
-                const cardVariants = [
-                  'bg-gradient-to-br from-blue-50 to-indigo-100 border-l-4 border-blue-500',
-                  'bg-gradient-to-br from-purple-50 to-pink-100 border-l-4 border-purple-500',
-                  'bg-gradient-to-br from-green-50 to-emerald-100 border-l-4 border-green-500',
-                  'bg-gradient-to-br from-orange-50 to-red-100 border-l-4 border-orange-500',
-                  'bg-gradient-to-br from-teal-50 to-cyan-100 border-l-4 border-teal-500',
-                  'bg-gradient-to-br from-rose-50 to-pink-100 border-l-4 border-rose-500'
-                ];
-                
-                const iconColors = [
-                  'text-blue-600 bg-blue-100',
-                  'text-purple-600 bg-purple-100',
-                  'text-green-600 bg-green-100',
-                  'text-orange-600 bg-orange-100',
-                  'text-teal-600 bg-teal-100',
-                  'text-rose-600 bg-rose-100'
-                ];
-                
-                const badgeColors = [
-                  'bg-blue-100 text-blue-700 border-blue-200',
-                  'bg-purple-100 text-purple-700 border-purple-200',
-                  'bg-green-100 text-green-700 border-green-200',
-                  'bg-orange-100 text-orange-700 border-orange-200',
-                  'bg-teal-100 text-teal-700 border-teal-200',
-                  'bg-rose-100 text-rose-700 border-rose-200'
-                ];
-                
-                const cardVariant = cardVariants[index % cardVariants.length];
-                const iconColor = iconColors[index % iconColors.length];
-                const badgeColor = badgeColors[index % badgeColors.length];
-                
-                return (
-                  <div key={event.id} className={`group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-4 ${cardVariant}`}>
-                    {/* Decorative elements */}
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
-                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12"></div>
-                    
-                    {event.image_url && (
-                      <div className="relative aspect-video overflow-hidden">
-                        <img
-                          src={event.image_url}
-                          alt={event.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                        <div className="absolute top-4 left-4 flex gap-2">
-                          <Badge className={`${badgeColor} border font-medium`}>
-                            {event.status}
-                          </Badge>
-                          {event.price > 0 && (
-                            <Badge className={`${badgeColor} border font-medium`}>
-                              <DollarSign className="h-3 w-3 mr-1" />
-                              {event.price} {event.currency}
-                            </Badge>
-                          )}
-                        </div>
-                      </div>
-                    )}
-                    
-                    <div className="relative p-8">
-                      <div className="flex items-start justify-between mb-4">
-                        <h3 className="text-2xl font-bold text-gray-900 group-hover:text-gray-700 transition-colors duration-300 flex-1">
-                          {event.title}
-                        </h3>
-                        <div className={`w-12 h-12 rounded-xl ${iconColor} flex items-center justify-center ml-4 group-hover:scale-110 transition-transform duration-300`}>
-                          <Calendar className="h-6 w-6" />
-                        </div>
-                      </div>
-                      
-                      <p className="text-gray-700 mb-6 line-clamp-3 text-base leading-relaxed">
-                        {event.description}
-                      </p>
-                      
-                      {/* Info Cards */}
-                      <div className="grid grid-cols-2 gap-3 mb-6">
-                        <div className="bg-white/50 backdrop-blur-sm rounded-xl p-3 border border-white/20">
-                          <div className="flex items-center gap-2 text-sm text-gray-700">
-                            <Calendar className="h-4 w-4" />
-                            <span className="font-medium truncate">{formatDate(event.event_date)}</span>
-                          </div>
-                        </div>
-                        <div className="bg-white/50 backdrop-blur-sm rounded-xl p-3 border border-white/20">
-                          <div className="flex items-center gap-2 text-sm text-gray-700">
-                            <Clock className="h-4 w-4" />
-                            <span className="font-medium">{formatTime(event.event_time)}</span>
-                          </div>
-                        </div>
-                        <div className="bg-white/50 backdrop-blur-sm rounded-xl p-3 border border-white/20">
-                          <div className="flex items-center gap-2 text-sm text-gray-700">
-                            <MapPin className="h-4 w-4" />
-                            <span className="font-medium truncate">{event.location}</span>
-                          </div>
-                        </div>
-                        <div className="bg-white/50 backdrop-blur-sm rounded-xl p-3 border border-white/20">
-                          <div className="flex items-center gap-2 text-sm text-gray-700">
-                            <Users className="h-4 w-4" />
-                            <span className="font-medium">{event.max_attendees} max</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex gap-3">
-                        <Button asChild className="flex-1 h-12 text-base font-semibold rounded-2xl bg-gray-900 hover:bg-gray-800 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-                          <Link to={`/events/${event.id}`}>
-                            View Details
-                          </Link>
-                        </Button>
-                        {event.registration_enabled && (
-                          <Button asChild className="h-12 px-6 rounded-2xl bg-white/80 hover:bg-white text-gray-900 border border-gray-200 shadow-md hover:shadow-lg transition-all duration-300">
-                            <Link to={`/events/${event.id}/register`}>
-                              Register
-                            </Link>
-                          </Button>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
-      </section>
 
       {/* Gallery Section */}
       <section className="py-20 bg-white">
