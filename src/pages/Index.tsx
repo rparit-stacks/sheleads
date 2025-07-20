@@ -519,9 +519,9 @@ const Index = () => {
                         
                         {/* Brand Color Button */}
                         <Button asChild className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-200 mt-auto text-xs md:text-sm">
-                          <a href="https://rzp.io/rzp/TmsWQUS" target="_blank" rel="noopener noreferrer">
+                          <Link to="/canva-ai-workshop">
                             Register Now
-                          </a>
+                          </Link>
                         </Button>
                       </div>
                     </div>
